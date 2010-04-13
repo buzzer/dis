@@ -28,3 +28,15 @@ Logging
 ===================================
 
 Implementierungsmodell (Ausprägung)
+
+Darlehen: [DarlID,BankID,PersID,UNid,VersUNid,ImmoID,Betrag,Zinssatz,Tilgungsrate,Restschuld]
+Immobilie:[ImmoID,PersID,UNid,Wert]
+
+Darlehensnehmer
+Privatpersion: [PersID,Name,Str,PLZ,Ort,Vorname]
+Unternehmen: [UNid,Name,Str,PLZ,Ort,Rechtsform,Eigenkapital]
+Vers.UN: [VersUNid,Name,Str,PLZ,Ort,Rechtsform,Eigenkapital]
+Bank: [BankID,Name,Str,PLZ,Ort,Rechtsform,Eigenkapital]
+Versichert: [LebVersID,PersID,VersUNid]
+
+
