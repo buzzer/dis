@@ -67,7 +67,7 @@ public class Immobilie {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT id, wert FROM aufg2_immobilie WHERE id = ?";
+		String selectSQL = "SELECT ImmoID, Wert FROM immobilie WHERE ImmoID = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
 		pstmt.setInt(1, iid);
 
@@ -75,8 +75,8 @@ public class Immobilie {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next()) {
 			Immobilie i = new Immobilie();
-			i.setIid(rs.getInt("id"));
-			i.setWert(rs.getDouble("wert"));
+			i.setIid(rs.getInt("ImmoID"));
+			i.setWert(rs.getDouble("Wert"));
 
 			rs.close();
 			pstmt.close();
@@ -98,7 +98,8 @@ public class Immobilie {
 		if (getIid() == -1) {
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
-			String insertSQL = "INSERT INTO aufg2_immobilie(wert) VALUES (?)";
+			//String insertSQL = "INSERT INTO aufg2_immobilie(wert) VALUES (?)";
+			String insertSQL = "INSERT INTO immobilie(Wert) VALUES (?)";
 
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
@@ -117,7 +118,7 @@ public class Immobilie {
 			pstmt.close();
 		} else {
 			// Falls schon eine ID vorhanden ist, mache ein Update...
-			String updateSQL = "UPDATE aufg2_immobilie SET wert = ? WHERE id = ?";
+			String updateSQL = "UPDATE immobilie SET Wert = ? WHERE ImmoID = ?";
 			PreparedStatement pstmt = con.prepareStatement(updateSQL);
 
 			// Setze Anfrage Parameter

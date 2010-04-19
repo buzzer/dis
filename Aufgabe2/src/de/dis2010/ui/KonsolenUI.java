@@ -27,7 +27,9 @@ public class KonsolenUI {
 		while (true) {
 			System.out.println("\nHauptmenü\n");
 			System.out.println("[1]\tStammdaten");
-			System.out.println("[2]\tBeenden");
+			System.out.println("[2]\tKreditvergabe");
+			System.out.println("[3]\tVersicherungsabschluss");
+			System.out.println("[4]\tBeenden");
 
 			System.out.print("\nAuswahl: ");
 
@@ -39,8 +41,13 @@ public class KonsolenUI {
 				case 1:
 					stammdatenMenue();
 					break;
-
 				case 2:
+					kreditvergabeMenue();
+					break;
+				case 3:
+					versicherungsabschlussMenue();
+					break;
+				case 4:
 					return;
 
 				default:
@@ -59,7 +66,9 @@ public class KonsolenUI {
 		while (true) {
 			System.out.println("\nStammdaten-Menü\n");
 			System.out.println("[1]\tNeue Immobilie anlegen");
-			System.out.println("[2]\tHauptmenü");
+			System.out.println("[2]\tNeues Unternehmen anlegen");
+			System.out.println("[3]\tNeue Privatperson anlegen");
+			System.out.println("[4]\tHauptmenü");
 
 			System.out.print("\nAuswahl: ");
 
@@ -71,8 +80,15 @@ public class KonsolenUI {
 				case 1:
 					kv.erstelleImmobilie();
 					break;
-
 				case 2:
+					kv.erstelleUnternehmen();
+					break;
+					
+				case 3:
+					//kv.erstellePrivatperson();
+					break;
+					
+				case 4:
 					return;
 
 				default:
@@ -85,6 +101,73 @@ public class KonsolenUI {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private void kreditvergabeMenue() {
+		
+		while (true) {
+			System.out.println("\nKreditvergabe-Menü\n");
+			System.out.println("[1]\tNeuen Kredit anlegen");
+			System.out.println("[2]\tHauptmenü");
+
+			System.out.print("\nAuswahl: ");
+
+			try {
+				String eingabe = in.readLine();
+				int auswahl = Integer.parseInt(eingabe);
+
+				switch (auswahl) {
+				case 1:
+					//kv.erstelleKredit();
+					break;
+
+				case 2:
+					return;
+
+				default:
+					System.out.println("Ungültige Eingabe.\n");
+					kreditvergabeMenue();
+					break;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private void versicherungsabschlussMenue() {
+		
+		while (true) {
+			System.out.println("\nVersicherungs-Menü\n");
+			System.out.println("[1]\tNeue Versicherung anlegen");
+			System.out.println("[2]\tHauptmenü");
+
+			System.out.print("\nAuswahl: ");
+
+			try {
+				String eingabe = in.readLine();
+				int auswahl = Integer.parseInt(eingabe);
+
+				switch (auswahl) {
+				case 1:
+					//kv.erstelleVersicherung();
+					break;
+
+				case 2:
+					return;
+
+				default:
+					System.out.println("Ungültige Eingabe.\n");
+					versicherungsabschlussMenue();
+					break;
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 	/*************************************************
@@ -107,5 +190,17 @@ public class KonsolenUI {
 
 	public void message(String text) {
 		System.out.println(text);
+	}
+
+	public String getName(String eingabe) {
+		String value = null;
+		while (value == null) {
+			try {
+				System.out.print(eingabe + ": ");
+				value = in.readLine();
+			} catch (Exception e) {
+			}
+		}
+		return value;
 	}
 }

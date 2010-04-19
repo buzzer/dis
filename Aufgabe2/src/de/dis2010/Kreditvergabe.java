@@ -1,6 +1,7 @@
 package de.dis2010;
 
 import de.dis2010.data.Immobilie;
+import de.dis2010.data.Unternehmen;
 import de.dis2010.ui.KonsolenUI;
 
 public class Kreditvergabe {
@@ -53,6 +54,28 @@ public class Kreditvergabe {
 		}
 
 		return i;
+	}
+	
+	public Unternehmen erstelleUnternehmen() {
+		Unternehmen u = null;
+		try {
+			// Name des Unternehmens abfragen
+			String name = ui.getName("Name des Unternehmens");
+
+			// Neues Unternehmen anlegen
+			u = new Unternehmen();
+			u.setName(name);
+			
+			// Unternehmen speichern
+			u.save();
+			
+			ui.message("Unternehmen erstellt.");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return u;
 	}
 
 	/**
