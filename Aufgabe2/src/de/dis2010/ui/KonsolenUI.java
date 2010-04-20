@@ -118,7 +118,7 @@ public class KonsolenUI {
 
 				switch (auswahl) {
 				case 1:
-					//kv.erstelleKredit();
+					kv.erstelleKredit();
 					break;
 
 				case 2:
@@ -151,7 +151,7 @@ public class KonsolenUI {
 
 				switch (auswahl) {
 				case 1:
-					//kv.erstelleVersicherung();
+					kv.erstelleVersicherung();
 					break;
 
 				case 2:

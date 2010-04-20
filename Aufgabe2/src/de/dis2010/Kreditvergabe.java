@@ -1,7 +1,9 @@
 package de.dis2010;
 
+import de.dis2010.data.Darlehen;
 import de.dis2010.data.Immobilie;
 import de.dis2010.data.Unternehmen;
+import de.dis2010.data.Versicherung;
 import de.dis2010.ui.KonsolenUI;
 
 public class Kreditvergabe {
@@ -76,6 +78,22 @@ public class Kreditvergabe {
 		}
 
 		return u;
+	}
+	
+	public Darlehen erstelleKredit() {
+		// TODO Auto-generated method stub
+		Darlehen d = null;
+		try {}
+		catch (Exception e) {}
+		return d;
+	}
+
+	public Versicherung erstelleVersicherung() {
+		// TODO Auto-generated method stub
+		Versicherung v = null;
+		try {}
+		catch (Exception e) {}
+		return v;
 	}
 
 	/**
