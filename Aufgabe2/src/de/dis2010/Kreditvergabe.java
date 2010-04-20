@@ -91,8 +91,19 @@ public class Kreditvergabe {
 	public Versicherung erstelleVersicherung() {
 		// TODO Auto-generated method stub
 		Versicherung v = null;
-		try {}
-		catch (Exception e) {}
+		try {
+			// Betrag der Versicherung abfagen
+			Double betrag = ui.getDouble("Betrag der Lebensversicherung");
+			
+			// Neue Versicherung anlegen
+			v = new Versicherung();
+			v.setBetrag(betrag);
+			
+			// Versicherung speichern
+			v.save();
+			ui.message("Versicherung erstellt.");
+		}
+		catch (Exception e) { e.printStackTrace(); }
 		return v;
 	}
 
