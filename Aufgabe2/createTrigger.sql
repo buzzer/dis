@@ -17,19 +17,33 @@ SELECT DatabaseLogID FROM DELETED
  - Für UPDATE-Anweisungen nimmt man UPDATED und INSERTED für INSERT-Anweisungen
  
 */
-DISABLE TRIGGER ChangeTrigger
-ON unternehmen
-ON privatperson
-GO
+--DISABLE TRIGGER ChangeTrigger
+--ON unternehmen
+--ON privatperson
+--GO
 
+DROP TABLE logTabelle;
 
-CREATE TRIGGER ChangeTrigger
-ON unternehmen
-ON privatperson
-AFTER INSERT
-AFTER UPDATE
-AFTER DELETE
-SELECT ProtID FROM INSERT
-SELECT ProtID FROM UPDATE
-SELECT ProtID FROM DELETE
-GO
+CREATE TABLE logTabelle (
+  id         INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
+  username   VARCHAR(50),
+  updateTime TIMESTAMP,
+  actionDone VARCHAR(50)
+);
+
+CREATE TRIGGER logStammdatenU
+AFTER UPDATE ON immobilie
+FOR EACH ROW
+INSERT INTO logTabelle (username,updateTime,actionDone) VALUES (USER,CURRENT TIMESTAMP,'UPDATE');
+
+CREATE TRIGGER logStammdatenI
+AFTER INSERT ON immobilie
+FOR EACH ROW
+INSERT INTO logTabelle (username,updateTime,actionDone) VALUES (USER,CURRENT TIMESTAMP,'INSERT');
+
+CREATE TRIGGER logStammdatenD
+AFTER DELETE ON immobilie
+FOR EACH ROW
+INSERT INTO logTabelle (username,updateTime,actionDone) VALUES (USER,CURRENT TIMESTAMP,'DELETE');
+
+commit;
