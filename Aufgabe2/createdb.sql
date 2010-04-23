@@ -18,7 +18,7 @@ DROP TABLE versichert;
 CREATE TABLE darlehen(
   DarlID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
   BankID INTEGER NOT NULL,
-  PersID INTEGER,
+  PersID INTEGER, -- UNIQUE requires not null
   UNid INTEGER,
   VersUNid INTEGER,
   ImmoID INTEGER,
@@ -26,7 +26,12 @@ CREATE TABLE darlehen(
   Betrag NUMERIC(12,2) NOT NULL,
   Zinssatz NUMERIC(5,2) NOT NULL,
   Tilgungsrate NUMERIC(5,2),
-  Restschuld NUMERIC(12,2)
+  Restschuld NUMERIC(12,2),
+  CONSTRAINT NurEinDarlNehmer CHECK (
+    (PersID>0 AND UNid=0 AND VersUNid=0) OR
+    (PersID=0 AND UNid>0 AND VersUNid=0) OR
+    (PersID=0 AND UNid=0 AND VersUNid>0)
+  )
 );
 
 CREATE TABLE immobilie(
@@ -35,7 +40,13 @@ CREATE TABLE immobilie(
   UNid INTEGER,
   VersUNid INTEGER,
   BankID INTEGER,
-  Wert NUMERIC(12,2) NOT NULL
+  Wert NUMERIC(12,2) NOT NULL,
+  CONSTRAINT NurEinBesitzer CHECK (
+    (PersID>0 AND UNid=0 AND VersUNid=0 AND BankID=0) OR
+    (PersID=0 AND UNid>0 AND VersUNid=0 AND BankID=0) OR
+    (PersID=0 AND UNid=0 AND VersUNid>0 AND BankID=0) OR
+    (PersID=0 AND UNid=0 AND VersUNid=0 AND BankID>0)
+  )
 );
 
 CREATE TABLE privatperson(
@@ -91,7 +102,11 @@ ALTER TABLE darlehen ADD FOREIGN KEY (VersUNid) REFERENCES vers_un(VersUNid) ON 
 ALTER TABLE darlehen ADD FOREIGN KEY (ImmoID) REFERENCES immobilie(ImmoID) ON DELETE RESTRICT;
 ALTER TABLE darlehen ADD FOREIGN KEY (LebVersID) REFERENCES versichert(LebVersID) ON DELETE RESTRICT;
 --ALTER TABLE darlehen ADD CONSTRAINT NurEinKredit UNIQUE (BankID, PersID);
-ALTER TABLE darlehen ADD CONSTRAINT Sicherheiten CHECK ((Betrag>10000 AND ImmoID>0) OR (Betrag>100000 AND ImmoID>0 AND LebVersID>0) OR (Betrag<= 10000));
+ALTER TABLE darlehen ADD CONSTRAINT Sicherheiten CHECK (
+  (Betrag<=10000) OR
+  ((Betrag>10000) AND (ImmoID IS NOT NULL)) OR
+  ((Betrag>100000) AND (ImmoID IS NOT NULL) AND (LebVersID IS NOT NULL))
+);
 
 ALTER TABLE immobilie ADD FOREIGN KEY (PersID) REFERENCES privatperson(PersID) ON DELETE RESTRICT;
 ALTER TABLE immobilie ADD FOREIGN KEY (UNid) REFERENCES unternehmen(UNid) ON DELETE RESTRICT;
@@ -100,7 +115,7 @@ ALTER TABLE immobilie ADD FOREIGN KEY (BankID) REFERENCES bank(BankID) ON DELETE
 ALTER TABLE versichert ADD FOREIGN KEY (PersID) REFERENCES privatperson(PersID) ON DELETE RESTRICT;
 ALTER TABLE versichert ADD FOREIGN KEY (VersUNid) REFERENCES vers_un(VersUNid) ON DELETE RESTRICT;
 
-commit;
+COMMIT;
 
 -- quit
 -- terminate
