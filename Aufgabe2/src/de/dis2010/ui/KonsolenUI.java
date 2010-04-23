@@ -66,9 +66,11 @@ public class KonsolenUI {
 		while (true) {
 			System.out.println("\nStammdaten-Menü\n");
 			System.out.println("[1]\tNeue Immobilie anlegen");
-			System.out.println("[2]\tNeues Unternehmen anlegen");
-			System.out.println("[3]\tNeue Privatperson anlegen");
-			System.out.println("[4]\tHauptmenü");
+			System.out.println("[2]\tNeue Privatperson anlegen");
+			System.out.println("[3]\tNeue Bank anlegen");
+			System.out.println("[4]\tNeues Versicherungsunternehmen anlegen");
+			System.out.println("[5]\tSonstiges Unternehmen anlegen");
+			System.out.println("[6]\tHauptmenü");
 
 			System.out.print("\nAuswahl: ");
 
@@ -81,16 +83,19 @@ public class KonsolenUI {
 					kv.erstelleImmobilie();
 					break;
 				case 2:
-					kv.erstelleUnternehmen();
-					break;
-					
-				case 3:
 					//kv.erstellePrivatperson();
 					break;
-					
+				case 3:
+					//kv.erstelleBank();
+					break;
 				case 4:
+					//kv.erstelleVersUN();
+					break;
+				case 5:
+					kv.erstelleUnternehmen();
+					break;
+				case 6:
 					return;
-
 				default:
 					System.out.println("Ungültige Eingabe.\n");
 					stammdatenMenue();
@@ -151,7 +156,7 @@ public class KonsolenUI {
 
 				switch (auswahl) {
 				case 1:
-					kv.erstelleVersicherung();
+					kv.erstelleVersichert();
 					break;
 
 				case 2:
@@ -198,6 +203,19 @@ public class KonsolenUI {
 			try {
 				System.out.print(eingabe + ": ");
 				value = in.readLine();
+			} catch (Exception e) {
+			}
+		}
+		return value;
+	}
+
+	public Integer getInteger(String eingabe) {
+		Integer value = null;
+		while (value == null) {
+			try {
+				System.out.print(eingabe + ": ");
+				String valueString = in.readLine();
+				value = Integer.parseInt(valueString);
 			} catch (Exception e) {
 			}
 		}

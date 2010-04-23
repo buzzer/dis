@@ -98,7 +98,6 @@ public class Immobilie {
 		if (getIid() == -1) {
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
-			//String insertSQL = "INSERT INTO aufg2_immobilie(wert) VALUES (?)";
 			String insertSQL = "INSERT INTO immobilie(Wert) VALUES (?)";
 
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
