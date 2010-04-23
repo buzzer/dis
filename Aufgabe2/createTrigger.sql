@@ -50,6 +50,7 @@ CREATE TABLE logTabelle (
   username   VARCHAR(50),
   updateTime TIMESTAMP,
   actionDone VARCHAR(50),
+  tableName  VARCHAR(50),
   tableID    INTEGER
 );
 
@@ -58,132 +59,132 @@ CREATE TRIGGER logimmobilieU
 AFTER UPDATE ON immobilie
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE',N_ROW.ImmoID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE','IMMOBILIE',N_ROW.ImmoID);
 
 CREATE TRIGGER logimmobilieI
 AFTER INSERT ON immobilie
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT',N_ROW.ImmoID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT','IMMOBILIE',N_ROW.ImmoID);
 
 CREATE TRIGGER logimmobilieD
 AFTER DELETE ON immobilie
 REFERENCING OLD AS O_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE',O_ROW.ImmoID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE','IMMOBILIE',O_ROW.ImmoID);
 
 -- Privatperson
 CREATE TRIGGER logprivatpersonU
 AFTER UPDATE ON privatperson
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE',N_ROW.PersID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE','PRIVATPERSON',N_ROW.PersID);
 
 CREATE TRIGGER logprivatpersonI
 AFTER INSERT ON privatperson
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT',N_ROW.PersID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT','PRIVATPERSON',N_ROW.PersID);
 
 CREATE TRIGGER logprivatpersonD
 AFTER DELETE ON privatperson
 REFERENCING OLD AS O_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE',O_ROW.PersID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE','PRIVATPERSON',O_ROW.PersID);
 
 -- Unternehmen
 CREATE TRIGGER logunternehmenU
 AFTER UPDATE ON unternehmen
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE',N_ROW.UNid);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE','UNTERNEHMEN',N_ROW.UNid);
 
 CREATE TRIGGER logunternehmenI
 AFTER INSERT ON unternehmen
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT',N_ROW.UNid);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT','UNTERNEHMEN',N_ROW.UNid);
 
 CREATE TRIGGER logunternehmenD
 AFTER DELETE ON unternehmen
 REFERENCING OLD AS O_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE',O_ROW.UNid);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE','UNTERNEHMEN',O_ROW.UNid);
 
 --VersicherungsUN
 CREATE TRIGGER logvers_unU
 AFTER UPDATE ON vers_un
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE',N_ROW.VersUNid);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE','VERS_UN',N_ROW.VersUNid);
 
 CREATE TRIGGER logvers_unI
 AFTER INSERT ON vers_un
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT',N_ROW.VersUNid);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT','VERS_UN',N_ROW.VersUNid);
 
 CREATE TRIGGER logvers_unD
 AFTER DELETE ON vers_un
 REFERENCING OLD AS O_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE',O_ROW.VersUNid);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE','VERS_UN',O_ROW.VersUNid);
 
 -- Bank
 CREATE TRIGGER logbankU
 AFTER UPDATE ON bank
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE',N_ROW.BankID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE','BANK',N_ROW.BankID);
 
 CREATE TRIGGER logbankI
 AFTER INSERT ON bank
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT',N_ROW.BankID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT','BANK',N_ROW.BankID);
 
 CREATE TRIGGER logbankD
 AFTER DELETE ON bank
 REFERENCING OLD AS O_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE',O_ROW.BankID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE','BANK',O_ROW.BankID);
 
 -- Versichert
 CREATE TRIGGER logversichertU
 AFTER UPDATE ON versichert
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE',N_ROW.LebVersID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE','VERSICHERT',N_ROW.LebVersID);
 
 CREATE TRIGGER logversichertI
 AFTER INSERT ON versichert
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT',N_ROW.LebVersID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT','VERSICHERT',N_ROW.LebVersID);
 
 CREATE TRIGGER logversichertD
 AFTER DELETE ON versichert
 REFERENCING OLD AS O_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE',O_ROW.LebVersID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE','VERSICHERT',O_ROW.LebVersID);
 
 -- Darlehen
 CREATE TRIGGER logdarlehenU
 AFTER UPDATE ON darlehen
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE',N_ROW.DarlID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'UPDATE','DARLEHEN',N_ROW.DarlID);
 
 CREATE TRIGGER logdarlehenI
 AFTER INSERT ON darlehen
 REFERENCING NEW AS N_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT',N_ROW.DarlID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'INSERT','DARLEHEN',N_ROW.DarlID);
 
 CREATE TRIGGER logdarlehenD
 AFTER DELETE ON darlehen
 REFERENCING OLD AS O_ROW
 FOR EACH ROW
-INSERT INTO logTabelle (username,updateTime,actionDone,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE',O_ROW.DarlID);
+INSERT INTO logTabelle (username,updateTime,actionDone,tableName,tableID) VALUES (USER,CURRENT TIMESTAMP,'DELETE','DARLEHEN',O_ROW.DarlID);
 
 commit;
