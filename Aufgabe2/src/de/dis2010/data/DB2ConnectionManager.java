@@ -14,7 +14,8 @@ import java.util.Properties;
 /**
  * Einfaches Singleton zur Verwaltung von Datenbank-Verbindungen.
  */
-public class DB2ConnectionManager {
+public class DB2ConnectionManager
+{
 
 	// instance of Driver Manager
 	private static DB2ConnectionManager _instance = null;
@@ -25,8 +26,10 @@ public class DB2ConnectionManager {
 	/**
 	 * Erzeugt eine Datenbankverbindung
 	 */
-	private DB2ConnectionManager() {
-		try {
+	private DB2ConnectionManager()
+	{
+		try
+		{
 			// Holen der Einstellungen aus der db2.properties Datei
 			Properties properties = new Properties();
 			URL url = ClassLoader.getSystemResource("db2.properties");
@@ -42,15 +45,25 @@ public class DB2ConnectionManager {
 			Class.forName("com.ibm.db2.jcc.DB2Driver");
 			_con = DriverManager.getConnection(jdbcUrl, jdbcUser, jdbcPass);
 
-		} catch (FileNotFoundException e1) {
+		}
+		catch (FileNotFoundException e1)
+		{
 			e1.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e)
+		{
 			e.printStackTrace();
-		} catch (SQLException e) {
+		}
+		catch (SQLException e)
+		{
 			e.printStackTrace();
-		} catch (URISyntaxException e) {
+		}
+		catch (URISyntaxException e)
+		{
 			e.printStackTrace();
 		}
 	}
@@ -60,8 +73,10 @@ public class DB2ConnectionManager {
 	 * 
 	 * @return DB2ConnectionManager
 	 */
-	public static DB2ConnectionManager getInstance() {
-		if (_instance == null) {
+	public static DB2ConnectionManager getInstance()
+	{
+		if (_instance == null)
+		{
 			_instance = new DB2ConnectionManager();
 		}
 		return _instance;
@@ -72,7 +87,8 @@ public class DB2ConnectionManager {
 	 * 
 	 * @return Connection
 	 */
-	public Connection getConnection() {
+	public Connection getConnection()
+	{
 		return _con;
 	}
 }

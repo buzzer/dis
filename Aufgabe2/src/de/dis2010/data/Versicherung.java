@@ -6,29 +6,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Versicherung {
+public class Versicherung 
+{
 	private Double betrag = 0.;
 	
-	public Versicherung() {
+
+	public Versicherung()
+	{
 		// dummy
 	}
 
-	public void setBetrag(Double betrag) {
+	public void setBetrag(Double betrag)
+	{
 		// TODO Auto-generated method stub
 		this.betrag = betrag;
-		
+
 	}
 
 	/**
 	 * Speichert das Unternehmen in der Datenbank. Ist noch keine ID vergeben
 	 * worden, wird die generierte Id von DB2 geholt und dem Model übergeben.
 	 */
-	public void save() throws SQLException {
+	public void save() throws SQLException
+	{
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Füge neues Element hinzu, wenn das Objekt noch keine ID hat.
-		if (getIid() == -1) {
+		if (getIid() == -1)
+		{
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
 			String insertSQL = "INSERT INTO versichert(Betrag) VALUES (?)";
@@ -42,13 +48,16 @@ public class Versicherung {
 
 			// Hole die Id des engefügten Datensatzes
 			ResultSet rs = pstmt.getGeneratedKeys();
-			if (rs.next()) {
+			if (rs.next())
+			{
 				setIid(rs.getInt(1));
 			}
 
 			rs.close();
 			pstmt.close();
-		} else {
+		}
+		else
+		{
 			// Falls schon eine ID vorhanden ist, mache ein Update...
 			String updateSQL = "UPDATE versichert SET Betrag = ? WHERE LebVersID = ?";
 			PreparedStatement pstmt = con.prepareStatement(updateSQL);
@@ -62,17 +71,20 @@ public class Versicherung {
 		}
 	}
 
-	private String getBetrag() {
+	private String getBetrag()
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	private void setIid(int int1) {
+	private void setIid(int int1)
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
-	private int getIid() {
+	private int getIid()
+	{
 		// TODO Auto-generated method stub
 		return 0;
 	}
