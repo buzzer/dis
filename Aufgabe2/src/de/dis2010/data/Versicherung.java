@@ -14,9 +14,7 @@ public class Versicherung {
 	}
 
 	public void setBetrag(Double betrag) {
-		// TODO Auto-generated method stub
 		this.betrag = betrag;
-		
 	}
 
 	/**
@@ -37,7 +35,7 @@ public class Versicherung {
 					Statement.RETURN_GENERATED_KEYS);
 
 			// Setze Anfrageparameter und führe Anfrage aus
-			pstmt.setString(1, getBetrag());
+			pstmt.setDouble(1, getBetrag());
 			pstmt.executeUpdate();
 
 			// Hole die Id des engefügten Datensatzes
@@ -54,7 +52,7 @@ public class Versicherung {
 			PreparedStatement pstmt = con.prepareStatement(updateSQL);
 
 			// Setze Anfrage Parameter
-			pstmt.setString(1, getBetrag());
+			pstmt.setDouble(1, getBetrag());
 			pstmt.setInt(2, getIid());
 			pstmt.executeUpdate();
 
@@ -62,9 +60,8 @@ public class Versicherung {
 		}
 	}
 
-	private String getBetrag() {
-		// TODO Auto-generated method stub
-		return null;
+	private Double getBetrag() {
+		return this.betrag;
 	}
 
 	private void setIid(int int1) {

@@ -8,24 +8,16 @@ import java.sql.Statement;
 
 public class versichert {
 	private Integer iid = -1;
-	private Double Betrag = 0.;
-	private Integer PersID = 0;
-	private Integer VersUNid = 0;
+	private Double Betrag;
+	private Integer PersID;
+	private Integer VersUNid;
 	
 	public versichert() {
 		// dummy
 	}
-	/**
-	 * @return the iid
-	 */
 	public Integer getIid() {
 		return iid;
 	}
-
-	/**
-	 * @param iid
-	 *            the iid to set
-	 */
 	public void setIid(Integer iid) {
 		this.iid = iid;
 	}
@@ -77,15 +69,48 @@ public class versichert {
 			pstmt.close();
 		} else {
 			// Falls schon eine ID vorhanden ist, mache ein Update...
-			String updateSQL = "UPDATE versichert SET Betrag = ? WHERE LebVersID = ?";
+			String updateSQL = "UPDATE versichert SET PersID = ?,VersUNid = ?,Betrag = ? WHERE LebVersID = ?";
 			PreparedStatement pstmt = con.prepareStatement(updateSQL);
 
 			// Setze Anfrage Parameter
-			pstmt.setDouble(1, getBetrag());
-			pstmt.setInt(2, getIid());
+			pstmt.setInt(1, this.getPerson());
+			pstmt.setInt(2, this.getVersUN());
+			pstmt.setDouble(3, this.getBetrag());
 			pstmt.executeUpdate();
 
 			pstmt.close();
+		}
+	}
+	/**
+	 * Lädt eine versichert via Id.
+	 * 
+	 * @param id
+	 *            die Id des Datensatzes
+	 * @return versichert
+	 */
+	public static versichert load(int iid) throws SQLException {
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT LebVersID,PersID,VersUNid,Betrag FROM versichert WHERE LebVersID = ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, iid);
+
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			versichert i = new versichert();
+			i.setIid(rs.getInt("LebVersID"));
+			i.setPerson(rs.getInt("PersID"));
+			i.setVersUN(rs.getInt("VersUNid"));
+			i.setBetrag(rs.getDouble("Betrag"));
+
+			rs.close();
+			pstmt.close();
+			return i;
+		} else {
+			return null;
 		}
 	}
 	

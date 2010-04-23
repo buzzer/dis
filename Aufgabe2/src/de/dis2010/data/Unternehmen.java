@@ -11,10 +11,10 @@ public class Unternehmen {
 		// Attribute
 		private Integer iid = -1;
 		private String Name;
-		private String Str;
-		private String Ort;
-		private String Rechtsform;
-		private Integer Plz;
+//		private String Str;
+//		private String Ort;
+//		private String Rechtsform;
+//		private Integer Plz;
 		private Double Eigenkapital;
 
 		/**
