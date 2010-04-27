@@ -1,1 +1,0 @@
--- Versicherungsabschluss (nur Lebensversicherungen)

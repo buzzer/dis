@@ -1,1 +1,0 @@
--- Protokollierung (mittels Trigger)

@@ -1,3 +1,0 @@
--- Kreditvergabe an
---  Privatpersonen
---  Unternehmen
