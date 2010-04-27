@@ -15,6 +15,7 @@ public class Darlehen {
 	private Integer UNid;
 	private Integer VersUNid;
 	private Integer ImmoID;
+	private Integer LebVersID;
 	private Double	Betrag;
 	private Double	Zinssatz;
 	private Double	Tilgungsrate;
@@ -79,6 +80,14 @@ public class Darlehen {
 		return ImmoID;
 	}
 
+	public void setLebVersID(Integer lebVersID) {
+		LebVersID = lebVersID;
+	}
+
+	public Integer getLebVersID() {
+		return LebVersID;
+	}
+	
 	public Double getBetrag() {
 		return this.Betrag;
 	}
@@ -123,21 +132,58 @@ public class Darlehen {
 		if (getIid() == -1) {
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
-			String insertSQL = "INSERT INTO darlehen (BankID,PersID,UNid,VersUNid,ImmoID,Betrag,Zinssatz,Tilgungsrate,Restschuld) VALUES (?,?,?,?,?,?,?,?,?)";
+			String insertSQL = "INSERT INTO darlehen (BankID,PersID,UNid,VersUNid,ImmoID,LebVersID,Betrag,Zinssatz,Tilgungsrate,Restschuld) VALUES (?,?,?,?,?,?,?,?,?)";
 	
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
 	
 			// Setze Anfrageparameter und führe Anfrage aus
 			pstmt.setInt(1, this.getBankID());
-			pstmt.setInt(2, this.getPersID());
-			pstmt.setInt(3, this.getUNid());
-			pstmt.setInt(4, this.getVersUNid());
-			pstmt.setInt(5, this.getImmoID());
-			pstmt.setDouble(6, this.getBetrag());
-			pstmt.setDouble(7, this.getZinssatz());
-			pstmt.setDouble(8, this.getTilgungsrate());
-			pstmt.setDouble(9, this.getRestschuld());
+			if ( this.getPersID() != 0 ) {
+				pstmt.setInt(2, this.getPersID());
+			} else {
+				pstmt.setNull(2, java.sql.Types.INTEGER);
+			}; // Set NULL value
+			
+			if ( this.getUNid() != 0 ) {
+				pstmt.setInt(3, this.getUNid());
+			} else {
+				pstmt.setNull(3, java.sql.Types.INTEGER);
+			}; // Set NULL value
+			
+			if ( this.getVersUNid() != 0 ) {
+				pstmt.setInt(4, this.getVersUNid());
+			} else {
+				pstmt.setNull(4, java.sql.Types.INTEGER);
+			}; // Set NULL value
+			
+			if ( this.getImmoID() != 0 ) {
+				pstmt.setInt(5, this.getImmoID());
+			} else {
+				pstmt.setNull(5, java.sql.Types.INTEGER);
+			}; // Set NULL value
+			
+			if ( this.getPersID() != 0 ) {
+				pstmt.setInt(6, this.getPersID());
+			} else {
+				pstmt.setNull(6, java.sql.Types.INTEGER);
+			}; // Set NULL value
+			
+			pstmt.setInt(6, this.getLebVersID());
+			pstmt.setDouble(7, this.getBetrag());
+			pstmt.setDouble(8, this.getZinssatz());
+			
+			if ( this.getTilgungsrate() != 0 ) {
+				pstmt.setDouble(9, this.getTilgungsrate());
+			} else {
+				pstmt.setNull(9, java.sql.Types.NUMERIC);
+			}; // Set NULL value
+			
+			if ( this.getRestschuld() != 0 ) {
+				pstmt.setDouble(10, this.getRestschuld());
+			} else {
+				pstmt.setNull(10, java.sql.Types.INTEGER);
+			}; // Set NULL value
 			pstmt.executeUpdate();
 	
 			// Hole die Id des engefügten Datensatzes
@@ -150,7 +196,7 @@ public class Darlehen {
 			pstmt.close();
 		} else {
 			// Falls schon eine ID vorhanden ist, mache ein Update...
-			String updateSQL = "UPDATE darlehen SET BankID=?,PersID=?,UNid=?,VersUNid=?,ImmoID=?,Betrag=?,Zinssatz=?,Tilgungsrate=?,Restschuld=? WHERE DarlID = ?";
+			String updateSQL = "UPDATE darlehen SET BankID=?,PersID=?,UNid=?,VersUNid=?,ImmoID=?LebVersID=?,Betrag=?,Zinssatz=?,Tilgungsrate=?,Restschuld=? WHERE DarlID = ?";
 			PreparedStatement pstmt = con.prepareStatement(updateSQL);
 	
 			// Setze Anfrage Parameter
@@ -159,11 +205,12 @@ public class Darlehen {
 			pstmt.setInt(3, this.getUNid());
 			pstmt.setInt(4, this.getVersUNid());
 			pstmt.setInt(5, this.getImmoID());
-			pstmt.setDouble(6, this.getBetrag());
-			pstmt.setDouble(7, this.getZinssatz());
-			pstmt.setDouble(8, this.getTilgungsrate());
-			pstmt.setDouble(9, this.getRestschuld());
-			pstmt.setInt(10, this.getIid());
+			pstmt.setInt(6, this.getLebVersID());
+			pstmt.setDouble(7, this.getBetrag());
+			pstmt.setDouble(8, this.getZinssatz());
+			pstmt.setDouble(9, this.getTilgungsrate());
+			pstmt.setDouble(10, this.getRestschuld());
+			pstmt.setInt(11, this.getIid());
 			pstmt.executeUpdate();
 	
 			pstmt.close();

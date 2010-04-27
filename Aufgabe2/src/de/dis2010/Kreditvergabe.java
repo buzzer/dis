@@ -82,10 +82,44 @@ public class Kreditvergabe {
 	}
 	
 	public Darlehen erstelleKredit() {
-		// TODO Auto-generated method stub
 		Darlehen d = null;
-		try {}
-		catch (Exception e) {}
+		Double limit1 = 10000.;
+		Double limit2 = 100000.;
+		
+		try {
+			// Bank abfragen (muss bereits in DB sein!)
+			Integer BankID = ui.getInteger("Bank Identifier");
+			Double betrag  = ui.getDouble("Kreditrahmen");
+			Integer immoID = 0;
+			Integer lebVersID = 0;
+			
+			if (betrag > limit1) { immoID = ui.getInteger("Immobilien Identifier"); }; 
+			if (betrag > limit2) { lebVersID = ui.getInteger("Lebensversicherungs Identifier");	};
+			Integer versUNid = ui.getInteger("versUNid");
+			Integer persID = ui.getInteger("Personen Identifier");
+			Integer uNid   = ui.getInteger("Unternehmens Identifier");
+			Double zinssatz= ui.getDouble("Zinssatz");
+			Double tilgungsrate= ui.getDouble("tilgungsrate");
+			Double restschuld= ui.getDouble("restschuld");
+			
+			// Neues Darlehen anlegen
+			d = new Darlehen();
+			d.setBankID(BankID);
+			d.setBetrag(betrag);
+			if (betrag > limit1) { d.setImmoID(immoID);	};
+			if (betrag > limit2) { d.setLebVersID(lebVersID); }
+			d.setVersUNid(versUNid);
+			d.setPersID(persID);
+			d.setUNid(uNid);
+			d.setZinssatz(zinssatz);
+			d.setTilgungsrate(tilgungsrate);
+			d.setRestschuld(restschuld);
+			
+			// Darlehen speichern
+			d.save();
+			ui.message("Darlehen erstellt.");
+			
+		} catch (Exception e) { e.printStackTrace(); }
 		return d;
 	}
 
