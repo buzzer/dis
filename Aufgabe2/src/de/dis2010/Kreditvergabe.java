@@ -1,13 +1,10 @@
 package de.dis2010;
 
-import java.util.Enumeration;
-
 import de.dis2010.data.Darlehen;
 import de.dis2010.data.Immobilie;
 import de.dis2010.data.Privatpersonen;
 import de.dis2010.data.Unternehmen;
 import de.dis2010.data.Versicherung;
-//import de.dis2010.data.versichert;
 import de.dis2010.ui.KonsolenUI;
 
 public class Kreditvergabe {
@@ -45,10 +42,17 @@ public class Kreditvergabe {
 		try {
 			// Wert der Immobilie abfragen
 			Double wert = ui.getDouble("Wert der Immobilie");
-
+			Integer pid = ui.getInteger("PersonID der Immobilie");
+			Integer bid = ui.getInteger("BankID der Immobilie");
+            Integer vuid = ui.getInteger("VersicherungsunternID der Immobilie");
+            Integer uid = ui.getInteger("UnternehmenID der Immobilie");
 			// Neue Immobilie anlegen
 			i = new Immobilie(wert);
 			i.setWert(wert);
+			i.setPid(pid);
+			i.setUid(uid);
+			i.setVuid(vuid);
+			i.setBid(bid);
 			
 			// Immobilie speichern
 			i.save();

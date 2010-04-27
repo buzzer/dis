@@ -13,7 +13,6 @@ public abstract class Darlehensnehmer
 	public Darlehensnehmer(Integer did)
 	{
 		this.did = did;
-
 	}
 
 	/**
@@ -41,6 +40,11 @@ public abstract class Darlehensnehmer
 		return name;
 	}
 
+	public void setStr(String str)
+	{
+		this.str = str;
+	}
+
 	/**
 	 * @return the strasse
 	 */
@@ -49,12 +53,22 @@ public abstract class Darlehensnehmer
 		return str;
 	}
 
+	public void setPLZ(int plz)
+	{
+		this.plz = plz;
+	}
+
 	/**
 	 * @return the plz
 	 */
 	public int getPLZ()
 	{
 		return plz;
+	}
+
+	public void setOrt(String ort)
+	{
+		this.ort = ort;
 	}
 
 	/**

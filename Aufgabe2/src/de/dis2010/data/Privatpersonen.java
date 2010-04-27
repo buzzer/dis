@@ -9,20 +9,19 @@ import java.sql.Statement;
 public class Privatpersonen extends Darlehensnehmer
 {
 	// Attribute
-	private Integer pid;
+	private static Integer pid;
 	private String vorname;
 
 	public Privatpersonen(Integer pid)
 	{
 		super(pid);
-		
 
 	}
 
 	/**
 	 * @return pid
 	 */
-	public Integer getPid()
+	public static Integer getPid()
 	{
 		return pid;
 	}
@@ -33,7 +32,7 @@ public class Privatpersonen extends Darlehensnehmer
 	 */
 	public void setPid(Integer pid)
 	{
-		this.pid = pid;
+		Privatpersonen.pid = pid;
 	}
 
 	/**
@@ -50,7 +49,7 @@ public class Privatpersonen extends Darlehensnehmer
 	 */
 	public void setVorName(String vorname)
 	{
-		 this.vorname = vorname;
+		this.vorname = vorname;
 	}
 
 	public static Privatpersonen load(int pid) throws SQLException
@@ -71,7 +70,9 @@ public class Privatpersonen extends Darlehensnehmer
 			p.setPid(rs.getInt("PersID"));
 			p.setVorName(rs.getString("Vorname"));
 			p.setName(rs.getString("Name"));
-			// TODO
+			p.setStr(rs.getString("Str"));
+			p.setOrt(rs.getString("Ort"));
+			p.setPLZ(rs.getInt("PLZ"));
 			rs.close();
 			pstmt.close();
 			return p;
@@ -128,7 +129,6 @@ public class Privatpersonen extends Darlehensnehmer
 			pstmt.setString(3, getStr());
 			pstmt.setInt(4, getPLZ());
 			pstmt.setString(5, getOrt());
-
 
 			pstmt.executeUpdate();
 
