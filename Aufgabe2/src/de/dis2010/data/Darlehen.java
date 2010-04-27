@@ -10,16 +10,16 @@ public class Darlehen {
 
 	// Attribute
 	private Integer iid = -1;
-	private Integer BankID;
-	private Integer PersID;
-	private Integer UNid;
-	private Integer VersUNid;
-	private Integer ImmoID;
-	private Integer LebVersID;
-	private Double	Betrag;
-	private Double	Zinssatz;
-	private Double	Tilgungsrate;
-	private Double	Restschuld;
+	private Integer BankID = 0;
+	private Integer PersID = 0;
+	private Integer UNid = 0;
+	private Integer VersUNid = 0;
+	private Integer ImmoID = 0;
+	private Integer LebVersID = 0;
+	private Double	Betrag = 0.;
+	private Double	Zinssatz = 0.;
+	private Double	Tilgungsrate = 0.;
+	private Double	Restschuld = 0.;
 
 	public Darlehen() {
 		// dummy
@@ -132,7 +132,7 @@ public class Darlehen {
 		if (getIid() == -1) {
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
-			String insertSQL = "INSERT INTO darlehen (BankID,PersID,UNid,VersUNid,ImmoID,LebVersID,Betrag,Zinssatz,Tilgungsrate,Restschuld) VALUES (?,?,?,?,?,?,?,?,?)";
+			String insertSQL = "INSERT INTO darlehen (BankID,PersID,UNid,VersUNid,ImmoID,LebVersID,Betrag,Zinssatz,Tilgungsrate,Restschuld) VALUES (?,?,?,?,?,?,?,?,?,?)";
 	
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
@@ -163,13 +163,12 @@ public class Darlehen {
 				pstmt.setNull(5, java.sql.Types.INTEGER);
 			}; // Set NULL value
 			
-			if ( this.getPersID() != 0 ) {
-				pstmt.setInt(6, this.getPersID());
+			if ( this.getLebVersID() != 0 ) {
+				pstmt.setInt(6, this.getLebVersID());
 			} else {
 				pstmt.setNull(6, java.sql.Types.INTEGER);
 			}; // Set NULL value
 			
-			pstmt.setInt(6, this.getLebVersID());
 			pstmt.setDouble(7, this.getBetrag());
 			pstmt.setDouble(8, this.getZinssatz());
 			
@@ -229,7 +228,7 @@ public class Darlehen {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT DarlID,BankID,PersID,UNid,VersUNid,ImmoID,Betrag,Zinssatz,Tilgungsrate,Restschuld FROM darlehen WHERE DarlID = ?";
+		String selectSQL = "SELECT DarlID,BankID,PersID,UNid,VersUNid,LebVersID,ImmoID,Betrag,Zinssatz,Tilgungsrate,Restschuld FROM darlehen WHERE DarlID = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
 		pstmt.setInt(1, iid);
 
@@ -244,6 +243,7 @@ public class Darlehen {
 			i.setUNid(rs.getInt("UNid"));
 			i.setVersUNid(rs.getInt("VersUNid"));
 			i.setImmoID(rs.getInt("ImmoID"));
+			i.setLebVersID(rs.getInt("LebVersID"));
 			i.setBetrag(rs.getDouble("Betrag"));
 			i.setZinssatz(rs.getDouble("Zinssatz"));
 			i.setTilgungsrate(rs.getDouble("Tilgungsrate"));

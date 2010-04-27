@@ -1,5 +1,8 @@
 package de.dis2010;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import de.dis2010.data.Darlehen;
 import de.dis2010.data.Immobilie;
 import de.dis2010.data.Unternehmen;
@@ -85,19 +88,46 @@ public class Kreditvergabe {
 		Darlehen d = null;
 		Double limit1 = 10000.;
 		Double limit2 = 100000.;
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		
 		try {
+			System.out.println("\nKreditnehmer auswählen\n");
+			System.out.println("[1]\tPrivatperson");
+			System.out.println("[2]\tVersicherungsunternehmen");
+			System.out.println("[3]\tsonstiges Unternehmen (keine Bank)!");
+
+			System.out.print("\nAuswahl: ");
+			String eingabe = in.readLine();
+			int auswahl = Integer.parseInt(eingabe);
+			
+			Integer persID = 0;
+			Integer versUNid = 0;
+			Integer uNid = 0;
+
+			switch (auswahl) {
+			case 1:
+				persID = ui.getInteger("Personen Identifier");
+				break;
+			case 2:
+				versUNid = ui.getInteger("versUNid");
+				break;
+			case 3:
+				uNid   = ui.getInteger("Unternehmens Identifier");
+				break;
+			default:
+				System.out.println("Ungültige Eingabe.\n");
+				erstelleKredit();
+				break;
+			}
+			
 			// Bank abfragen (muss bereits in DB sein!)
-			Integer BankID = ui.getInteger("Bank Identifier");
+			Integer BankID = ui.getInteger("Bank Identifier (Kreditgeber)");
 			Double betrag  = ui.getDouble("Kreditrahmen");
 			Integer immoID = 0;
 			Integer lebVersID = 0;
 			
 			if (betrag > limit1) { immoID = ui.getInteger("Immobilien Identifier"); }; 
 			if (betrag > limit2) { lebVersID = ui.getInteger("Lebensversicherungs Identifier");	};
-			Integer versUNid = ui.getInteger("versUNid");
-			Integer persID = ui.getInteger("Personen Identifier");
-			Integer uNid   = ui.getInteger("Unternehmens Identifier");
 			Double zinssatz= ui.getDouble("Zinssatz");
 			Double tilgungsrate= ui.getDouble("tilgungsrate");
 			Double restschuld= ui.getDouble("restschuld");
@@ -108,9 +138,19 @@ public class Kreditvergabe {
 			d.setBetrag(betrag);
 			if (betrag > limit1) { d.setImmoID(immoID);	};
 			if (betrag > limit2) { d.setLebVersID(lebVersID); }
-			d.setVersUNid(versUNid);
-			d.setPersID(persID);
-			d.setUNid(uNid);
+			switch (auswahl) {
+			case 1:
+				d.setPersID(persID);
+				break;
+			case 2:
+				d.setVersUNid(versUNid);
+				break;
+			case 3:
+				d.setUNid(uNid);
+				break;
+			default:
+				break;
+			}
 			d.setZinssatz(zinssatz);
 			d.setTilgungsrate(tilgungsrate);
 			d.setRestschuld(restschuld);
