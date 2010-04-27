@@ -13,6 +13,10 @@ public class Immobilie
 	private Integer iid = -1;
 	private static Double wert;
 	private Unternehmen unternehmerVon;
+	private int BankID = 0;
+	private int VersUNid = 0;
+	private int UNid = 0;
+	private int PersID = 0;
 
 	/**
 	 * Erzeugt Immobilie mit einem Wert Beispiel-Tabelle: CREATE TABLE
@@ -88,7 +92,7 @@ public class Immobilie
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT ImmoID, Wert FROM immobilie WHERE ImmoID = ?";
+		String selectSQL = "SELECT ImmoID,PersID,UNid,VersUNid,BankID,Wert FROM immobilie WHERE ImmoID = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
 		pstmt.setInt(1, iid);
 
@@ -98,6 +102,10 @@ public class Immobilie
 		{
 			Immobilie i = new Immobilie(wert);
 			i.setIid(rs.getInt("ImmoID"));
+			i.setPersID(rs.getInt("PersID"));
+			i.setUNid(rs.getInt("UNid"));
+			i.setVersUNid(rs.getInt("VersUNid"));
+			i.setBankID(rs.getInt("BankID"));
 			i.setWert(rs.getDouble("Wert"));
 	
 			rs.close();
@@ -108,6 +116,22 @@ public class Immobilie
 		{
 			return null;
 		}
+	}
+
+	private void setBankID(int int1) {
+		this.BankID = int1;
+	}
+
+	private void setVersUNid(int int1) {
+		this.VersUNid = int1;
+	}
+
+	private void setUNid(int int1) {
+		this.UNid = int1;
+	}
+
+	private void setPersID(int int1) {
+		this.PersID = int1;
 	}
 
 	/**

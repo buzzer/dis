@@ -11,8 +11,8 @@ public class Unternehmen extends Darlehensnehmer
 
 	// Attribute
 	private static Integer unid = -1;
-	private String rechtsform;
-	private Double eigenkapital;
+	private String rechtsform = null;
+	private Double eigenkapital = 0.;
 
 	/**
 	 * Erzeugt Unternehmen mit einem Name Beispiel-Tabelle:
@@ -78,6 +78,28 @@ public class Unternehmen extends Darlehensnehmer
 	// this.Name = Name;
 	// }
 
+	public Double getImmowerte() throws SQLException {
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "select Wert FROM immobilie where UNid = ?";
+		
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, this.getUnid());
+
+		Double ImmoWerte = 0.;
+		
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		while (rs.next()) {
+			ImmoWerte += rs.getDouble("Wert");
+		}
+		rs.close();
+		pstmt.close();
+		return ImmoWerte;
+	}
+
 	/**
 	 * Lädt ein Unternehmen via Id.
 	 * 
@@ -91,7 +113,7 @@ public class Unternehmen extends Darlehensnehmer
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT UNid, Name FROM unternehmen WHERE UNid = ?";
+		String selectSQL = "SELECT UNid,Name,Str,PLZ,Ort,Rechtsform,Eigenkapital FROM unternehmen WHERE UNid = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
 		pstmt.setInt(1, iid);
 
@@ -102,6 +124,11 @@ public class Unternehmen extends Darlehensnehmer
 			Unternehmen u = new Unternehmen(name);
 			u.setUnid(rs.getInt("UNid"));
 			u.setName(rs.getString("Name"));
+			u.setStr(rs.getString("Str"));
+			u.setPLZ(rs.getInt("PLZ"));
+			u.setOrt(rs.getString("Ort"));
+			u.setRechtsform(rs.getString("Rechtsform"));
+			u.setEigenkapital(rs.getDouble("Eigenkapital"));
 
 			rs.close();
 			pstmt.close();
@@ -171,4 +198,11 @@ public class Unternehmen extends Darlehensnehmer
 		}
 		return false;
 	}
+
+	@Override
+	public boolean hatDarlehen(Integer bankID) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

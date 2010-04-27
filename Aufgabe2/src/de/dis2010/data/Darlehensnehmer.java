@@ -1,5 +1,10 @@
 package de.dis2010.data;
 
+//import java.sql.Connection;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public abstract class Darlehensnehmer
 {
 
@@ -73,5 +78,18 @@ public abstract class Darlehensnehmer
 	{
 		Darlehensnehmer.name = name;
 	}
+	public void setOrt(String string) {
+		this.ort = string;
+	}
+
+	public void setPLZ(Integer plz) {
+		this.plz = plz;
+	}
+
+	public void setStr(String string) {
+		this.str = string;
+	}
+
+	public abstract boolean hatDarlehen(Integer bankID) throws SQLException;
 
 }

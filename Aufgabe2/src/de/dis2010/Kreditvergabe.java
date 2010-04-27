@@ -3,6 +3,8 @@ package de.dis2010;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+//import de.dis2010.data.Bank;
+import de.dis2010.data.Privatpersonen;
 import de.dis2010.data.Darlehen;
 import de.dis2010.data.Immobilie;
 import de.dis2010.data.Unternehmen;
@@ -89,12 +91,14 @@ public class Kreditvergabe {
 		Double limit1 = 10000.;
 		Double limit2 = 100000.;
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		Privatpersonen person = null;
+		Immobilie sicherung = null;
+		versichert sicherung2 = null;
 		
 		try {
 			System.out.println("\nKreditnehmer auswählen\n");
 			System.out.println("[1]\tPrivatperson");
-			System.out.println("[2]\tVersicherungsunternehmen");
-			System.out.println("[3]\tsonstiges Unternehmen (keine Bank)!");
+			System.out.println("[2]\tsonstiges Unternehmen (keine Bank oder Versicherung!)");
 
 			System.out.print("\nAuswahl: ");
 			String eingabe = in.readLine();
@@ -103,15 +107,16 @@ public class Kreditvergabe {
 			Integer persID = 0;
 			Integer versUNid = 0;
 			Integer uNid = 0;
-
+			Integer immoID = 0;
+			Integer lebVersID = 0;
+			
 			switch (auswahl) {
 			case 1:
 				persID = ui.getInteger("Personen Identifier");
+				person = new Privatpersonen(null, null);
+				person.setPid(persID);
 				break;
 			case 2:
-				versUNid = ui.getInteger("versUNid");
-				break;
-			case 3:
 				uNid   = ui.getInteger("Unternehmens Identifier");
 				break;
 			default:
@@ -119,15 +124,45 @@ public class Kreditvergabe {
 				erstelleKredit();
 				break;
 			}
-			
+									
 			// Bank abfragen (muss bereits in DB sein!)
 			Integer BankID = ui.getInteger("Bank Identifier (Kreditgeber)");
+			if (auswahl == 1) { // Nur Privatpersonen
+				if (person.hatDarlehen(BankID)) {
+					ui.message("Person hat bereits ein Darlehen von dieser Bank");
+					return null;
+				}
+			}
 			Double betrag  = ui.getDouble("Kreditrahmen");
-			Integer immoID = 0;
-			Integer lebVersID = 0;
 			
-			if (betrag > limit1) { immoID = ui.getInteger("Immobilien Identifier"); }; 
-			if (betrag > limit2) { lebVersID = ui.getInteger("Lebensversicherungs Identifier");	};
+			if (auswahl == 1) { // Nur Privatpersonen
+				if (betrag > limit1) {
+					immoID = ui.getInteger("Immobilien Identifier");
+					// Immobilie zur Sicherung bestimmen
+					sicherung = Immobilie.load(immoID);
+					if (sicherung.getWert() < betrag) {
+						ui.message("Immobilie reicht zur Sicherung nicht aus");
+						return null;
+					}
+					// TODO ggf. anlegen
+				}; 
+				if (betrag > limit2) {
+					lebVersID = ui.getInteger("Lebensversicherungs Identifier");
+					sicherung2 = versichert.load(lebVersID);
+					if (sicherung2.getBetrag() < (betrag/2) ) {
+						ui.message("Lebensversicherung reicht zur Sicherung nicht aus");
+						return null;
+					}
+					// TODO ggf. anlegen
+				};
+			} else { // Nur Unternehmen
+				Unternehmen un = null;
+				un = Unternehmen.load(uNid);
+				if (betrag > 5*(un.getEigenkapital()+un.getImmowerte() ) ) {
+					ui.message("Gesamtverschuldung ist zu hoch");
+					return null;
+				}
+			}
 			Double zinssatz= ui.getDouble("Zinssatz");
 			Double tilgungsrate= ui.getDouble("tilgungsrate");
 			Double restschuld= ui.getDouble("restschuld");
@@ -143,9 +178,6 @@ public class Kreditvergabe {
 				d.setPersID(persID);
 				break;
 			case 2:
-				d.setVersUNid(versUNid);
-				break;
-			case 3:
 				d.setUNid(uNid);
 				break;
 			default:

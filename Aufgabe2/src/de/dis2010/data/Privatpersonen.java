@@ -51,6 +51,27 @@ public class Privatpersonen extends Darlehensnehmer
 	{
 		Privatpersonen.vorname = vorname;
 	}
+	
+	public boolean hatDarlehen(Integer bankID) throws SQLException{
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT PersID, BankID FROM darlehen where PersID = ? AND BankID = ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, this.pid);
+		pstmt.setInt(2, bankID);
+		
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next()) {
+			rs.close();
+			pstmt.close();
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public static Privatpersonen load(int pid) throws SQLException
 	{
@@ -80,5 +101,4 @@ public class Privatpersonen extends Darlehensnehmer
 			return null;
 		}
 	}
-
 }
