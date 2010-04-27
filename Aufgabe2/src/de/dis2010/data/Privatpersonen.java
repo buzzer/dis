@@ -15,8 +15,9 @@ public class Privatpersonen extends Darlehensnehmer
 	{
 		super(name);
 		Privatpersonen.vorname = vorname;
-		
+
 	}
+
 	/**
 	 * @return pid
 	 */
@@ -41,7 +42,7 @@ public class Privatpersonen extends Darlehensnehmer
 	{
 		return vorname;
 	}
-	
+
 	/**
 	 * @param vorname
 	 *            the vorname to set
@@ -50,7 +51,7 @@ public class Privatpersonen extends Darlehensnehmer
 	{
 		Privatpersonen.vorname = vorname;
 	}
-	
+
 	public static Privatpersonen load(int pid) throws SQLException
 	{
 		// Hole Verbindung
@@ -68,8 +69,8 @@ public class Privatpersonen extends Darlehensnehmer
 			Privatpersonen p = new Privatpersonen(vorname, getName());
 			p.setPid(rs.getInt("PersID"));
 			p.setVorName(rs.getString("Vorname"));
-            p.setName(rs.getString("Name"));
-//       TODO     
+			p.setName(rs.getString("Name"));
+			// TODO
 			rs.close();
 			pstmt.close();
 			return p;

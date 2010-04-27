@@ -44,7 +44,7 @@ public class Kreditvergabe {
 			Double wert = ui.getDouble("Wert der Immobilie");
 
 			// Neue Immobilie anlegen
-			i = new Immobilie();
+			i = new Immobilie(wert);
 			i.setWert(wert);
 			
 			// Immobilie speichern
@@ -66,7 +66,7 @@ public class Kreditvergabe {
 			String name = ui.getName("Name des Unternehmens");
 
 			// Neues Unternehmen anlegen
-			u = new Unternehmen();
+			u = new Unternehmen(name);
 			u.setName(name);
 			
 			// Unternehmen speichern

@@ -4,8 +4,8 @@ public abstract class Darlehensnehmer
 {
 
 	// Attribute
-	private Integer diid = -1;
-	private static String name;
+	private Integer did = -1;
+	protected static String name;
 	private String str;
 	private int plz;
 	private String ort;
@@ -16,22 +16,21 @@ public abstract class Darlehensnehmer
 
 	}
 
-
 	/**
 	 * @return diid
 	 */
-	public Integer getDiid()
+	public Integer getDid()
 	{
-		return diid;
+		return did;
 	}
 
 	/**
 	 * @param diid
 	 *            the diid to set
 	 */
-	public void setDiid(Integer diid)
+	public void setDiid(Integer did)
 	{
-		this.diid = diid;
+		this.did = did;
 	}
 
 	/**

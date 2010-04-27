@@ -8,9 +8,9 @@ import java.sql.Statement;
 
 public class versichert {
 	private Integer iid = -1;
-	private Double Betrag;
-	private Integer PersID;
-	private Integer VersUNid;
+	private Double Betrag = 0.;
+	private Integer PersID = 0;
+	private Integer VersUNid = 0;
 	
 	public versichert() {
 		// dummy
