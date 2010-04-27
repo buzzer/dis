@@ -6,98 +6,61 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Unternehmen extends Darlehensnehmer
+public class Versicherungsuntern extends Unternehmen
 {
+	private Integer vuid;
 
-	// Attribute
-	private static Integer unid = -1;
-	private String rechtsform;
-	private Double eigenkapital;
-
-	/**
-	 * Erzeugt Unternehmen mit einem Name Beispiel-Tabelle:
-	 * 
-	 * @param Name
-	 */
-	public Unternehmen(Integer unid)
+	public Versicherungsuntern(Integer vuid)
 	{
-		super(unid);
-
+		super(vuid);
+		
 	}
 
 	/**
-	 * @return the unid
+	 * @param vuid
+	 *            the vuid to set
 	 */
-	public Integer getUnid()
+
+	public void setVuid(int vuid)
 	{
-		return unid;
+		this.vuid = vuid;
 	}
 
-	/**
-	 * @param unid
-	 *            the unid to set
-	 */
-	public void setUnid(int unid)
+	public Integer getVuid()
 	{
-		Unternehmen.unid = unid;
-	}
-
-	/**
-	 * @return the wert
-	 */
-	public Double getEigenkapital()
-	{
-		return eigenkapital;
-	}
-
-	public String getRechtsform()
-	{
-		return rechtsform;
-	}
-
-	public void setRechtsform(String rechtsform)
-	{
-		this.rechtsform = rechtsform;
-	}
-
-	/**
-	 * @param eigenkapital
-	 *            the eigenkapital to set
-	 */
-	public void setEigenkapital(Double eigenkapital)
-	{
-		this.eigenkapital = eigenkapital;
+		return vuid;
 	}
 
 	/**
 	 * Lädt ein Unternehmen via Id.
 	 * 
-	 * @param id
+	 * @param vuid
 	 *            die Id des Datensatzes
-	 * @return Unternehmen
+	 * @return versicherungsunternehmen
 	 */
-	public static Unternehmen load(int iid) throws SQLException
+	public static Versicherungsuntern load(int vuid) throws SQLException
 	{
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT UNid, Name FROM unternehmen WHERE UNid = ?";
+		String selectSQL = "SELECT VersUNid,Name FROM vers_un WHERE VersUNid = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
-		pstmt.setInt(1, iid);
+		pstmt.setInt(1, vuid);
 
 		// Führe Anfrage aus
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			Unternehmen u = new Unternehmen(unid);
-			u.setUnid(rs.getInt("UNid"));
-			u.setName(rs.getString("Name"));
+			Versicherungsuntern v = new Versicherungsuntern(vuid);
+			v.setVuid(rs.getInt("VersUNid"));
+			v.setName(rs.getString("Name"));
 
 			rs.close();
 			pstmt.close();
-			return u;
+			return v;
 		}
+
 		else
 		{
 			return null;
@@ -114,11 +77,11 @@ public class Unternehmen extends Darlehensnehmer
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Füge neues Element hinzu, wenn das Objekt noch keine ID hat.
-		if (getUnid() == -1)
+		if (getVuid() == -1)
 		{
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
-			String insertSQL = "INSERT INTO unternehmen(Name,Str,PLZ,Ort,Rechtsform,Eigenkapital) VALUES (?,?,?,?,?,?)";
+			String insertSQL = "INSERT INTO vers_u(Name,Str,PLZ,Ort,Rechtsform,Eigenkapital) VALUES (?,?,?,?,?,?)";
 
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
@@ -137,7 +100,7 @@ public class Unternehmen extends Darlehensnehmer
 			ResultSet rs = pstmt.getGeneratedKeys();
 			if (rs.next())
 			{
-				setUnid(rs.getInt(1));
+				setVuid(rs.getInt(1));
 			}
 
 			rs.close();
@@ -146,16 +109,12 @@ public class Unternehmen extends Darlehensnehmer
 		else
 		{
 			// Falls schon eine ID vorhanden ist, mache ein Update...
-			String updateSQL = "UPDATE unternehmen SET VorName = ?,Str = ?,PLZ = ?,Ort = ?,Rechtsform = ?,Eigenkapital = ? WHERE UNid = ?";
+			String updateSQL = "UPDATE vers_un SET Name = ? WHERE VersUNid = ?";
 			PreparedStatement pstmt = con.prepareStatement(updateSQL);
 
 			// Setze Anfrage Parameter
 			pstmt.setString(1, getName());
-			pstmt.setString(2, getStr());
-			pstmt.setInt(3, getPLZ());
-			pstmt.setString(4, getOrt());
-			pstmt.setString(5, getRechtsform());
-			pstmt.setDouble(6, getEigenkapital());
+			pstmt.setInt(2, getVuid());
 			pstmt.executeUpdate();
 
 			pstmt.close();
@@ -165,11 +124,13 @@ public class Unternehmen extends Darlehensnehmer
 	@Override
 	public boolean equals(Object o)
 	{
-		if (o instanceof Unternehmen)
+		if (o instanceof Versicherungsuntern)
 		{
-			Unternehmen u = (Unternehmen) o;
-			return u.getUnid().equals(this.getUnid());
+			Versicherungsuntern v = (Versicherungsuntern) o;
+			return v.getVuid().equals(this.getVuid());
 		}
 		return false;
+
 	}
+
 }

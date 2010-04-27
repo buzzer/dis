@@ -10,9 +10,9 @@ public abstract class Darlehensnehmer
 	private int plz;
 	private String ort;
 
-	public Darlehensnehmer(String name)
+	public Darlehensnehmer(Integer did)
 	{
-		Darlehensnehmer.name = name;
+		this.did = did;
 
 	}
 
@@ -52,7 +52,7 @@ public abstract class Darlehensnehmer
 	/**
 	 * @return the plz
 	 */
-	public int getPlz()
+	public int getPLZ()
 	{
 		return plz;
 	}

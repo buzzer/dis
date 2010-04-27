@@ -1,10 +1,13 @@
 package de.dis2010;
 
+import java.util.Enumeration;
+
 import de.dis2010.data.Darlehen;
 import de.dis2010.data.Immobilie;
+import de.dis2010.data.Privatpersonen;
 import de.dis2010.data.Unternehmen;
 import de.dis2010.data.Versicherung;
-import de.dis2010.data.versichert;
+//import de.dis2010.data.versichert;
 import de.dis2010.ui.KonsolenUI;
 
 public class Kreditvergabe {
@@ -66,7 +69,7 @@ public class Kreditvergabe {
 			String name = ui.getName("Name des Unternehmens");
 
 			// Neues Unternehmen anlegen
-			u = new Unternehmen(name);
+			u = new Unternehmen(null);
 			u.setName(name);
 			
 			// Unternehmen speichern
@@ -106,29 +109,47 @@ public class Kreditvergabe {
 		catch (Exception e) { e.printStackTrace(); }
 		return v;
 	}
-	public versichert erstelleVersichert() {
-		versichert v = null;
+
+	public  Privatpersonen  erstellePrivatperson() {
+		 Privatpersonen p = null;
 		try {
-			// Betrag der Versicherung abfragen
-			Double betrag = ui.getDouble("Betrag der Lebensversicherung");
-			// PersID abfragen
-			Integer persID = ui.getInteger("PersonID");
-			// VersicherungsunternehmenID abfragen
-			Integer versUNid = ui.getInteger("VersicherungsunternehmenID");
+			// Betrag der Versicherung abfagen
+			String Vorname = ui.getVorName("Vorname der Privatperson");
 			
 			// Neue Versicherung anlegen
-			v = new versichert();
-			v.setBetrag(betrag);
-			v.setPerson(persID);
-			v.setVersUN(versUNid);
+			p = new Privatpersonen(null);
+			p.setVorName(Vorname);
 			
 			// Versicherung speichern
-			v.save();
+			p.save();
 			ui.message("Versicherung erstellt.");
 		}
 		catch (Exception e) { e.printStackTrace(); }
-		return v;
+		return p;
 	}
+//	public versichert erstelleVersichert() {
+//		versichert v = null;
+//		try {
+//			// Betrag der Versicherung abfragen
+//			Double betrag = ui.getDouble("Betrag der Lebensversicherung");
+//			// PersID abfragen
+//			Integer persID = ui.getInteger("PersonID");
+//			// VersicherungsunternehmenID abfragen
+//			Integer versUNid = ui.getInteger("VersicherungsunternehmenID");
+//			
+//			// Neue Versicherung anlegen
+//			v = new versichert();
+//			v.setBetrag(betrag);
+//			v.setPerson(persID);
+//			v.setVersUN(versUNid);
+//			
+//			// Versicherung speichern
+//			v.save();
+//			ui.message("Versicherung erstellt.");
+//		}
+//		catch (Exception e) { e.printStackTrace(); }
+//		return v;
+//	}
 
 	/**
 	 * Hauptprogramm

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Enumeration;
 
 public class Immobilie
 {
@@ -12,7 +13,11 @@ public class Immobilie
 	// Attribute
 	private Integer iid = -1;
 	private static Double wert;
+	private static Privatpersonen p;
 	private Unternehmen unternehmerVon;
+	private Versicherungsuntern versVon;
+	private Bank bankVon;
+	private Privatpersonen PrivatpersonVon;
 
 	/**
 	 * Erzeugt Immobilie mit einem Wert Beispiel-Tabelle: CREATE TABLE
@@ -60,20 +65,45 @@ public class Immobilie
 		Immobilie.wert = wert;
 	}
 
+	public void setUnternehmen(Unternehmen u)
+	{
+		unternehmerVon = u;
+	}
+
+	public void setVersicherungsuntern(Versicherungsuntern v)
+	{
+		unternehmerVon = v;
+	}
+
+	public void setBank(Bank b)
+	{
+		bankVon = b;
+	}
+
+	public void setPrivatpersonen(Privatpersonen p)
+	{
+		PrivatpersonVon = p;
+	}
+
+	public Privatpersonen getPrivatperson()
+	{
+		return PrivatpersonVon;
+	}
+
 	public Unternehmen getUnternehmer()
 	{
 		return unternehmerVon;
 	}
 
-	// public Versicherungsuntern getVersicherungsuntern()
-	// {
-	// return versVon;
-	// }
+	public Versicherungsuntern getVersicherungsuntern()
+	{
+		return versVon;
+	}
 
-	// public Bank getBank()
-	// {
-	// return bankVon;
-	// }
+	public Bank getBank()
+	{
+		return bankVon;
+	}
 
 	/**
 	 * Lädt eine Immobilie via Id.
@@ -99,7 +129,9 @@ public class Immobilie
 			Immobilie i = new Immobilie(wert);
 			i.setIid(rs.getInt("ImmoID"));
 			i.setWert(rs.getDouble("Wert"));
-	
+			i.setPrivatpersonen(p);
+			
+			
 			rs.close();
 			pstmt.close();
 			return i;
@@ -125,13 +157,14 @@ public class Immobilie
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
 			String insertSQL = "INSERT INTO immobilie(Wert) VALUES (?)";
-//			TODO
+			// TODO
 
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
 
 			// Setze Anfrageparameter und führe Anfrage aus
 			pstmt.setDouble(1, getWert());
+	        
 			pstmt.executeUpdate();
 
 			// Hole die Id des engefügten Datensatzes
@@ -153,7 +186,7 @@ public class Immobilie
 			// Setze Anfrage Parameter
 			pstmt.setDouble(1, getWert());
 			pstmt.setInt(2, getIid());
-			
+
 			pstmt.executeUpdate();
 
 			pstmt.close();

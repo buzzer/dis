@@ -83,7 +83,7 @@ public class KonsolenUI {
 					kv.erstelleImmobilie();
 					break;
 				case 2:
-					//kv.erstellePrivatperson();
+					kv.erstellePrivatperson();
 					break;
 				case 3:
 					//kv.erstelleBank();
@@ -208,6 +208,17 @@ public class KonsolenUI {
 		}
 		return value;
 	}
+	public String getVorName(String eingabe) {
+		String value = null;
+		while (value == null) {
+			try {
+				System.out.print(eingabe + ": ");
+				value = in.readLine();
+			} catch (Exception e) {
+			}
+		}
+		return value;
+	}
 
 	public Integer getInteger(String eingabe) {
 		Integer value = null;
@@ -221,4 +232,6 @@ public class KonsolenUI {
 		}
 		return value;
 	}
+
+
 }
