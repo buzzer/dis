@@ -3,14 +3,21 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-	<class name="data.Immobilie" table="AUFG3_IMMOBILIE">
-		<id name="iid" column="IID">
+	<class name="data.Lebensversicherung" table="AUFG3_VERSICHERT">
+		<id name="LebVersID" column="LEBVERSID">
 			<generator class="increment" />
 		</id>
-		<property name="wert" type="double" column="WERT" />
-		<!--
-			Vorsicht: Verknüpfungen mit Darlehen und Dahrlehensnehmer fehlen!
-			Bitte selbst hinzufügen!
-		-->
+		<property name="PersID"       type="integer" column="PERSID"/>
+		<property name="VersUNid"     type="integer" column="VERSUNID"/>
+		<property name="Betrag"       type="double"  column="BETRAG"/>
+		
+		<set name="Privatperson" inverse="false">
+			<key column="PERSID"/>
+			<one-to-many class="data.Privatperson"/>
+		</set>
+		<set name="Versicherungsunternehmen" inverse="false">
+			<key column="VERSUNID"/>
+			<one-to-many class="data.Versicherungsunternehmen"/>
+		</set>
 	</class>
 </hibernate-mapping>

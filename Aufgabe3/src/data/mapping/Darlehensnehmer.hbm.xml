@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="data.Darlehensnehmer" abstract="true">
+		<id name="dnid" column="DNID">
+			<generator class="increment"/>
+		</id>
+		<property name="Name"    type="string" column="NAME"/>
+		<property name="Str"     type="string" column="STR"/>
+		<property name="PLZ"     type="string" column="PLZ"/>
+		<property name="Ort"     type="string" column="ORT"/>
+		
+		<joined-subclass name="Privatperson" table=“AUFG3_PRIVATPERSON">
+			<key column="DNID"/>
+			<property name="Vorname" type="string" column="VORNAME"/>
+		</joined-subclass>
+		
+		<joined-subclass name="Unternehmen" table=“AUFG3_UNTERNEHMEN">
+			<key column="DNID"/>
+			<property name="Rechtsform"   type="string" column="RECHTSFORM"/>
+			<property name="Eigenkapital" type="string" column="EIGENKAPITAL"/>
+
+			<joined-subclass name="Versicherungsunternehmen" table=“AUFG3_VERS_UN">
+				<key column="DNID"/>
+			</joined-subclass>
+
+			<joined-subclass name="Bank" table=“AUFG3_BANK">
+				<key column="DNID"/>
+			</joined-subclass>
+		</joined-subclass>
+			
+	</class>
+</hibernate-mapping>

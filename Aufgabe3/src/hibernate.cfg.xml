@@ -18,6 +18,15 @@
 		<!-- Drop and re-create the database schema on startup -->
 		<property name="hbm2ddl.auto">create</property>
 
-		<mapping resource="data/mapping/Immobilie.hbm.xml" />
+		<mapping resource="data/mapping/Darlehen.hbm.xml"/>
+		<mapping resource="data/mapping/Darlehensnehmer.hbm.xml"/>
+		<mapping resource="data/mapping/Immobilie.hbm.xml"/>
+		<mapping resource="data/mapping/Lebensversicherung.hbm.xml"/>
+		<!--
+		<mapping resource="data/mapping/Bank.hbm.xml"/>
+		<mapping resource="data/mapping/Privatperson.hbm.xml"/>
+		<mapping resource="data/mapping/Unternehmen.hbm.xml"/>
+		<mapping resource="data/mapping/Versicherungsunternehmen.hbm.xml"/>
+		-->
 	</session-factory>
 </hibernate-configuration>

@@ -4,23 +4,34 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="data.Darlehen" table="AUFG3_DARLEHEN">
-		<id name="DarlID" column="DARLID">
+		<id name="did" column="DARLID">
   			<generator class="increment"/>
   		</id>
-		<property name="BankID"       type="integer" column="BANKID"/>
-		<property name="PersID"       type="integer" column="PERSID"/>
-		<property name="UNid"         type="integer" column="UNID"/>
-		<property name="VersUNid"     type="integer" column="VERSUNID"/>
-		<property name="ImmoID"       type="integer" column="IMMOID"/>
-		<property name="LebVersID"    type="integer" column="LEBVERSID"/>
-		<property name="Betrag"       type="double"  column="BETRAG"/>
-		<property name="Zinssatz"     type="double"  column="ZINSSATZ"/>
-		<property name="Tilgungsrate" type="double"  column="TILGUNGSRATE"/>
-		<property name="Restschuld"   type="double"  column="RESTSCHULD"/>
+		<property name="darlehensgeber"  type="integer" column="BANKID"/>
+		<property name="darlehensnehmer" type="integer" column="DNID"/>
+		<property name="sicherung"       type="integer" column="IMMOID"/>
+		<property name="sicherung2"      type="integer" column="LEBVERSID"/>
+		<property name="betrag"          type="double"  column="BETRAG"/>
+		<property name="zinssatz"        type="double"  column="ZINSSATZ"/>
+		<property name="tilgungsrate"    type="double"  column="TILGUNGSRATE"/>
+		<property name="restschuld"      type="double"  column="RESTSCHULD"/>
 
-		<!--
-			Vorsicht: Verknüpfungen mit Darlehen und Dahrlehensnehmer fehlen!
-			Bitte selbst hinzufügen!
-		-->
+		<!-- Fremdschluessel -->
+		<set name="darlehensgeber" inverse="false">
+			<key column="BANKID"/>
+			<one-to-many class="data.Bank"/>
+		</set>
+		<set name="darlehensnehmer" inverse="false">
+			<key column="DNID"/>
+			<one-to-many class="data.Darlehensnehmer"/>
+		</set>
+		<set name="sicherung" inverse="false">
+			<key column="IMMOID"/>
+			<one-to-many class="data.Immobilie"/>
+		</set>
+		<set name="sicherung2" inverse="false">
+			<key column="LEBVERSID"/>
+			<one-to-many class="data.Lebensversicherung"/>
+		</set>
 	</class>
 </hibernate-mapping>
