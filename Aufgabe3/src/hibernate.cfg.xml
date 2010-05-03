@@ -7,8 +7,8 @@
 	<session-factory>
 		<property name="connection.driver_class">com.ibm.db2.jcc.DB2Driver</property>
 		<property name="connection.url">jdbc:db2://vsisls4.informatik.uni-hamburg.de:50001/VSISP</property>
-		<property name="connection.username">vsispXX</property>
-		<property name="connection.password">********</property>
+		<property name="connection.username">vsisp23</property>
+		<property name="connection.password">6FOAC65l</property>
 
 		<property name="dialect">org.hibernate.dialect.DB2Dialect</property>
 		<property name="current_session_context_class">thread</property>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="data.Immobilie" table="AUFG3_IMMOBILIE">
+		<id name="iid" column="IID">
+			<generator class="increment" />
+		</id>
+		<property name="wert" type="double" column="WERT" />
+		<!--
+			Vorsicht: Verknüpfungen mit Darlehen und Dahrlehensnehmer fehlen!
+			Bitte selbst hinzufügen!
+		-->
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="data.Darlehen" table="AUFG3_DARLEHEN">
+		<id name="DarlID" column="DARLID">
+  			<generator class="increment"/>
+  		</id>
+		<property name="BankID"       type="integer" column="BANKID"/>
+		<property name="PersID"       type="integer" column="PERSID"/>
+		<property name="UNid"         type="integer" column="UNID"/>
+		<property name="VersUNid"     type="integer" column="VERSUNID"/>
+		<property name="ImmoID"       type="integer" column="IMMOID"/>
+		<property name="LebVersID"    type="integer" column="LEBVERSID"/>
+		<property name="Betrag"       type="double"  column="BETRAG"/>
+		<property name="Zinssatz"     type="double"  column="ZINSSATZ"/>
+		<property name="Tilgungsrate" type="double"  column="TILGUNGSRATE"/>
+		<property name="Restschuld"   type="double"  column="RESTSCHULD"/>
+
+		<!--
+			Vorsicht: Verknüpfungen mit Darlehen und Dahrlehensnehmer fehlen!
+			Bitte selbst hinzufügen!
+		-->
+	</class>
+</hibernate-mapping>
