@@ -7,9 +7,9 @@
 		<id name="did" column="DARLID">
   			<generator class="increment"/>
   		</id>
-		<property name="darlehensgeber"  type="integer" column="BANKID"/>
-		<property name="darlehensnehmer" type="integer" column="DNID"/>
-		<property name="sicherung"       type="integer" column="IMMOID"/>
+<!--		<property name="darlehensgeber"  type="integer" column="BANKID"/>-->
+<!--		<property name="darlehensnehmer" type="integer" column="DNID"/>-->
+<!--		<property name="sicherung"       type="integer" column="IMMOID"/>-->
 		<property name="betrag"          type="double"  column="BETRAG"/>
 		<property name="zinssatz"        type="double"  column="ZINSSATZ"/>
 		<property name="tilgungsrate"    type="double"  column="TILGUNGSRATE"/>

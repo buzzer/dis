@@ -7,8 +7,8 @@
 		<id name="iid" column="IMMOID">
 			<generator class="increment"/>
 		</id>
-		<property name="besitzer" type="integer" column="DNID"/>
-		<property name="hypothek" type="integer" column="DARLID"/>
+<!--		<property name="besitzer" type="integer" column="DNID"/>-->
+<!--		<property name="hypothek" type="integer" column="DARLID"/>-->
 		<property name="wert"     type="double"  column="WERT"/>
 		
 		<set name="besitzer" inverse="false">

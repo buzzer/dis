@@ -4,7 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="data.Darlehensnehmer" abstract="true">
-		<id name="dnid" column="DNID">
+		<id name="dnid" type="long" column="DNID">
 			<generator class="increment"/>
 		</id>
 		<property name="name"    type="string" column="NAME"/>
@@ -14,42 +14,42 @@
 		
 		<set name="darlehen" inverse="true">
 					<key column="DARLID"/>
-					<many-to-one class="data.Darlehen"/>
+					<one-to-many class="data.Darlehen"/>
 		</set>
 		<set name="immobilien" inverse="true">
 					<key column="IMMOID"/>
-					<many-to-one class="data.Immobilie"/>
+					<one-to-many class="data.Immobilie"/>
 		</set>
 			
-		<joined-subclass name="data.Privatperson" table=“AUFG3_PRIVATPERSON">
+		<joined-subclass name="data.Privatperson" table="AUFG3_PRIVATPERSON">
 			<key column="PERSID"/>
 			<property name="vorname" type="string" column="VORNAME"/>
-			<set name="versicherungen" table="PERS_VERSUN">
-				<key column="LEBVERSID"/>
+			
+			<set name="versicherungsUnternehmen" table="PERS_VERSUN">
+				<key column="PERSID"/>
 				<many-to-many column="VERSUNID" class="data.Versicherungsunternehmen"/>
 			</set>
 		</joined-subclass>
 		
-		<joined-subclass name="data.Unternehmen" table=“AUFG3_UNTERNEHMEN">
+		<joined-subclass name="data.Unternehmen" table="AUFG3_UNTERNEHMEN">
 			<key column="UNID"/>
 			<property name="rechtsform"   type="string" column="RECHTSFORM"/>
 			<property name="eigenkapital" type="string" column="EIGENKAPITAL"/>
 
-			<joined-subclass name="data.Versicherungsunternehmen" table=“AUFG3_VERS_UN">
+			<joined-subclass name="data.Versicherungsunternehmen" table="AUFG3_VERS_UN">
 				<key column="VERSUNID"/>
 				
-				<set name="versicherungen" table="PERS_VERSUN">
-				<key column="LEBVERSID"/>
-				<many-to-many column="PERSID" class="data.Privatperson"/>
+				<set name="privatPerson" table="PERS_VERSUN">
+					<key column="VERSUNID"/>
+					<many-to-many column="PERSID" class="data.Privatperson"/>
 				</set>
 			</joined-subclass>
 
-			<joined-subclass name="data.Bank" table=“AUFG3_BANK">
+			<joined-subclass name="data.Bank" table="AUFG3_BANK">
 				<key column="BANKID"/>
-				
 				<set name="vergebeneDarlehen" inverse="true">
 					<key column="DARLID"/>
-					<many-to-one class="data.Darlehen"/>
+					<one-to-many class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
 		</joined-subclass>		
