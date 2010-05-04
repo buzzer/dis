@@ -5,11 +5,11 @@
 <hibernate-mapping>
 	<class name="data.Immobilie" table="AUFG3_IMMOBILIE">
 		<id name="iid" column="IMMOID">
-			<generator class="increment" />
+			<generator class="increment"/>
 		</id>
 		<property name="besitzer" type="integer" column="DNID"/>
-		<property name="wert"     type="double"  column="WERT"/>
 		<property name="hypothek" type="integer" column="DARLID"/>
+		<property name="wert"     type="double"  column="WERT"/>
 		
 		<set name="besitzer" inverse="false">
 			<key column="DNID"/>

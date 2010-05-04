@@ -45,10 +45,10 @@
 			</joined-subclass>
 
 			<joined-subclass name="data.Bank" table=“AUFG3_BANK">
-				<key column="DNID"/>
+				<key column="BANKID"/>
 				
 				<set name="vergebeneDarlehen" inverse="true">
-					<key column="BANKID"/>
+					<key column="DARLID"/>
 					<many-to-one class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
