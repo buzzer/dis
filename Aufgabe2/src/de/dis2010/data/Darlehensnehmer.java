@@ -45,9 +45,13 @@ public abstract class Darlehensnehmer
 		return name;
 	}
 
-	public void setStr(String str)
+	/**
+	 * @param name
+	 *            the name to set
+	 */
+	public void setName(String name)
 	{
-		this.str = str;
+		Darlehensnehmer.name = name;
 	}
 
 	/**
@@ -58,22 +62,14 @@ public abstract class Darlehensnehmer
 		return str;
 	}
 
+	public void setStr(String str)
+	{
+		this.str = str;
+	}
+
 	public void setPLZ(int plz)
 	{
 		this.plz = plz;
-	}
-
-	/**
-	 * @return the plz
-	 */
-	public int getPLZ()
-	{
-		return plz;
-	}
-
-	public void setOrt(String ort)
-	{
-		this.ort = ort;
 	}
 
 	/**
@@ -84,24 +80,21 @@ public abstract class Darlehensnehmer
 		return ort;
 	}
 
-	/**
-	 * @param name
-	 *            the name to set
-	 */
-	public void setName(String name)
+	public void setOrt(String ort)
 	{
-		Darlehensnehmer.name = name;
-	}
-	public void setOrt(String string) {
-		this.ort = string;
+		this.ort = ort;
 	}
 
 	public void setPLZ(Integer plz) {
 		this.plz = plz;
 	}
 
-	public void setStr(String string) {
-		this.str = string;
+	/**
+	 * @return the plz
+	 */
+	public int getPLZ()
+	{
+		return plz;
 	}
 
 	public abstract boolean hatDarlehen(Integer bankID) throws SQLException;

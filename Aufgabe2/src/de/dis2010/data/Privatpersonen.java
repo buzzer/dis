@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class Privatpersonen extends Darlehensnehmer
 {
 	// Attribute
-	private static Integer pid;
+	private Integer pid;
 	private String vorname;
 
 	public Privatpersonen(Integer pid)
@@ -21,7 +21,7 @@ public class Privatpersonen extends Darlehensnehmer
 	/**
 	 * @return pid
 	 */
-	public static Integer getPid()
+	public  Integer getPid()
 	{
 		return pid;
 	}
@@ -32,7 +32,7 @@ public class Privatpersonen extends Darlehensnehmer
 	 */
 	public void setPid(Integer pid)
 	{
-		Privatpersonen.pid = pid;
+		this.pid = pid;
 	}
 
 	/**
