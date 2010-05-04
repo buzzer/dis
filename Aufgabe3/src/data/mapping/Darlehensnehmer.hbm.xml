@@ -7,27 +7,31 @@
 		<id name="dnid" column="DNID">
 			<generator class="increment"/>
 		</id>
-		<property name="Name"    type="string" column="NAME"/>
-		<property name="Str"     type="string" column="STR"/>
-		<property name="PLZ"     type="string" column="PLZ"/>
+		<property name="name"    type="string" column="NAME"/>
+		<property name="strasse" type="string" column="STR"/>
+		<property name="plz"     type="string" column="PLZ"/>
 		<property name="Ort"     type="string" column="ORT"/>
 		
-		<joined-subclass name="Privatperson" table=“AUFG3_PRIVATPERSON">
+		<joined-subclass name="data.Privatperson" table=“AUFG3_PRIVATPERSON">
 			<key column="DNID"/>
-			<property name="Vorname" type="string" column="VORNAME"/>
+			<property name="vorname" type="string" column="VORNAME"/>
 		</joined-subclass>
 		
-		<joined-subclass name="Unternehmen" table=“AUFG3_UNTERNEHMEN">
+		<joined-subclass name="data.Unternehmen" table=“AUFG3_UNTERNEHMEN">
 			<key column="DNID"/>
-			<property name="Rechtsform"   type="string" column="RECHTSFORM"/>
-			<property name="Eigenkapital" type="string" column="EIGENKAPITAL"/>
+			<property name="rechtsform"   type="string" column="RECHTSFORM"/>
+			<property name="eigenkapital" type="string" column="EIGENKAPITAL"/>
 
-			<joined-subclass name="Versicherungsunternehmen" table=“AUFG3_VERS_UN">
+			<joined-subclass name="data.Versicherungsunternehmen" table=“AUFG3_VERS_UN">
 				<key column="DNID"/>
 			</joined-subclass>
 
-			<joined-subclass name="Bank" table=“AUFG3_BANK">
+			<joined-subclass name="data.Bank" table=“AUFG3_BANK">
 				<key column="DNID"/>
+				<set name="vergebeneDarlehen" inverse="true">
+					<key column="BANKID"/>
+					<one-to-many class="data.Darlehen"/>
+				</set>
 			</joined-subclass>
 		</joined-subclass>
 			
