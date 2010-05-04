@@ -12,7 +12,7 @@ public class Unternehmen extends Darlehensnehmer
 	// Attribute
 	private static Integer unid = -1;
 	private String rechtsform;
-	private Double eigenkapital;
+	private Double  eigenkapital;
 
 	/**
 	 * Erzeugt Unternehmen mit einem Name Beispiel-Tabelle:

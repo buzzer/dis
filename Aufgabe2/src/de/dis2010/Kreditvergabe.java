@@ -5,6 +5,7 @@ import de.dis2010.data.Immobilie;
 import de.dis2010.data.Privatpersonen;
 import de.dis2010.data.Unternehmen;
 import de.dis2010.data.Versicherung;
+import de.dis2010.data.versichert;
 import de.dis2010.ui.KonsolenUI;
 
 public class Kreditvergabe {
@@ -131,29 +132,29 @@ public class Kreditvergabe {
 		catch (Exception e) { e.printStackTrace(); }
 		return p;
 	}
-//	public versichert erstelleVersichert() {
-//		versichert v = null;
-//		try {
-//			// Betrag der Versicherung abfragen
-//			Double betrag = ui.getDouble("Betrag der Lebensversicherung");
-//			// PersID abfragen
-//			Integer persID = ui.getInteger("PersonID");
-//			// VersicherungsunternehmenID abfragen
-//			Integer versUNid = ui.getInteger("VersicherungsunternehmenID");
-//			
-//			// Neue Versicherung anlegen
-//			v = new versichert();
-//			v.setBetrag(betrag);
-//			v.setPerson(persID);
-//			v.setVersUN(versUNid);
-//			
-//			// Versicherung speichern
-//			v.save();
-//			ui.message("Versicherung erstellt.");
-//		}
-//		catch (Exception e) { e.printStackTrace(); }
-//		return v;
-//	}
+	public versichert erstelleVersichert() {
+		versichert v = null;
+		try {
+			// Betrag der Versicherung abfragen
+			Double betrag = ui.getDouble("Betrag der Lebensversicherung");
+			// PersID abfragen
+			Integer persID = ui.getInteger("PersonID");
+			// VersicherungsunternehmenID abfragen
+			Integer versUNid = ui.getInteger("VersicherungsunternehmenID");
+			
+			// Neue Versicherung anlegen
+			v = new versichert();
+			v.setBetrag(betrag);
+			v.setPerson(persID);
+			v.setVersUN(versUNid);
+			
+			// Versicherung speichern
+			v.save();
+			ui.message("Versicherung erstellt.");
+		}
+		catch (Exception e) { e.printStackTrace(); }
+		return v;
+	}
 
 	/**
 	 * Hauptprogramm
