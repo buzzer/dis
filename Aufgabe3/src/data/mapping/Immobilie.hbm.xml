@@ -4,18 +4,18 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="data.Immobilie" table="AUFG3_IMMOBILIE">
-		<id name="iid" column="IID">
+		<id name="iid" column="IMMOID">
 			<generator class="increment" />
 		</id>
-		<property name="besitzer" type="integer" column="DNID" />
-		<property name="wert" type="double" column="WERT" />
-		<property name="hypothek" type="integer" column="DARLID" />
+		<property name="besitzer" type="integer" column="DNID"/>
+		<property name="wert"     type="double"  column="WERT"/>
+		<property name="hypothek" type="integer" column="DARLID"/>
 		
 		<set name="besitzer" inverse="false">
 			<key column="DNID"/>
 			<one-to-many class="data.Darlehensnehmer"/>
 		</set>
-		<set name="hypothek" inverse="false">
+		<set name="hypothek" inverse="true">
 			<key column="DARLID"/>
 			<one-to-many class="data.Darlehen"/>
 		</set>

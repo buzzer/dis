@@ -29,9 +29,5 @@
 			<key column="IMMOID"/>
 			<one-to-many class="data.Immobilie"/>
 		</set>
-		<set name="sicherung2" inverse="false">
-			<key column="LEBVERSID"/>
-			<one-to-many class="data.Lebensversicherung"/>
-		</set>
 	</class>
 </hibernate-mapping>

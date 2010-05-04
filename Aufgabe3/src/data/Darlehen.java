@@ -13,7 +13,6 @@ public class Darlehen {
 	private Darlehensnehmer darlehensnehmer;
 	private Bank darlehensgeber;
 	private Immobilie sicherung;
-	private Lebensversicherung sicherung2;
 
 	public Darlehen(Double betrag, Double zinssatz, Darlehensnehmer dn,
 			Bank dg, Immobilie sicherung) {

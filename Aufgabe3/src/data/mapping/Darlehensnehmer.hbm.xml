@@ -12,25 +12,44 @@
 		<property name="plz"     type="string" column="PLZ"/>
 		<property name="Ort"     type="string" column="ORT"/>
 		
+		<set name="darlehen" inverse="true">
+					<key column="DARLID"/>
+					<many-to-one class="data.Darlehen"/>
+		</set>
+		<set name="immobilien" inverse="true">
+					<key column="IMMOID"/>
+					<many-to-one class="data.Immobilie"/>
+		</set>
+			
 		<joined-subclass name="data.Privatperson" table=“AUFG3_PRIVATPERSON">
-			<key column="DNID"/>
+			<key column="PERSID"/>
 			<property name="vorname" type="string" column="VORNAME"/>
+			<set name="versicherungen" table="PERS_VERSUN">
+				<key column="LEBVERSID"/>
+				<many-to-many column="VERSUNID" class="data.Versicherungsunternehmen"/>
+			</set>
 		</joined-subclass>
 		
 		<joined-subclass name="data.Unternehmen" table=“AUFG3_UNTERNEHMEN">
-			<key column="DNID"/>
+			<key column="UNID"/>
 			<property name="rechtsform"   type="string" column="RECHTSFORM"/>
 			<property name="eigenkapital" type="string" column="EIGENKAPITAL"/>
 
 			<joined-subclass name="data.Versicherungsunternehmen" table=“AUFG3_VERS_UN">
-				<key column="DNID"/>
+				<key column="VERSUNID"/>
+				
+				<set name="versicherungen" table="PERS_VERSUN">
+				<key column="LEBVERSID"/>
+				<many-to-many column="PERSID" class="data.Privatperson"/>
+				</set>
 			</joined-subclass>
 
 			<joined-subclass name="data.Bank" table=“AUFG3_BANK">
 				<key column="DNID"/>
+				
 				<set name="vergebeneDarlehen" inverse="true">
 					<key column="BANKID"/>
-					<one-to-many class="data.Darlehen"/>
+					<many-to-one class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
 		</joined-subclass>
