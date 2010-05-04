@@ -7,10 +7,18 @@
 		<id name="iid" column="IID">
 			<generator class="increment" />
 		</id>
+		<property name="besitzer" type="integer" column="DNID" />
 		<property name="wert" type="double" column="WERT" />
-		<!--
-			Vorsicht: Verknüpfungen mit Darlehen und Dahrlehensnehmer fehlen!
-			Bitte selbst hinzufügen!
-		-->
+		<property name="hypothek" type="integer" column="DARLID" />
+		
+		<set name="besitzer" inverse="false">
+			<key column="DNID"/>
+			<one-to-many class="data.Darlehensnehmer"/>
+		</set>
+		<set name="hypothek" inverse="false">
+			<key column="DARLID"/>
+			<one-to-many class="data.Darlehen"/>
+		</set>
+		
 	</class>
 </hibernate-mapping>

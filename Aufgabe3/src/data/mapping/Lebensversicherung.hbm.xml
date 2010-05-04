@@ -4,18 +4,18 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="data.Lebensversicherung" table="AUFG3_VERSICHERT">
-		<id name="LebVersID" column="LEBVERSID">
+		<id name="vid" column="LEBVERSID">
 			<generator class="increment" />
 		</id>
-		<property name="PersID"       type="integer" column="PERSID"/>
-		<property name="VersUNid"     type="integer" column="VERSUNID"/>
-		<property name="Betrag"       type="double"  column="BETRAG"/>
+		<property name="versicherter" type="integer" column="PERSID"/>
+		<property name="versicherer"  type="integer" column="VERSUNID"/>
+		<property name="betrag"       type="double"  column="BETRAG"/>
 		
-		<set name="Privatperson" inverse="false">
+		<set name="versicherter" inverse="false">
 			<key column="PERSID"/>
 			<one-to-many class="data.Privatperson"/>
 		</set>
-		<set name="Versicherungsunternehmen" inverse="false">
+		<set name="versicherer" inverse="false">
 			<key column="VERSUNID"/>
 			<one-to-many class="data.Versicherungsunternehmen"/>
 		</set>
