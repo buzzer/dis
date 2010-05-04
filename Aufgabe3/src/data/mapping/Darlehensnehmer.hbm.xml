@@ -52,7 +52,6 @@
 					<many-to-one class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
-		</joined-subclass>
-			
+		</joined-subclass>		
 	</class>
 </hibernate-mapping>
