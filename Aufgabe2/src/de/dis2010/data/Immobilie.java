@@ -12,11 +12,10 @@ public class Immobilie
 	// Attribute
 	private Integer iid = -1;
 	private static Double wert;
-	private Unternehmen unternehmerVon;
-	private int BankID = 0;
-	private int VersUNid = 0;
-	private int UNid = 0;
-	private int PersID = 0;
+	private Integer pid;
+	private Integer uid;
+	private Integer vuid;
+	private Integer bid;
 
 	/**
 	 * Erzeugt Immobilie mit einem Wert Beispiel-Tabelle: CREATE TABLE
@@ -28,6 +27,11 @@ public class Immobilie
 	public Immobilie(Double wert)
 	{
 		Immobilie.wert = wert;
+		pid = 0;
+		uid = 0;
+		vuid = 0;
+		bid = 0;
+
 	}
 
 	/**
@@ -64,20 +68,46 @@ public class Immobilie
 		Immobilie.wert = wert;
 	}
 
-	public Unternehmen getUnternehmer()
+	public void setPid(Integer pid)
 	{
-		return unternehmerVon;
+		this.pid = pid;
 	}
 
-	// public Versicherungsuntern getVersicherungsuntern()
-	// {
-	// return versVon;
-	// }
+	public int getPid()
+	{
+		return pid;
+	}
 
-	// public Bank getBank()
-	// {
-	// return bankVon;
-	// }
+	public void setVuid(Integer vuid)
+	{
+		this.vuid = vuid;
+	}
+
+	public int getVuid()
+	{
+		return vuid;
+	}
+
+	public void setBid(Integer bid)
+	{
+		this.bid = bid;
+	}
+
+	public int getBid()
+	{
+		return bid;
+
+	}
+
+	public void setUid(Integer uid)
+	{
+		this.uid = uid;
+	}
+
+	public int getUid()
+	{
+		return uid;
+	}
 
 	/**
 	 * Lädt eine Immobilie via Id.
@@ -92,7 +122,7 @@ public class Immobilie
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT ImmoID,PersID,UNid,VersUNid,BankID,Wert FROM immobilie WHERE ImmoID = ?";
+		String selectSQL = "SELECT * FROM immobilie WHERE ImmoID = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
 		pstmt.setInt(1, iid);
 
@@ -102,12 +132,11 @@ public class Immobilie
 		{
 			Immobilie i = new Immobilie(wert);
 			i.setIid(rs.getInt("ImmoID"));
-			i.setPersID(rs.getInt("PersID"));
-			i.setUNid(rs.getInt("UNid"));
-			i.setVersUNid(rs.getInt("VersUNid"));
-			i.setBankID(rs.getInt("BankID"));
 			i.setWert(rs.getDouble("Wert"));
-	
+	        i.setPid(rs.getInt("PersID"));
+	        i.setUid(rs.getInt("UNid"));
+	        i.setVuid(rs.getInt("VersUNid"));
+	        i.setBid(rs.getInt("BankID"));
 			rs.close();
 			pstmt.close();
 			return i;
@@ -116,22 +145,6 @@ public class Immobilie
 		{
 			return null;
 		}
-	}
-
-	private void setBankID(int int1) {
-		this.BankID = int1;
-	}
-
-	private void setVersUNid(int int1) {
-		this.VersUNid = int1;
-	}
-
-	private void setUNid(int int1) {
-		this.UNid = int1;
-	}
-
-	private void setPersID(int int1) {
-		this.PersID = int1;
 	}
 
 	/**
@@ -148,14 +161,19 @@ public class Immobilie
 		{
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
-			String insertSQL = "INSERT INTO immobilie(Wert) VALUES (?)";
-//			TODO
+			String insertSQL = "INSERT INTO immobilie(PersID,UNid,VersUNid,BankID,Wert) VALUES (?,?,?,?,?)";
+			
 
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
 
 			// Setze Anfrageparameter und führe Anfrage aus
-			pstmt.setDouble(1, getWert());
+			pstmt.setInt(1, getPid());
+			pstmt.setInt(2, getUid());
+			pstmt.setInt(3,getVuid());
+			pstmt.setInt(4,getBid());
+			pstmt.setDouble(5,getWert());
+			
 			pstmt.executeUpdate();
 
 			// Hole die Id des engefügten Datensatzes
@@ -177,7 +195,7 @@ public class Immobilie
 			// Setze Anfrage Parameter
 			pstmt.setDouble(1, getWert());
 			pstmt.setInt(2, getIid());
-			
+
 			pstmt.executeUpdate();
 
 			pstmt.close();

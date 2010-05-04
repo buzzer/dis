@@ -11,21 +11,22 @@ public class Unternehmen extends Darlehensnehmer
 
 	// Attribute
 	private static Integer unid = -1;
-	private String rechtsform = null;
-	private Double eigenkapital = 0.;
+	private String rechtsform;
+	private Double  eigenkapital;
 
 	/**
 	 * Erzeugt Unternehmen mit einem Name Beispiel-Tabelle:
 	 * 
 	 * @param Name
 	 */
-	public Unternehmen(String name)
+	public Unternehmen(Integer unid)
 	{
-		super(name);
+		super(unid);
+
 	}
 
 	/**
-	 * @return the iid
+	 * @return the unid
 	 */
 	public Integer getUnid()
 	{
@@ -49,7 +50,7 @@ public class Unternehmen extends Darlehensnehmer
 		return eigenkapital;
 	}
 
-	public String getReechtsform()
+	public String getRechtsform()
 	{
 		return rechtsform;
 	}
@@ -59,14 +60,9 @@ public class Unternehmen extends Darlehensnehmer
 		this.rechtsform = rechtsform;
 	}
 
-	// public String getName()
-	// {
-	// return name;
-	// }
-
 	/**
-	 * @param wert
-	 *            the wert to set
+	 * @param eigenkapital
+	 *            the eigenkapital to set
 	 */
 	public void setEigenkapital(Double eigenkapital)
 	{
@@ -121,7 +117,7 @@ public class Unternehmen extends Darlehensnehmer
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			Unternehmen u = new Unternehmen(name);
+			Unternehmen u = new Unternehmen(unid);
 			u.setUnid(rs.getInt("UNid"));
 			u.setName(rs.getString("Name"));
 			u.setStr(rs.getString("Str"));
@@ -154,13 +150,19 @@ public class Unternehmen extends Darlehensnehmer
 		{
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
-			String insertSQL = "INSERT INTO unternehmen(Name) VALUES (?)";
+			String insertSQL = "INSERT INTO unternehmen(Name,Str,PLZ,Ort,Rechtsform,Eigenkapital) VALUES (?,?,?,?,?,?)";
 
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
 
 			// Setze Anfrageparameter und führe Anfrage aus
 			pstmt.setString(1, getName());
+			pstmt.setString(2, getStr());
+			pstmt.setInt(3, getPLZ());
+			pstmt.setString(4, getOrt());
+			pstmt.setString(5, getRechtsform());
+			pstmt.setDouble(6, getEigenkapital());
+
 			pstmt.executeUpdate();
 
 			// Hole die Id des engefügten Datensatzes
@@ -176,12 +178,16 @@ public class Unternehmen extends Darlehensnehmer
 		else
 		{
 			// Falls schon eine ID vorhanden ist, mache ein Update...
-			String updateSQL = "UPDATE unternehmen SET Name = ? WHERE UNid = ?";
+			String updateSQL = "UPDATE unternehmen SET VorName = ?,Str = ?,PLZ = ?,Ort = ?,Rechtsform = ?,Eigenkapital = ? WHERE UNid = ?";
 			PreparedStatement pstmt = con.prepareStatement(updateSQL);
 
 			// Setze Anfrage Parameter
 			pstmt.setString(1, getName());
-			pstmt.setInt(2, getUnid());
+			pstmt.setString(2, getStr());
+			pstmt.setInt(3, getPLZ());
+			pstmt.setString(4, getOrt());
+			pstmt.setString(5, getRechtsform());
+			pstmt.setDouble(6, getEigenkapital());
 			pstmt.executeUpdate();
 
 			pstmt.close();

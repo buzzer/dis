@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import de.dis2010.data.Privatpersonen;
 import de.dis2010.data.Darlehen;
 import de.dis2010.data.Immobilie;
+import de.dis2010.data.Privatpersonen;
 import de.dis2010.data.Unternehmen;
 import de.dis2010.data.Versicherung;
 import de.dis2010.data.versichert;
@@ -47,10 +48,17 @@ public class Kreditvergabe {
 		try {
 			// Wert der Immobilie abfragen
 			Double wert = ui.getDouble("Wert der Immobilie");
-
+			Integer pid = ui.getInteger("PersonID der Immobilie");
+			Integer bid = ui.getInteger("BankID der Immobilie");
+            Integer vuid = ui.getInteger("VersicherungsunternID der Immobilie");
+            Integer uid = ui.getInteger("UnternehmenID der Immobilie");
 			// Neue Immobilie anlegen
 			i = new Immobilie(wert);
 			i.setWert(wert);
+			i.setPid(pid);
+			i.setUid(uid);
+			i.setVuid(vuid);
+			i.setBid(bid);
 			
 			// Immobilie speichern
 			i.save();
@@ -71,7 +79,7 @@ public class Kreditvergabe {
 			String name = ui.getName("Name des Unternehmens");
 
 			// Neues Unternehmen anlegen
-			u = new Unternehmen(name);
+			u = new Unternehmen(null);
 			u.setName(name);
 			
 			// Unternehmen speichern
@@ -211,6 +219,24 @@ public class Kreditvergabe {
 		}
 		catch (Exception e) { e.printStackTrace(); }
 		return v;
+	}
+
+	public  Privatpersonen  erstellePrivatperson() {
+		 Privatpersonen p = null;
+		try {
+			// Betrag der Versicherung abfagen
+			String Vorname = ui.getVorName("Vorname der Privatperson");
+			
+			// Neue Versicherung anlegen
+			p = new Privatpersonen(null);
+			p.setVorName(Vorname);
+			
+			// Versicherung speichern
+			p.save();
+			ui.message("Versicherung erstellt.");
+		}
+		catch (Exception e) { e.printStackTrace(); }
+		return p;
 	}
 	public versichert erstelleVersichert() {
 		versichert v = null;

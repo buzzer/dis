@@ -4,24 +4,24 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Privatpersonen extends Darlehensnehmer
 {
 	// Attribute
-	private Integer pid;
-	private static String vorname;
+	private static Integer pid;
+	private String vorname;
 
-	public Privatpersonen(String vorname, String name)
+	public Privatpersonen(Integer pid)
 	{
-		super(name);
-		Privatpersonen.vorname = vorname;
+		super(pid);
 
 	}
 
 	/**
 	 * @return pid
 	 */
-	public Integer getPid()
+	public static Integer getPid()
 	{
 		return pid;
 	}
@@ -32,13 +32,13 @@ public class Privatpersonen extends Darlehensnehmer
 	 */
 	public void setPid(Integer pid)
 	{
-		this.pid = pid;
+		Privatpersonen.pid = pid;
 	}
 
 	/**
 	 * @return the vorname
 	 */
-	public String getVorname()
+	public String getVorName()
 	{
 		return vorname;
 	}
@@ -49,7 +49,7 @@ public class Privatpersonen extends Darlehensnehmer
 	 */
 	public void setVorName(String vorname)
 	{
-		Privatpersonen.vorname = vorname;
+		this.vorname = vorname;
 	}
 	
 	public boolean hatDarlehen(Integer bankID) throws SQLException{
@@ -87,11 +87,13 @@ public class Privatpersonen extends Darlehensnehmer
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			Privatpersonen p = new Privatpersonen(vorname, getName());
+			Privatpersonen p = new Privatpersonen(pid);
 			p.setPid(rs.getInt("PersID"));
 			p.setVorName(rs.getString("Vorname"));
 			p.setName(rs.getString("Name"));
-			// TODO
+			p.setStr(rs.getString("Str"));
+			p.setOrt(rs.getString("Ort"));
+			p.setPLZ(rs.getInt("PLZ"));
 			rs.close();
 			pstmt.close();
 			return p;
@@ -101,4 +103,58 @@ public class Privatpersonen extends Darlehensnehmer
 			return null;
 		}
 	}
+
+	public void save() throws SQLException
+	{
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Füge neues Element hinzu, wenn das Objekt noch keine ID hat.
+		if (getPid() == -1)
+		{
+			// Achtung, hier wird noch ein Parameter mitgegeben,
+			// damit später generierte IDs zurückgeliefert werden!
+			String insertSQL = "INSERT INTO privatperson(Vorname,Name,Str,PLZ,Ort) VALUES (?,?,?,?,?)";
+
+			PreparedStatement pstmt = con.prepareStatement(insertSQL,
+					Statement.RETURN_GENERATED_KEYS);
+
+			// Setze Anfrageparameter und führe Anfrage aus
+			pstmt.setString(1, getVorName());
+			pstmt.setString(2, getName());
+			pstmt.setString(3, getStr());
+			pstmt.setInt(4, getPLZ());
+			pstmt.setString(5, getOrt());
+
+			pstmt.executeUpdate();
+
+			// Hole die Id des engefügten Datensatzes
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next())
+			{
+				setPid(rs.getInt(1));
+			}
+
+			rs.close();
+			pstmt.close();
+		}
+		else
+		{
+			// Falls schon eine ID vorhanden ist, mache ein Update...
+			String updateSQL = "UPDATE privatperson SET Vorname = ? WHERE PersID = ?";
+			PreparedStatement pstmt = con.prepareStatement(updateSQL);
+
+			// Setze Anfrage Parameter
+			pstmt.setString(1, getVorName());
+			pstmt.setString(2, getName());
+			pstmt.setString(3, getStr());
+			pstmt.setInt(4, getPLZ());
+			pstmt.setString(5, getOrt());
+
+			pstmt.executeUpdate();
+
+			pstmt.close();
+		}
+	}
+
 }
