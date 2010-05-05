@@ -13,42 +13,43 @@
 		<property name="Ort"     type="string" column="ORT"/>
 		
 		<set name="darlehen" inverse="true">
-					<key column="DARLID"/>
-					<one-to-many class="data.Darlehen"/>
+			<key column="DARLID"/>
+			<one-to-many class="data.Darlehen"/>
 		</set>
+		
 		<set name="immobilien" inverse="true">
-					<key column="IMMOID"/>
-					<one-to-many class="data.Immobilie"/>
+			<key column="IMMOID"/>
+			<one-to-many class="data.Immobilie"/>
 		</set>
 			
 		<joined-subclass name="data.Privatperson" table="AUFG3_PRIVATPERSON">
-			<key column="PERSID"/>
+			<key column="DNID"/>
 			<property name="vorname" type="string" column="VORNAME"/>
 			
-			<set name="versicherungsUnternehmen" table="PERS_VERSUN">
-				<key column="PERSID"/>
-				<many-to-many column="VERSUNID" class="data.Versicherungsunternehmen"/>
+			<set name="versicherungen" inverse="true">
+				<key column="DNID"/>
+				<one-to-many class="data.Lebensversicherung"/>
 			</set>
 		</joined-subclass>
 		
 		<joined-subclass name="data.Unternehmen" table="AUFG3_UNTERNEHMEN">
-			<key column="UNID"/>
+			<key column="DNID"/>
 			<property name="rechtsform"   type="string" column="RECHTSFORM"/>
 			<property name="eigenkapital" type="string" column="EIGENKAPITAL"/>
 
 			<joined-subclass name="data.Versicherungsunternehmen" table="AUFG3_VERS_UN">
-				<key column="VERSUNID"/>
+				<key column="DNID"/>
 				
-				<set name="privatPerson" table="PERS_VERSUN">
-					<key column="VERSUNID"/>
-					<many-to-many column="PERSID" class="data.Privatperson"/>
+				<set name="versicherungen" inverse="true">
+					<key column="DNID"/>
+					<one-to-many class="data.Lebensversicherung"/>
 				</set>
 			</joined-subclass>
 
 			<joined-subclass name="data.Bank" table="AUFG3_BANK">
-				<key column="BANKID"/>
+				<key column="DNID"/>
 				<set name="vergebeneDarlehen" inverse="true">
-					<key column="DARLID"/>
+					<key column="DNID"/>
 					<one-to-many class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
