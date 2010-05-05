@@ -4,6 +4,7 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="data.Darlehensnehmer" abstract="true">
+
 		<id name="dnid" type="long" column="DNID">
 			<generator class="increment"/>
 		</id>
@@ -27,7 +28,7 @@
 			<property name="vorname" type="string" column="VORNAME"/>
 			
 			<set name="versicherungen" inverse="true">
-				<key column="DNID"/>
+				<key column="VNID"/>
 				<one-to-many class="data.Lebensversicherung"/>
 			</set>
 		</joined-subclass>
@@ -39,9 +40,8 @@
 
 			<joined-subclass name="data.Versicherungsunternehmen" table="AUFG3_VERS_UN">
 				<key column="DNID"/>
-				
 				<set name="versicherungen" inverse="true">
-					<key column="DNID"/>
+					<key column="VGID"/>
 					<one-to-many class="data.Lebensversicherung"/>
 				</set>
 			</joined-subclass>
@@ -49,10 +49,12 @@
 			<joined-subclass name="data.Bank" table="AUFG3_BANK">
 				<key column="DNID"/>
 				<set name="vergebeneDarlehen" inverse="true">
-					<key column="DNID"/>
+					<key column="DGID"/>
 					<one-to-many class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
+
 		</joined-subclass>		
+
 	</class>
 </hibernate-mapping>

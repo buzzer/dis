@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="data.Lebensversicherung" table="AUFG3_VERSICHERT">
+
+		<id name="vid" column="LEBVERSID">
+			<generator class="increment" />
+		</id>
+
+		<property name="betrag" type="double" column="BETRAG"/>
+    <many-to-one name="versicherter" class="data.Privatperson" column="VNID" not-null="true" />
+    <many-to-one name="versicherer" class="data.Versicherungsunternehmen" column="VGID" not-null="true" />
+		
+	</class>
+</hibernate-mapping>
