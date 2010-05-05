@@ -15,10 +15,9 @@
 			<key column="DNID"/>
 			<one-to-many class="data.Darlehensnehmer"/>
 		</set>
-		<set name="hypothek" inverse="false">
-			<key column="DARLID"/>
-			<one-to-many class="data.Darlehen"/>
-		</set>
+
+			<many-to-one name="hypothek" class="data.Darlehen" column="DARLID" not-null="true"/>
+
 		
 	</class>
 </hibernate-mapping>

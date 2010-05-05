@@ -4,13 +4,13 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="data.Darlehensnehmer" abstract="true">
-		<id name="dnid" column="DNID">
-			<generator class="increment"/>
+		<id name="dnid" column="DNID" type="Integer">
+			<generator class="native"/>
 		</id>
-		<property name="name"    type="string" column="NAME"/>
-		<property name="strasse" type="string" column="STR"/>
-		<property name="plz"     type="string" column="PLZ"/>
-		<property name="Ort"     type="string" column="ORT"/>
+		<property name="name"    type="string" column="NAME" />
+		<property name="strasse" type="string" column="STR" />
+		<property name="plz"     type="string" column="PLZ" />
+		<property name="Ort"     type="string" column="ORT" />
 		
 		<joined-subclass name="data.Privatperson" table=“AUFG3_PRIVATPERSON">
 			<key column="DNID"/>
@@ -30,7 +30,7 @@
 				<key column="DNID"/>
 				<set name="vergebeneDarlehen" inverse="true">
 					<key column="BANKID"/>
-					<one-to-many class="data.Darlehen"/>
+					<many-to-one class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
 		</joined-subclass>

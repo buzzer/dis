@@ -5,33 +5,33 @@
 <hibernate-mapping>
 	<class name="data.Darlehen" table="AUFG3_DARLEHEN">
 		<id name="did" column="DARLID">
-  			<generator class="increment"/>
-  		</id>
-		<property name="darlehensgeber"  type="integer" column="BANKID"/>
-		<property name="darlehensnehmer" type="integer" column="DNID"/>
-		<property name="sicherung"       type="integer" column="IMMOID"/>
-		<property name="sicherung2"      type="integer" column="LEBVERSID"/>
-		<property name="betrag"          type="double"  column="BETRAG"/>
-		<property name="zinssatz"        type="double"  column="ZINSSATZ"/>
-		<property name="tilgungsrate"    type="double"  column="TILGUNGSRATE"/>
-		<property name="restschuld"      type="double"  column="RESTSCHULD"/>
+			<generator class="increment" />
+		</id>
+		<property name="darlehensgeber" type="java.lang.Integer" column="BANKID" />
+		<property name="darlehensnehmer" type="java.lang.Integer" column="DNID" />
+		<property name="sicherung" type="java.lang.Integer" column="IMMOID" />
+		<property name="sicherung2" type="java.lang.Integer" column="LEBVERSID" />
+		<property name="betrag" type="double" column="BETRAG" />
+		<property name="zinssatz" type="double" column="ZINSSATZ" />
+		<property name="tilgungsrate" type="double" column="TILGUNGSRATE" />
+		<property name="restschuld" type="double" column="RESTSCHULD" />
 
 		<!-- Fremdschluessel -->
 		<set name="darlehensgeber" inverse="false">
-			<key column="BANKID"/>
-			<one-to-many class="data.Bank"/>
+			<key column="BANKID" />
+			<one-to-many class="data.Bank" />
 		</set>
 		<set name="darlehensnehmer" inverse="false">
-			<key column="DNID"/>
-			<one-to-many class="data.Darlehensnehmer"/>
+			<key column="DNID" />
+			<one-to-many class="data.Darlehensnehmer" />
 		</set>
 		<set name="sicherung" inverse="false">
-			<key column="IMMOID"/>
-			<one-to-many class="data.Immobilie"/>
+			<key column="IMMOID" />
+			<one-to-many class="data.Immobilie" />
 		</set>
 		<set name="sicherung2" inverse="false">
-			<key column="LEBVERSID"/>
-			<one-to-many class="data.Lebensversicherung"/>
+			<key column="LEBVERSID" />
+			<one-to-many class="data.Lebensversicherung" />
 		</set>
 	</class>
 </hibernate-mapping>
