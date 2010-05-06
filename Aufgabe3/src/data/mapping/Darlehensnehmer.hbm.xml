@@ -4,36 +4,45 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="data.Darlehensnehmer" abstract="true">
-		<id name="dnid" column="DNID" type="Integer">
-			<generator class="native"/>
+		<id name="dnid" column="DNID" type="integer">
+			<generator class="increment"/>
 		</id>
 		<property name="name"    type="string" column="NAME" />
 		<property name="strasse" type="string" column="STR" />
 		<property name="plz"     type="string" column="PLZ" />
 		<property name="Ort"     type="string" column="ORT" />
 		
-		<joined-subclass name="data.Privatperson" table=“AUFG3_PRIVATPERSON">
+        <set name="darlehensnehmer" inverse="true">
+        <key column="DARLID"/>
+        <one-to-many class="data.Darlehen"/>
+        </set>
+        
+        <set name="dnid" inverse="true">
+        <key column="DARLID"/>
+        <one-to-many class="data.Immobilie"/>
+        </set>       
+   
+		<joined-subclass name="data.Privatperson" table="AUFG3_PRIVATPERSON">
 			<key column="DNID"/>
 			<property name="vorname" type="string" column="VORNAME"/>
 		</joined-subclass>
 		
-		<joined-subclass name="data.Unternehmen" table=“AUFG3_UNTERNEHMEN">
+		<joined-subclass name="data.Unternehmen" table="AUFG3_UNTERNEHMEN">
 			<key column="DNID"/>
 			<property name="rechtsform"   type="string" column="RECHTSFORM"/>
 			<property name="eigenkapital" type="string" column="EIGENKAPITAL"/>
 
-			<joined-subclass name="data.Versicherungsunternehmen" table=“AUFG3_VERS_UN">
+			<joined-subclass name="data.Versicherungsunternehmen" table="AUFG3_VERS_UN">
 				<key column="DNID"/>
 			</joined-subclass>
 
-			<joined-subclass name="data.Bank" table=“AUFG3_BANK">
+			<joined-subclass name="data.Bank" table="AUFG3_BANK">
 				<key column="DNID"/>
 				<set name="vergebeneDarlehen" inverse="true">
 					<key column="BANKID"/>
-					<many-to-one class="data.Darlehen"/>
+				<one-to-many class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
 		</joined-subclass>
-			
-	</class>
+</class>
 </hibernate-mapping>

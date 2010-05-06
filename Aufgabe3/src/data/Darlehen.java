@@ -1,5 +1,6 @@
 package data;
 
+
 public class Darlehen {
 	private static Integer currentDid = 0;
 

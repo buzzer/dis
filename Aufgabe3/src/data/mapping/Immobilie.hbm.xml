@@ -10,14 +10,12 @@
 		<property name="besitzer" type="integer" column="DNID" />
 		<property name="wert" type="double" column="WERT" />
 		<property name="hypothek" type="integer" column="DARLID" />
-		
-		<set name="besitzer" inverse="false">
-			<key column="DNID"/>
-			<one-to-many class="data.Darlehensnehmer"/>
+
+		<many-to-one name="besitzer" class="data.Darlehensnehmer"
+			column="DNID" not-null="true" />
+		<set name="hypothek" inverse="true">
+			<key column="DARLID" />
+			<one-to-many class="data.Darlehen" />
 		</set>
-
-			<many-to-one name="hypothek" class="data.Darlehen" column="DARLID" not-null="true"/>
-
-		
 	</class>
 </hibernate-mapping>

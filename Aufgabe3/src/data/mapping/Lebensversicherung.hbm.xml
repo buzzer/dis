@@ -5,19 +5,14 @@
 <hibernate-mapping>
 	<class name="data.Lebensversicherung" table="AUFG3_VERSICHERT">
 		<id name="vid" column="LEBVERSID">
-			<generator class="increment" />
+			<generator class="native" />
 		</id>
-		<property name="versicherter" type="integer" column="PERSID"/>
-		<property name="versicherer"  type="integer" column="VERSUNID"/>
-		<property name="betrag"       type="double"  column="BETRAG"/>
-		
-		<set name="versicherter" inverse="false">
-			<key column="PERSID"/>
-			<one-to-many class="data.Privatperson"/>
-		</set>
-		<set name="versicherer" inverse="false">
-			<key column="VERSUNID"/>
-			<one-to-many class="data.Versicherungsunternehmen"/>
-		</set>
+		<property name="versicherter" type="integer" column="PERSID" />
+		<property name="versicherer" type="integer" column="VERSUNID" />
+		<property name="betrag" type="double" column="BETRAG" />
+		<many-to-one name="versicherter" class="data.Privatperson"
+			column="PERSID" not-null="true"/>
+		<many-to-one name="versicherer" class="data.Versicherungsunternehmen"
+			column="VERSUNID" not-null="true"/>
 	</class>
 </hibernate-mapping>
