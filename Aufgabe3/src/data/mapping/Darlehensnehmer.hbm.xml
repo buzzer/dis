@@ -4,27 +4,33 @@
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 	<class name="data.Darlehensnehmer" abstract="true">
-		<id name="dnid" column="DNID" type="integer">
+
+		<id name="dnid" type="long" column="DNID">
 			<generator class="increment"/>
 		</id>
-		<property name="name"    type="string" column="NAME" />
-		<property name="strasse" type="string" column="STR" />
-		<property name="plz"     type="string" column="PLZ" />
-		<property name="Ort"     type="string" column="ORT" />
+		<property name="name"    type="string" column="NAME"/>
+		<property name="strasse" type="string" column="STR"/>
+		<property name="plz"     type="string" column="PLZ"/>
+		<property name="Ort"     type="string" column="ORT"/>
 		
-        <set name="darlehensnehmer" inverse="true">
-        <key column="DARLID"/>
-        <one-to-many class="data.Darlehen"/>
-        </set>
-        
-        <set name="dnid" inverse="true">
-        <key column="DARLID"/>
-        <one-to-many class="data.Immobilie"/>
-        </set>       
-   
+		<set name="darlehen" inverse="true">
+			<key column="DARLID"/>
+			<one-to-many class="data.Darlehen"/>
+		</set>
+		
+		<set name="immobilien" inverse="true">
+			<key column="IMMOID"/>
+			<one-to-many class="data.Immobilie"/>
+		</set>
+			
 		<joined-subclass name="data.Privatperson" table="AUFG3_PRIVATPERSON">
 			<key column="DNID"/>
 			<property name="vorname" type="string" column="VORNAME"/>
+			
+			<set name="versicherungen" inverse="true">
+				<key column="VNID"/>
+				<one-to-many class="data.Lebensversicherung"/>
+			</set>
 		</joined-subclass>
 		
 		<joined-subclass name="data.Unternehmen" table="AUFG3_UNTERNEHMEN">
@@ -34,15 +40,21 @@
 
 			<joined-subclass name="data.Versicherungsunternehmen" table="AUFG3_VERS_UN">
 				<key column="DNID"/>
+				<set name="versicherungen" inverse="true">
+					<key column="VGID"/>
+					<one-to-many class="data.Lebensversicherung"/>
+				</set>
 			</joined-subclass>
 
 			<joined-subclass name="data.Bank" table="AUFG3_BANK">
 				<key column="DNID"/>
 				<set name="vergebeneDarlehen" inverse="true">
-					<key column="BANKID"/>
-				<one-to-many class="data.Darlehen"/>
+					<key column="DGID"/>
+					<one-to-many class="data.Darlehen"/>
 				</set>
 			</joined-subclass>
-		</joined-subclass>
-</class>
+
+		</joined-subclass>		
+
+	</class>
 </hibernate-mapping>

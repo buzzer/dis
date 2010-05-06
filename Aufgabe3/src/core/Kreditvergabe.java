@@ -26,6 +26,7 @@ public class Kreditvergabe {
 	private KonsolenUI ui; 
 	
 	// globale Variablen
+	// TODO implement persistent
 	private Collection<Darlehensnehmer> darlehensnehmer;
 	
 	public Kreditvergabe() {

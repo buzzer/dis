@@ -14,7 +14,6 @@ public class Darlehen {
 	private Darlehensnehmer darlehensnehmer;
 	private Bank darlehensgeber;
 	private Immobilie sicherung;
-	private Lebensversicherung sicherung2;
 
 	public Darlehen(Double betrag, Double zinssatz, Darlehensnehmer dn,
 			Bank dg, Immobilie sicherung) {
@@ -77,7 +76,22 @@ public class Darlehen {
 		this.zinssatz = zinssatz;
 	}
 
-	public boolean equals(Object o) {
+	public void setTilgungsrate(Double tilgungsrate) {
+		this.tilgungsrate = tilgungsrate;
+	}
+
+	public Double getTilgungsrate() {
+		return tilgungsrate;
+	}
+
+	public void setRestschuld(Double restschuld) {
+		this.restschuld = restschuld;
+	}
+
+	public Double getRestschuld() {
+		return restschuld;
+	}
+public boolean equals(Object o) {
 		if (o instanceof Darlehen) {
 			Darlehen d = (Darlehen) o;
 			return d.getDid().equals(this.getDid());

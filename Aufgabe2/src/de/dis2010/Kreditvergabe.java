@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import de.dis2010.data.Privatpersonen;
 import de.dis2010.data.Darlehen;
 import de.dis2010.data.Immobilie;
-import de.dis2010.data.Privatpersonen;
+//import de.dis2010.data.Privatpersonen;
 import de.dis2010.data.Unternehmen;
 import de.dis2010.data.Versicherung;
 import de.dis2010.data.versichert;
@@ -113,6 +113,7 @@ public class Kreditvergabe {
 			int auswahl = Integer.parseInt(eingabe);
 			
 			Integer persID = 0;
+			@SuppressWarnings("unused")
 			Integer versUNid = 0;
 			Integer uNid = 0;
 			Integer immoID = 0;
@@ -121,7 +122,7 @@ public class Kreditvergabe {
 			switch (auswahl) {
 			case 1:
 				persID = ui.getInteger("Personen Identifier");
-				person = new Privatpersonen(null, null);
+				person = new Privatpersonen(null);
 				person.setPid(persID);
 				break;
 			case 2:
