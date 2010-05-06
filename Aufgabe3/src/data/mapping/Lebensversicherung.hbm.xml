@@ -10,8 +10,10 @@
 		</id>
 
 		<property name="betrag" type="double" column="BETRAG"/>
-    <many-to-one name="versicherter" class="data.Privatperson" column="VNID" not-null="true" />
-    <many-to-one name="versicherer" class="data.Versicherungsunternehmen" column="VGID" not-null="true" />
+    <many-to-one name="versicherter" class="data.Privatperson"
+      column="DNID" not-null="true" />
+    <many-to-one name="versicherer" class="data.Versicherungsunternehmen"
+      column="DNID" not-null="true" />
 		
 	</class>
 </hibernate-mapping>

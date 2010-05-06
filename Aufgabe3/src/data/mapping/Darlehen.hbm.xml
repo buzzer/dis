@@ -14,9 +14,12 @@
 		<property name="restschuld"      type="double"  column="RESTSCHULD"/>
 
 		<!-- Fremdschluessel -->
-    <many-to-one name="darlehensgeber" class="data.Bank" column="DGID" not-null="true" />
-    <many-to-one name="darlehensnehmer" class="data.Darlehensnehmer" column="DNID" not-null="true" />
-    <many-to-one name="sicherung" class="data.Immobilie" column="SICHID" not-null="true" />
+    <many-to-one name="darlehensgeber" class="data.Bank"
+      column="DNID" not-null="true" />
+    <many-to-one name="darlehensnehmer" class="data.Darlehensnehmer"
+      column="DNID" not-null="true" />
+    <many-to-one name="sicherung" class="data.Immobilie"
+      column="IMMOID" not-null="true" />
 
 	</class>
 </hibernate-mapping>
