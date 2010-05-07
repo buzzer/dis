@@ -11,9 +11,14 @@
 
 		<property name="betrag" type="double" column="BETRAG"/>
     <many-to-one name="versicherter" class="data.Privatperson"
-      column="DNID" not-null="true" />
+      column="VNID" not-null="true" />
     <many-to-one name="versicherer" class="data.Versicherungsunternehmen"
-      column="DNID" not-null="true" />
+      column="VGID" not-null="true" />
+	
+	<set name="hypothek" inverse="true">
+			<key column="DARLID"/>
+			<one-to-many class="data.Darlehen"/>
+	</set>
 		
 	</class>
 </hibernate-mapping>

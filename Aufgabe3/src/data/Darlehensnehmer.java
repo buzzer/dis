@@ -70,12 +70,20 @@ public abstract class Darlehensnehmer {
 		return immobilien;
 	}
 
+	public void setImmobilien(Collection<Immobilie> immobilien) {
+		this.immobilien = immobilien;
+	}
+
 	public void addImmobilie(Immobilie i) {
 		this.immobilien.add(i);
 	}
 
 	public Collection<Darlehen> getDarlehen() {
 		return darlehen;
+	}
+
+	public void setDarlehen(Collection<Darlehen> darlehen) {
+		this.darlehen = darlehen;
 	}
 
 	public void addDarlehen(Darlehen d) {

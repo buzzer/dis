@@ -18,6 +18,10 @@ public class Versicherungsunternehmen extends Unternehmen {
 		return versicherungen;
 	}
 
+	public void setVersicherungen(Collection<Lebensversicherung> versicherungen) {
+		this.versicherungen = versicherungen;
+	}
+
 	public void addVersicherung(Lebensversicherung v) {
 		this.versicherungen.add(v);
 	}

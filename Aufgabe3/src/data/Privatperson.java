@@ -7,6 +7,10 @@ public class Privatperson extends Darlehensnehmer {
 	private String vorname;
 	private Collection<Lebensversicherung> versicherungen;
 
+	public void setVersicherungen(Collection<Lebensversicherung> versicherungen) {
+		this.versicherungen = versicherungen;
+	}
+
 	public Privatperson(String name, String strasse, String plz, String ort,
 			String vorname2) {
 		super(name, strasse, plz, ort);
