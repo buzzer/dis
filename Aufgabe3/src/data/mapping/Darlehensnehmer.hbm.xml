@@ -10,7 +10,7 @@
 		</id>
 		<property name="name"    type="string" column="NAME"/>
 		<property name="strasse" type="string" column="STR"/>
-		<property name="plz"     type="string" column="PLZ"/>
+		<property name="plz"     type="integer" column="PLZ"/>
 		<property name="Ort"     type="string" column="ORT"/>
 		
 		<set name="darlehen" inverse="true">

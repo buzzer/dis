@@ -1,7 +1,8 @@
 package data;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public abstract class Darlehensnehmer {
 	private static Integer currentDnid = 0;
@@ -9,21 +10,21 @@ public abstract class Darlehensnehmer {
 	private Integer dnid;
 	private String name;
 	private String strasse;
-	private String plz;
+	private Integer plz;
 	private String Ort;
 
 	private Collection<Immobilie> immobilien;
 	private Collection<Darlehen> darlehen;
 
-	public Darlehensnehmer(String name, String strasse, String plz, String ort) {
+	public Darlehensnehmer(String name, String strasse, Integer plz, String ort) {
 		setDnid(currentDnid++);
 		setName(name);
 		setStrasse(strasse);
 		setPlz(plz);
 		setOrt(ort);
 
-		immobilien = new ArrayList<Immobilie>();
-		darlehen = new ArrayList<Darlehen>();
+		immobilien = new HashSet<Immobilie>();
+		darlehen = new HashSet<Darlehen>();
 	}
 
 	public Integer getDnid() {
@@ -50,11 +51,11 @@ public abstract class Darlehensnehmer {
 		Ort = ort;
 	}
 
-	public String getPlz() {
+	public Integer getPlz() {
 		return plz;
 	}
 
-	public void setPlz(String plz) {
+	public void setPlz(Integer plz) {
 		this.plz = plz;
 	}
 

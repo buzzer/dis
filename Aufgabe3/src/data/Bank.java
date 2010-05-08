@@ -1,7 +1,8 @@
 package data;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class Bank extends Unternehmen {
 
@@ -15,11 +16,11 @@ public class Bank extends Unternehmen {
 		this.vergebeneDarlehen = vergebeneDarlehen;
 	}
 
-	public Bank(String name, String strasse, String plz, String ort,
+	public Bank(String name, String strasse, Integer plz, String ort,
 			String rechstform, Double eigenkapital) {
 		super(name, strasse, plz, ort, rechstform, eigenkapital);
 
-		this.vergebeneDarlehen = new ArrayList<Darlehen>();
+		this.vergebeneDarlehen = new HashSet<Darlehen>();
 	}
 
 	public void addVergebenesDarlehen(Darlehen d) {
