@@ -2,7 +2,6 @@ package core;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.HashSet;
 import java.util.Collection;
 
 import org.hibernate.Session;
@@ -32,7 +31,7 @@ public class Kreditvergabe {
 		_sessionFactory = new Configuration().configure().buildSessionFactory();
 
 		// Anwendung initialisieren
-		//darlehensnehmer  = new HashSet<Darlehensnehmer>();
+		//darlehensnehmer  = new ArrayList<Darlehensnehmer>();
 		
 		/****** Initialisierungen (Evtl. später entfernen, wenn die Daten in der DB stehen) ****/
 		
@@ -169,7 +168,7 @@ public class Kreditvergabe {
 		Immobilie i = null;
 		
 		List<Darlehensnehmer> darlehensnehmer = session.createQuery(
-			"select dnid from Darlehensnehmer")
+			"from Darlehensnehmer")
 			.list();
 
 		
@@ -220,7 +219,7 @@ public class Kreditvergabe {
 		Darlehen d = null;
 
 		List<Darlehensnehmer> darlehensnehmer = session.createQuery(
-			"select dnid from Darlehensnehmer")
+			"from Darlehensnehmer")
 			.list();
 
 		try {
@@ -244,7 +243,7 @@ public class Kreditvergabe {
 			
 			if(betrag > 10000){
 
-				HashSet<Immobilie> unbelasteteImmoblilien = dn.getUnbelasteteImmobilien();
+				List<Immobilie> unbelasteteImmoblilien = dn.getUnbelasteteImmobilien();
 				if(unbelasteteImmoblilien.size() > 0){
 					sicherung = ui.getImmobilienAuswahl("Sicherung", unbelasteteImmoblilien);
 				}
@@ -315,7 +314,7 @@ public class Kreditvergabe {
 		Darlehen d = null;
 		
 		List<Darlehensnehmer> darlehensnehmer = session.createQuery(
-			"select dnid from Darlehensnehmer")
+			"from Darlehensnehmer")
 			.list();
 
 		try {
@@ -379,8 +378,8 @@ public class Kreditvergabe {
 		
 		Lebensversicherung v = null;
 
-		List<Darlehensnehmer> darlehensnehmer = session.createQuery(
-			"select dnid from Darlehensnehmer")
+		List darlehensnehmer = session.createQuery(
+			"from Darlehensnehmer")
 			.list();
 
 		

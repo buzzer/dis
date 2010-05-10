@@ -1,7 +1,6 @@
 package data;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Collection;
 
 public class Privatperson extends Darlehensnehmer {
@@ -36,8 +35,8 @@ public class Privatperson extends Darlehensnehmer {
 		this.versicherungen.add(v);
 	}
 
-	public HashSet<Immobilie> getUnbelasteteImmobilien() {
-		HashSet<Immobilie> unbelastet = new HashSet<Immobilie>();
+	public ArrayList<Immobilie> getUnbelasteteImmobilien() {
+		ArrayList<Immobilie> unbelastet = new ArrayList<Immobilie>();
 
 		for (Immobilie i : this.getImmobilien()) {
 			if (i.getHypothek() == null)

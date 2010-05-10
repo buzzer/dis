@@ -3,6 +3,7 @@ package ui;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Collection;
+import java.util.List;
 
 import core.Kreditvergabe;
 import data.Darlehensnehmer;
@@ -208,7 +209,8 @@ public class KonsolenUI implements KreditvergabeUI {
 	}
 
 	public Darlehensnehmer getDnAuswahl(String eingabe,
-			Collection<Darlehensnehmer> darlehensnehmer, Class dnType) {
+//			Collection<Darlehensnehmer> darlehensnehmer, Class dnType) {
+			List<Darlehensnehmer> darlehensnehmer, Class dnType) {
 		Darlehensnehmer auswahl = null;
 
 		System.out.println("\nAuswahl " + eingabe + ": ");
@@ -236,7 +238,8 @@ public class KonsolenUI implements KreditvergabeUI {
 	}
 
 	public Immobilie getImmobilienAuswahl(String eingabe,
-			Collection<Immobilie> immobilien) {
+			//Collection<Immobilie> immobilien) {
+			List<Immobilie> immobilien) {
 		Immobilie auswahl = null;
 
 		System.out.println("\nAuswahl " + eingabe + ": ");

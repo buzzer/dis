@@ -2,7 +2,6 @@ package data;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 
 public abstract class Darlehensnehmer {
 	private static Integer currentDnid = 0;
