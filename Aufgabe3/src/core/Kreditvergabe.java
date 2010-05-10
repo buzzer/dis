@@ -1,6 +1,7 @@
 package core;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.HashSet;
 import java.util.Collection;
 
@@ -40,7 +41,7 @@ public class Kreditvergabe {
 		// Transaktion starten
 		session.beginTransaction();
 		
-		/*//Banken
+		//Banken
 		Bank b1 = new Bank("Komerzbank", "Musterstr. 1", 11111, "Berlin", "GmbH", 100000.0);
 		Bank b2 = new Bank("Volkskasse", "Holzweg 7", 98765, "Nürnberg", "GBR", 300000.0);
 		Bank b3 = new Bank("Briefbank", "Geldstr. 14", 12345, "Bonn", "KG", 1000000.0);
@@ -76,7 +77,7 @@ public class Kreditvergabe {
 		session.save(p2);
 //		darlehensnehmer.add(p1);
 //		darlehensnehmer.add(p2);
-*/		
+		
 		// Transktion beenden
 		session.getTransaction().commit();
 		
@@ -167,8 +168,8 @@ public class Kreditvergabe {
 		
 		Immobilie i = null;
 		
-		Collection<Darlehensnehmer> darlehensnehmer = session.createQuery(
-			"select name from Darlehensnehmer")
+		List<Darlehensnehmer> darlehensnehmer = session.createQuery(
+			"select dnid from Darlehensnehmer")
 			.list();
 
 		
@@ -218,8 +219,8 @@ public class Kreditvergabe {
 		
 		Darlehen d = null;
 
-		Collection<Darlehensnehmer> darlehensnehmer = session.createQuery(
-			"select name from Darlehensnehmer")
+		List<Darlehensnehmer> darlehensnehmer = session.createQuery(
+			"select dnid from Darlehensnehmer")
 			.list();
 
 		try {
@@ -313,8 +314,8 @@ public class Kreditvergabe {
 		
 		Darlehen d = null;
 		
-		Collection<Darlehensnehmer> darlehensnehmer = session.createQuery(
-			"select name from Darlehensnehmer")
+		List<Darlehensnehmer> darlehensnehmer = session.createQuery(
+			"select dnid from Darlehensnehmer")
 			.list();
 
 		try {
@@ -378,8 +379,8 @@ public class Kreditvergabe {
 		
 		Lebensversicherung v = null;
 
-		Collection<Darlehensnehmer> darlehensnehmer = session.createQuery(
-			"select name from Darlehensnehmer")
+		List<Darlehensnehmer> darlehensnehmer = session.createQuery(
+			"select dnid from Darlehensnehmer")
 			.list();
 
 		

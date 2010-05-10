@@ -1,6 +1,6 @@
 package data;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -12,7 +12,7 @@ public class Versicherungsunternehmen extends Unternehmen {
 			String ort, String rechstform, Double eigenkapital) {
 		super(name, strasse, plz, ort, rechstform, eigenkapital);
 
-		this.versicherungen = new HashSet<Lebensversicherung>();
+		this.versicherungen = new ArrayList<Lebensversicherung>();
 	}
 
 	public Collection<Lebensversicherung> getVersicherungen() {

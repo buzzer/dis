@@ -1,6 +1,6 @@
 package data;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Collection;
 
@@ -17,7 +17,7 @@ public class Privatperson extends Darlehensnehmer {
 		super(name, strasse, plz, ort);
 		setVorname(vorname);
 
-		versicherungen = new HashSet<Lebensversicherung>();
+		versicherungen = new ArrayList<Lebensversicherung>();
 	}
 
 	public String getVorname() {

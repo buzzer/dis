@@ -1,6 +1,6 @@
 package data;
 
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -23,8 +23,8 @@ public abstract class Darlehensnehmer {
 		setPlz(plz);
 		setOrt(ort);
 
-		immobilien = new HashSet<Immobilie>();
-		darlehen = new HashSet<Darlehen>();
+		immobilien = new ArrayList<Immobilie>();
+		darlehen = new ArrayList<Darlehen>();
 	}
 
 	public Integer getDnid() {
