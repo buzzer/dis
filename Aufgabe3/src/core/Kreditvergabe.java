@@ -24,20 +24,14 @@ public class Kreditvergabe {
 	private SessionFactory _sessionFactory;
 
 	// GUI
-	private KonsolenUI ui; 
-	
-	// globale Variablen
-	// TODO implement persistent
-	private Collection<Darlehensnehmer> darlehensnehmer;
-	private Collection<Immobilie> immobilien;
-	private Collection<Lebensversicherung> lebensversicherungen;
-	
+	private KonsolenUI ui;
+
 	public Kreditvergabe() {
 		// Sessionfactory erzeugen
 		_sessionFactory = new Configuration().configure().buildSessionFactory();
 
 		// Anwendung initialisieren
-		darlehensnehmer  = new HashSet<Darlehensnehmer>();
+		//darlehensnehmer  = new HashSet<Darlehensnehmer>();
 		
 		/****** Initialisierungen (Evtl. später entfernen, wenn die Daten in der DB stehen) ****/
 		
@@ -46,7 +40,7 @@ public class Kreditvergabe {
 		// Transaktion starten
 		session.beginTransaction();
 		
-		//Banken
+		/*//Banken
 		Bank b1 = new Bank("Komerzbank", "Musterstr. 1", 11111, "Berlin", "GmbH", 100000.0);
 		Bank b2 = new Bank("Volkskasse", "Holzweg 7", 98765, "Nürnberg", "GBR", 300000.0);
 		Bank b3 = new Bank("Briefbank", "Geldstr. 14", 12345, "Bonn", "KG", 1000000.0);
@@ -55,34 +49,34 @@ public class Kreditvergabe {
 		session.save(b2);
 		session.save(b3);
 
-		darlehensnehmer.add(b1);
-		darlehensnehmer.add(b2);
-		darlehensnehmer.add(b3);
+//		darlehensnehmer.add(b1);
+//		darlehensnehmer.add(b2);
+//		darlehensnehmer.add(b3);
 		
 		//Versicherungen
 		Versicherungsunternehmen v1 = new Versicherungsunternehmen("Münchner Vor", "Musterstr. 2", 11111, "Berlin", "GmbH", 1000.0);
 		Versicherungsunternehmen v2 = new Versicherungsunternehmen("Alliance", "ABC Straße 9", 22222, "Frankfurt", "GmbH & Co KG", 999.0);
 		session.save(v1);
 		session.save(v2);
-		darlehensnehmer.add(v1);
-		darlehensnehmer.add(v2);
+//		darlehensnehmer.add(v1);
+//		darlehensnehmer.add(v2);
 		
 		//Unternehmen
 		Unternehmen u1 = new Unternehmen("U1", "UStr. 1", 11111, "UStadt", "GmbH", 1000.0);
 		Unternehmen u2 = new Unternehmen("U2", "UStr. 2", 22222, "UStadt", "GmbH", 2000.0);
 		session.save(u1);
 		session.save(u2);
-		darlehensnehmer.add(u1);
-		darlehensnehmer.add(u2);
+//		darlehensnehmer.add(u1);
+//		darlehensnehmer.add(u2);
 		
 		//Personen
 		Privatperson p1 = new Privatperson("P1", "PStr. 1", 11111, "PStadt", "V1");
 		Privatperson p2 = new Privatperson("P2", "PStr. 2", 22222, "PStadt", "V2");
 		session.save(p1);
 		session.save(p2);
-		darlehensnehmer.add(p1);
-		darlehensnehmer.add(p2);
-		
+//		darlehensnehmer.add(p1);
+//		darlehensnehmer.add(p2);
+*/		
 		// Transktion beenden
 		session.getTransaction().commit();
 		
@@ -111,7 +105,7 @@ public class Kreditvergabe {
 			
 			//neues unternehmen anlegen
 			u = new Unternehmen(name, strasse, plz, ort, rechstform, eigenkapital);
-			darlehensnehmer.add(u);
+//			darlehensnehmer.add(u);
 			
 			// Unternehmen in DB speichern
 			session.save(u);
@@ -147,7 +141,7 @@ public class Kreditvergabe {
 			
 			//neue person anlegen
 			p = new Privatperson(name, strasse, plz, ort, vorname);
-			darlehensnehmer.add(p);
+//			darlehensnehmer.add(p);
 			
 			// Privatperson in DB speichern
 			session.save(p);
@@ -172,6 +166,11 @@ public class Kreditvergabe {
 		session.beginTransaction();
 		
 		Immobilie i = null;
+		
+		Collection<Darlehensnehmer> darlehensnehmer = session.createQuery(
+			"select name from Darlehensnehmer")
+			.list();
+
 		
 		try {
 			//wert der immobilie abfragen
@@ -206,6 +205,7 @@ public class Kreditvergabe {
 	
 	
 	
+
 	/**************************************************
 	 *Kreditvergabe
 	 **************************************************/
@@ -217,7 +217,11 @@ public class Kreditvergabe {
 		session.beginTransaction();
 		
 		Darlehen d = null;
-		
+
+		Collection<Darlehensnehmer> darlehensnehmer = session.createQuery(
+			"select name from Darlehensnehmer")
+			.list();
+
 		try {
 			//darlehensinfos bestimmen
 			Double betrag = ui.getDouble("Betrag");
@@ -309,6 +313,10 @@ public class Kreditvergabe {
 		
 		Darlehen d = null;
 		
+		Collection<Darlehensnehmer> darlehensnehmer = session.createQuery(
+			"select name from Darlehensnehmer")
+			.list();
+
 		try {
 			//darlehensinfos bestimmen
 			Double betrag = ui.getDouble("Betrag");
@@ -369,6 +377,11 @@ public class Kreditvergabe {
 		session.beginTransaction();
 		
 		Lebensversicherung v = null;
+
+		Collection<Darlehensnehmer> darlehensnehmer = session.createQuery(
+			"select name from Darlehensnehmer")
+			.list();
+
 		
 		try {
 			//wert der versicherung abfragen
