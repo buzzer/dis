@@ -4,8 +4,8 @@ public class Unternehmen extends Darlehensnehmer {
 	private String rechtsform;
 	private Double eigenkapital;
 
-	public Unternehmen(String name, String strasse, String plz, String ort,
-			String rechstform, Double eigenkapital) {
+	public Unternehmen(String name, String strasse, Integer plz, String ort,
+			String rechtsform, Double eigenkapital) {
 		super(name, strasse, plz, ort);
 		setRechtsform(rechtsform);
 		setEigenkapital(eigenkapital);

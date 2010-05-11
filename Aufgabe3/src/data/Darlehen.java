@@ -14,6 +14,7 @@ public class Darlehen {
 	private Darlehensnehmer darlehensnehmer;
 	private Bank darlehensgeber;
 	private Immobilie sicherung;
+	private Lebensversicherung sicherung2;
 
 	public Darlehen(Double betrag, Double zinssatz, Darlehensnehmer dn,
 			Bank dg, Immobilie sicherung) {
@@ -66,6 +67,14 @@ public class Darlehen {
 
 	public void setSicherung(Immobilie sicherung) {
 		this.sicherung = sicherung;
+	}
+
+	public Lebensversicherung getSicherung2() {
+		return sicherung2;
+	}
+
+	public void setSicherung2(Lebensversicherung sicherung2) {
+		this.sicherung2 = sicherung2;
 	}
 
 	public Double getZinssatz() {

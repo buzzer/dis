@@ -8,6 +8,7 @@ public class Lebensversicherung {
 
 	private Versicherungsunternehmen versicherer;
 	private Privatperson versicherter;
+	private Darlehen hypothek = null;
 
 	public Lebensversicherung(Double betrag, Privatperson versicherter,
 			Versicherungsunternehmen versicherer) {
@@ -47,5 +48,13 @@ public class Lebensversicherung {
 
 	public void setVersicherter(Privatperson versicherter) {
 		this.versicherter = versicherter;
+	}
+
+	public Darlehen getHypothek() {
+		return hypothek;
+	}
+
+	public void setHypothek(Darlehen hypothek) {
+		this.hypothek = hypothek;
 	}
 }

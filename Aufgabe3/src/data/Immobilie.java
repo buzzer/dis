@@ -8,6 +8,7 @@ public class Immobilie {
 	private Double wert;
 
 	private Darlehensnehmer besitzer = null;
+	// TODO Kann eine I nicht mehrere D absichern? -> Collection?
 	private Darlehen hypothek = null;
 
 	public Immobilie(Double wert) {

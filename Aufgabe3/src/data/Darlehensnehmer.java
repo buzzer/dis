@@ -9,13 +9,13 @@ public abstract class Darlehensnehmer {
 	private Integer dnid;
 	private String name;
 	private String strasse;
-	private String plz;
+	private Integer plz;
 	private String Ort;
 
 	private Collection<Immobilie> immobilien;
 	private Collection<Darlehen> darlehen;
 
-	public Darlehensnehmer(String name, String strasse, String plz, String ort) {
+	public Darlehensnehmer(String name, String strasse, Integer plz, String ort) {
 		setDnid(currentDnid++);
 		setName(name);
 		setStrasse(strasse);
@@ -50,11 +50,11 @@ public abstract class Darlehensnehmer {
 		Ort = ort;
 	}
 
-	public String getPlz() {
+	public Integer getPlz() {
 		return plz;
 	}
 
-	public void setPlz(String plz) {
+	public void setPlz(Integer plz) {
 		this.plz = plz;
 	}
 
@@ -70,12 +70,20 @@ public abstract class Darlehensnehmer {
 		return immobilien;
 	}
 
+	public void setImmobilien(Collection<Immobilie> immobilien) {
+		this.immobilien = immobilien;
+	}
+
 	public void addImmobilie(Immobilie i) {
 		this.immobilien.add(i);
 	}
 
 	public Collection<Darlehen> getDarlehen() {
 		return darlehen;
+	}
+
+	public void setDarlehen(Collection<Darlehen> darlehen) {
+		this.darlehen = darlehen;
 	}
 
 	public void addDarlehen(Darlehen d) {

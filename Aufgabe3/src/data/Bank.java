@@ -7,7 +7,15 @@ public class Bank extends Unternehmen {
 
 	private Collection<Darlehen> vergebeneDarlehen;
 
-	public Bank(String name, String strasse, String plz, String ort,
+	public Collection<Darlehen> getVergebeneDarlehen() {
+		return vergebeneDarlehen;
+	}
+
+	public void setVergebeneDarlehen(Collection<Darlehen> vergebeneDarlehen) {
+		this.vergebeneDarlehen = vergebeneDarlehen;
+	}
+
+	public Bank(String name, String strasse, Integer plz, String ort,
 			String rechstform, Double eigenkapital) {
 		super(name, strasse, plz, ort, rechstform, eigenkapital);
 

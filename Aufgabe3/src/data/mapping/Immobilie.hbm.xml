@@ -11,7 +11,7 @@
 
 		<property name="wert" type="double" column="WERT"/>
 
-    <many-to-one name="besitzer" class="data.Darlehensnehmer" column="DNID" not-null="true" />
+    <many-to-one name="besitzer" class="data.Darlehensnehmer" column="BSID" not-null="true" />
 
 		<set name="hypothek" inverse="true">
 			<key column="DARLID"/>

@@ -15,11 +15,13 @@
 
 		<!-- Fremdschluessel -->
     <many-to-one name="darlehensgeber" class="data.Bank"
-      column="DNID" not-null="true" />
+      column="DGID" not-null="true" />
     <many-to-one name="darlehensnehmer" class="data.Darlehensnehmer"
       column="DNID" not-null="true" />
     <many-to-one name="sicherung" class="data.Immobilie"
-      column="IMMOID" not-null="true" />
-
+      column="IMMOID" not-null="false" />
+	<many-to-one name="sicherung2" class="data.Lebensversicherung"
+      column="LEBVERSID" not-null="false" />
+      
 	</class>
 </hibernate-mapping>
