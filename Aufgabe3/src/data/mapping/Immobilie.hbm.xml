@@ -13,10 +13,10 @@
 
     <many-to-one name="besitzer" class="data.Darlehensnehmer" column="BSID" not-null="true" />
 
-		<set name="hypothek" inverse="true">
+		<!--<set name="hypothek" inverse="true">
 			<key column="DARLID"/>
 			<one-to-many class="data.Darlehen"/>
 		</set>
 		
-	</class>
+	--></class>
 </hibernate-mapping>

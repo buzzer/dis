@@ -13,7 +13,7 @@
 		<property name="plz"     type="integer" column="PLZ"/>
 		<property name="Ort"     type="string" column="ORT"/>
 		
-		<set name="darlehen" inverse="true">
+		<!--<set name="darlehen" inverse="true">
 			<key column="DARLID"/>
 			<one-to-many class="data.Darlehen"/>
 		</set>
@@ -22,37 +22,40 @@
 			<key column="IMMOID"/>
 			<one-to-many class="data.Immobilie"/>
 		</set>
-			
+		-->
+		
 		<joined-subclass name="data.Privatperson" table="AUFG3_PRIVATPERSON">
 			<key column="DNID"/>
 			<property name="vorname" type="string" column="VORNAME"/>
 			
-			<set name="versicherungen" inverse="true">
+			<!--<set name="versicherungen" inverse="true">
 				<key column="LEBVERSID"/>
 				<one-to-many class="data.Lebensversicherung"/>
 			</set>
+		-->
 		</joined-subclass>
 		
 		<joined-subclass name="data.Unternehmen" table="AUFG3_UNTERNEHMEN">
 			<key column="DNID"/>
 			<property name="rechtsform"   type="string" column="RECHTSFORM"/>
-			<property name="eigenkapital" type="string" column="EIGENKAPITAL"/>
+			<property name="eigenkapital" type="double" column="EIGENKAPITAL"/>
 
 			<joined-subclass name="data.Versicherungsunternehmen" table="AUFG3_VERS_UN">
 				<key column="DNID"/>
-				<set name="versicherungen" inverse="true">
+				<!--<set name="versicherungen" inverse="true">
 					<key column="LEBVERSID"/>
 					<one-to-many class="data.Lebensversicherung"/>
 				</set>
+			-->
 			</joined-subclass>
 
 			<joined-subclass name="data.Bank" table="AUFG3_BANK">
 				<key column="DNID"/>
-				<set name="vergebeneDarlehen" inverse="true">
+				<!--<set name="vergebeneDarlehen" inverse="true">
 					<key column="DARLID"/>
 					<one-to-many class="data.Darlehen"/>
 				</set>
-			</joined-subclass>
+			--></joined-subclass>
 
 		</joined-subclass>		
 
