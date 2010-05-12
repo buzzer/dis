@@ -15,6 +15,9 @@ public abstract class Darlehensnehmer {
 	private Collection<Immobilie> immobilien;
 	private Collection<Darlehen> darlehen;
 
+	public Darlehensnehmer() {
+	}
+	
 	public Darlehensnehmer(String name, String strasse, Integer plz, String ort) {
 		setDnid(currentDnid++);
 		setName(name);

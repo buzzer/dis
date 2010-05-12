@@ -15,6 +15,7 @@ public class Bank extends Unternehmen {
 		this.vergebeneDarlehen = vergebeneDarlehen;
 	}
 
+	public Bank() {}
 	public Bank(String name, String strasse, Integer plz, String ort,
 			String rechstform, Double eigenkapital) {
 		super(name, strasse, plz, ort, rechstform, eigenkapital);

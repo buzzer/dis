@@ -11,6 +11,7 @@ public class Privatperson extends Darlehensnehmer {
 		this.versicherungen = versicherungen;
 	}
 
+	public Privatperson() {}
 	public Privatperson(String name, String strasse, Integer plz, String ort,
 			String vorname) {
 		super(name, strasse, plz, ort);

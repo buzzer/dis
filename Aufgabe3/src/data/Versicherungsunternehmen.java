@@ -7,6 +7,7 @@ public class Versicherungsunternehmen extends Unternehmen {
 
 	private Collection<Lebensversicherung> versicherungen;
 
+	public Versicherungsunternehmen() {}
 	public Versicherungsunternehmen(String name, String strasse, Integer plz,
 			String ort, String rechstform, Double eigenkapital) {
 		super(name, strasse, plz, ort, rechstform, eigenkapital);
