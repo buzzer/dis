@@ -1,7 +1,13 @@
 Isolationsstufen
 1)
+db2 values current isolation
+1 -- 1 record(s) selected
 2)
 3)
+db2 update command options using c off
+db2 list command options
+db2 attach to vsisls4 user vsisp23
+db2 list applications
 4)
 
 Sperrkonflikte
@@ -9,13 +15,43 @@ Sperrkonflikte
 6)
 7)
 8)
+-- db2 svtf createTable.sql
 9)
 
 Deadlocks
 10)
+export DB2OPTIONS="+c" (Verbindung 2)
+db2 "select * from opk where id=1"
+db2 "select * from opk where id=2"
+db2 "update opk set Name='Name1_a' where id=1"
+db2 "update opk set Name='Name2_a' where id=2"
+-> Deadlock
+
+Verbindung2:
+X auf Row 4
+IX auf Table opk
+
+Verbindung1:
+IX auf Table opk
+
+Lösung:
+Verbindung2: db2 commit
+
+
 11)
+Verbindung2: db2 set isolation=RS
+-> Deadlock
+
+Verbindung2:
+X auf Row 4
+NS auf Row 5
+IX auf Table opk
+
+Verbindung1:
+IX auf Table opk
 
 ====================
 Fragen:
--'db2' Kommando funktioniert nicht via vpn!
-- Isolationsstufen, Sperren ändern?
+-'db2' Kommando funktioniert nicht via vpn! -> geklärt
+- Isolationsstufen, Sperren ändern? -> geklärt
+db2 set isolation=<CS>
