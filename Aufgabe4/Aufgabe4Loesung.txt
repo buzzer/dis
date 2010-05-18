@@ -1,10 +1,18 @@
+Präambel
+--------
+db2 connect to VSISP user vsisp23
+db2 attach to vsisls4 user vsisp23
+db2 list applications -- -> <handle>
+db2 get snapshot for locks for application agentid <handle>
+
 Isolationsstufen
 1)
 db2 values current isolation
 1 -- 1 record(s) selected
 2)
 3)
-db2 update command options using c off
+-- db2 update command options using c off
+export DB2OPTIONS="+c"
 db2 list command options
 db2 attach to vsisls4 user vsisp23
 db2 list applications
@@ -12,43 +20,70 @@ db2 list applications
 
 Sperrkonflikte
 5)
+V1(RS)            V2(CS)
+-------------------------
++c                -c
+SELECT id>5
+                  INSERT id>5   -> OK
+SELECT id>5                     -> Neues Tupel
+
 6)
+V1(RR)            V2(CS)
+-------------------------
++c                -c
+SELECT id>5
+                  INSERT id>5   -> Blockiert (S lock on opk)
+COMMIT
+SELECT id>5                     -> Neues Tupel
+
 7)
+V1(RR)            V2(CS)
+-------------------------
++c                -c
+SELECT id=5
+                  UPDATE id=1   -> Blockiert (S lock on opk)
+COMMIT
+
 8)
 -- db2 svtf createTable.sql
-9)
+
+9) on table mpk
+V1(RR)            V2(CS)
+-------------------------
++c                -c
+SELECT id=5
+                  UPDATE id=1   -> OK (S lock on Row, IS on opk)
+COMMIT
 
 Deadlocks
-10)
+---------
+10) on table opk
 export DB2OPTIONS="+c" (Verbindung 2)
-db2 "select * from opk where id=1"
-db2 "select * from opk where id=2"
-db2 "update opk set Name='Name1_a' where id=1"
-db2 "update opk set Name='Name2_a' where id=2"
--> Deadlock
 
-Verbindung2:
-X auf Row 4
-IX auf Table opk
-
-Verbindung1:
-IX auf Table opk
-
-Lösung:
-Verbindung2: db2 commit
-
+V1(RR)            V2(CS)
+-------------------------
++c                +c
+SELECT id=1
+                  SELECT id=2
+                  UPDATE id=1   -> Blockiert (V1: SIX on opk)
+UPDATE id=2                     -> OK
+COMMIT
+                  COMMIT
 
 11)
 Verbindung2: db2 set isolation=RS
--> Deadlock
+V1(RR)            V2(RS)
+-------------------------
++c                +c
+SELECT id=1
+                  SELECT id=2
+                  UPDATE id=1   -> Blockiert (V1: SIX on opk)
+UPDATE id=2                     -> Rollback due Deadlock
+COMMIT
+                  COMMIT
 
-Verbindung2:
-X auf Row 4
-NS auf Row 5
-IX auf Table opk
-
-Verbindung1:
-IX auf Table opk
+-> Deadlock -> Rollback(V1)
+-> V2 OK
 
 ====================
 Fragen:
