@@ -13,6 +13,9 @@ Isolationsstufen
 1)
 db2 values current isolation
 1 -- 1 record(s) selected
+
+/* Wenn man CURRENT ISOLATION nicht eingestellt hat,wird das einfach
+   ein leeres String zurueck gegeben sowie obige(die default isolationstufe   (CS)   wird benutzt)*/
 2)
 db2 "select * from opk where id = 2"
 ID  	NAME
@@ -34,7 +37,7 @@ db2 list applications
 //NS:Next key schares
 
 db2 set isolation = RS
-
+//Bei der Verwendung des RS sperrt die DB2 UDB alle Datensaetze der //Ergebnismenge.
 Sperrkonflikte
 5)
 ***Zweite Verbindung:***
@@ -76,6 +79,8 @@ SELECT id>5                     -> Neues Tupel
 
 6)
 db2 set isolation=RR
+//Im Fall des Isolationstufe RR sperrt die DB2 UDB alle Datensaetze,die zur //Bestimmung der Ergebnismenge vom DBMS herangezogen werden.
+
 /**Table lock modes
    opk
    S :Share**/
