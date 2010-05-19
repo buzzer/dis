@@ -1,25 +1,72 @@
-Präambel
+Pr√§ambel
 --------
 db2 connect to VSISP user vsisp23
 db2 attach to vsisls4 user vsisp23
 db2 list applications -- -> <handle>
 db2 get snapshot for locks for application agentid <handle>
 
+db2connect
+Passport:6FOAC65l
+db2 list applications | grep VSIS23 (die Verbindung(en) schauen)
+
 Isolationsstufen
 1)
 db2 values current isolation
 1 -- 1 record(s) selected
 2)
+db2 "select * from opk where id = 2"
+ID  	NAME
+-------- ------------------------------------------
+      2  Name2_b
+  1 recodrd(s) selected.
+
+
 3)
--- db2 update command options using c off
-export DB2OPTIONS="+c"
+export DB20PTIONS="+c"
+//db2 update command options using c off
 db2 list command options
 db2 attach to vsisls4 user vsisp23
 db2 list applications
+
+
 4)
+//Row Lock Mode 
+//NS:Next key schares
+
+db2 set isolation = RS
 
 Sperrkonflikte
 5)
+***Zweite Verbindung:***
+export DB20PTIONS ="-c"
+db2 list command options
+***Erste Verbindung:***
+db2 "select * from opk where id > 8"
+
+ID  NAME
+--  --------
+ 9  Name9
+10  Name10
+20  Name20
+
+3 record(s) selected
+
+***Zweite Verbindung***
+db2 "insert into opk values(11,'name11')" 
+***Erste Verbindung:***
+db2 "select * from opk where id > 8"
+db2 commit    //da die AutoCommit in der Erste Verbindung ausgeschaltet wird.
+
+
+ID  NAME
+--  --------
+ 9  Name9
+10  Name10
+20  Name20
+11  name11
+
+4 record(s) selected
+
 V1(RS)            V2(CS)
 -------------------------
 +c                -c
@@ -28,6 +75,17 @@ SELECT id>5
 SELECT id>5                     -> Neues Tupel
 
 6)
+db2 set isolation=RR
+/**Table lock modes
+   opk
+   S :Share**/
+***Zweite Verbindung***
+db2 "insert into opk values(12,'name12')" 
+//Die zweite Verbindung muss warten,bis die erste Verbindung Commit ist.
+***Erste Verbindung:***
+db2 commit
+***Zweite Verbindung:***
+The SQL command completed successfully.
 V1(RR)            V2(CS)
 -------------------------
 +c                -c
@@ -69,6 +127,13 @@ SELECT id=1
 UPDATE id=2                     -> OK
 COMMIT
                   COMMIT
+
+Verbindung1:
+IX auf Table opk
+
+Lösung:
+Verbindung2: db2 commit
+
 
 11)
 Verbindung2: db2 set isolation=RS
