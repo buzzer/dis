@@ -35,6 +35,10 @@ public class PersistenceManager {
 	private CountDownLatch latch;
 	private ConcurrentMap<Long, Set<Long>> transactionIds2PageIds;
 	
+	/**
+	 * @param initialValue Initial log sequence number
+	 * @param pages Page buffer
+	 */
 	private PersistenceManager(long initialValue, ConcurrentMap<Long, Page> pages) {
 		pageBuffer = pages;
 		
@@ -50,6 +54,12 @@ public class PersistenceManager {
 		t.start();
 	}
 	
+	/**
+	 * Beginnt eine neue Transaktion.
+	 * Der Persistenz-Manager erzeugt eine eindeutige Transaktions- ID und
+	 * liefert diese als Rückgabewerte an den Client.
+	 * @return currentTransactionId
+	 */
 	public long beginTransaction() {
 		long currentTransactionId = transactionId.getAndIncrement();
 		logWriter.writeBOT(logSequenceNumber.getAndIncrement(), currentTransactionId);
@@ -59,6 +69,15 @@ public class PersistenceManager {
 		return currentTransactionId;
 	}
 	
+	/**
+	 * Schreibt im Rahmen der angegebenen Transaktion die angegebenen
+	 * Nutzdaten mit der angegebenen Seiten-ID in den Puffer.
+	 * Die Nutzdaten ersetzen dabei die evtl. vorhandenen Inhalte der
+	 * angegebenen Seite vollständig.
+	 * @param aTransactionId
+	 * @param aPageId
+	 * @param data
+	 */
 	public void write(long aTransactionId, long aPageId, String data) {
 		long aLogSequenceNumber = logSequenceNumber.getAndIncrement();
 		logWriter.writePage(aLogSequenceNumber, aTransactionId, aPageId, data);
@@ -85,6 +104,10 @@ public class PersistenceManager {
 		latch.countDown();
 	}
 	
+	/**
+	 * Schließt die angegebene Transaktion ab.
+	 * @param aTransactionId
+	 */
 	public void commit(long aTransactionId) {
 		logWriter.writeEOT(logSequenceNumber.getAndIncrement(), aTransactionId);
 		Set<Long> pageIds = (Set<Long>) transactionIds2PageIds.remove(aTransactionId);

@@ -35,6 +35,13 @@ public class LogRecord implements Comparable<LogRecord> {
 		this(aLogType, aLSN, aTransactionId, -1, "");
 	}
 	
+	/**
+	 * @param aLogType Either BOT, EOT or PAGE (for actual data)
+	 * @param aLSN Log sequence number
+	 * @param aTransactionId Transaction ID
+	 * @param aPageId Page ID refering to
+	 * @param data2 The actual data (if any)
+	 */
 	public LogRecord(LogType aLogType, long aLSN, long aTransactionId, long aPageId, String data2) {
 		logType = aLogType;
 		logSequenceNumber = aLSN;
@@ -85,7 +92,7 @@ public class LogRecord implements Comparable<LogRecord> {
 	
 	/**
 	 * @param o
-	 * @return
+	 * @return compareTo(LogRecord.getLogSequenceNumber())
 	 */
 	public int compareTo(LogRecord o) {
 		Long l1 = new Long(getLogSequenceNumber());

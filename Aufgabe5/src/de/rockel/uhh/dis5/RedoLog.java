@@ -48,16 +48,20 @@ public class RedoLog {
 				logSequenceNumber = record.getLogSequenceNumber();
 			}
 			
+			// Find all 'Winner' transactions
 			// _assuming a EOT record comes last_ it executes "redo" for all winning transaction right away
 			if(record.isEOT()) {
 				TreeSet<LogRecord> treeSet = multiMap.get(record.getTransactionId());
 				for (LogRecord logRecord : treeSet) {
+					// Loop through all operations of that transactions and get the page ID
 					Page page = pages.get(logRecord.getPageId());
-					if(page == null) { // recreate missing page
+					if(page == null) {
+						// Recreate missing page
 						page = new Page(logRecord.getPageId(), logRecord.getLogSequenceNumber(), logRecord.getData());
 						pages.put(page.getId(), page);
 						System.out.println("INFO: Recreated page " + logRecord.getPageId() + " with LSN " + logRecord.getLogSequenceNumber());
-					} else if(page.getLogSequenceNumber() < logRecord.getLogSequenceNumber()) { // update outdated page
+					} else if(page.getLogSequenceNumber() < logRecord.getLogSequenceNumber()) {
+						// Update outdated page
 						page.setData(logRecord.getData());
 						page.setLogSequenceNumber(logRecord.getLogSequenceNumber());
 						System.out.println("INFO: Redo of page " + logRecord.getPageId() + " with LSN " + logRecord.getLogSequenceNumber());

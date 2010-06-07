@@ -12,6 +12,12 @@ public class Client implements Runnable {
 	private CyclicBarrier barrier;
 	private PersistenceManager persistenceManager;
 
+	/**
+	 * @param pm Persistence Manager
+	 * @param anID Client ID
+	 * @param cycles Transaction cycles
+	 * @param aBarrier Clients' synchronization barrier
+	 */
 	public Client(PersistenceManager pm, int anID, int cycles, CyclicBarrier aBarrier) {
 		persistenceManager = pm;
 		id = anID;
@@ -41,7 +47,8 @@ public class Client implements Runnable {
 			
 			int writeCycles = random.nextInt(31);
 			for(int j = 0; j < writeCycles; j++) {
-				//calculate the page id correctly so each client gets its own page range
+				// Calculate the page id correctly so each client gets its own page range.
+				// Otherwise lock managment of DBMS has to be implemented as well.
 				long pageId = (id * 10) + random.nextInt(10);
 				persistenceManager.write(aTransactionID, pageId, data + " at " + System.currentTimeMillis());
 				sleepRandom();
@@ -53,7 +60,10 @@ public class Client implements Runnable {
 		System.out.println("Client " + id + " is done!");
 	}
 	
-	// wait for a while before we start the next TA 
+	/**
+	 * Zwischen den einzelnen Operationen sollen die Clients kurze
+	 * Pausen einlegen, um ein realis- tisches Verhalten anzunähern. 
+	 */
 	private void sleepRandom() {
 		try {
 			Thread.sleep(random.nextInt(1000));
