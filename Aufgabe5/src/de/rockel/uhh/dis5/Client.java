@@ -1,7 +1,3 @@
-/*******************************************************************************
- * based on template by
- *     Markus Alexander Kuppe (ecf-dev_eclipse.org <at> lemmster <dot> de) - initial API and implementation
- ******************************************************************************/
 package de.rockel.uhh.dis5;
 
 import java.util.Random;
