@@ -135,11 +135,11 @@ public class PersistenceManager {
 					for (Page page : pageBuffer.values()) {
 						if(!page.isInUse() && page.isDirty()) {
 							page.flush();
-							System.out.println("INFO: Flushed page " + page.getId() + " to disk!");
+							System.out.println("=Flushed page " + page.getId() + " to disk!");
 						} else if(page.isInUse() && page.isDirty()) {
-							System.out.println("INFO: Not flushed page " + page.getId() + " to disk because still in use!");
+							System.out.println("=Not flushed page " + page.getId() + " to disk because still in use!");
 						} else {
-							System.out.println("INFO: Not flushed page " + page.getId() + " since it isn't dirty");
+							System.out.println("=Not flushed page " + page.getId() + " since it isn't dirty");
 						}
 					}
 				}
