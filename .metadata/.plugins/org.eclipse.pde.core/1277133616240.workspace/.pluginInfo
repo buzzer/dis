@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map>
+	<bundle bundleID="376" class="de.rockel.uhh.dis5.Activator" localization="OSGI-INF/l10n/bundle" name="DIS Aufgabe 5" project="Aufgabe5" provider="Sebastian Rockel"/>
+</map>
