@@ -82,7 +82,7 @@ public class TransactionLog {
 	}
 
 	/**
-	 * @param currentTransactionId
+	 * @param aTransactionId
 	 */
 	public void writeBOT(long aTransactionId) {
 		logWriter.writeBOT(aTransactionId);

@@ -28,7 +28,7 @@ public class Activator implements BundleActivator {
 		fContext = context;
 		
 		CyclicBarrier barrier = new CyclicBarrier(parties);
-		for (int i = 0; i < parties; i++) {
+		for (int i = 1; i <= parties; i++) { // >= 1 to have alphabetically sorted (log) files (1X, 2X..)
 			Thread t = new Thread(new Client(i, cycles, barrier));
 			t.start();
 		}

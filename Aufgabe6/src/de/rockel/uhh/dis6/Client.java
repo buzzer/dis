@@ -34,23 +34,23 @@ public class Client implements Runnable {
 		}
 
 		final ITransactionManager transactionManager = TransactionManagerImpl.getInstance();
-		final String data = getClass().getName() + id;
+		final String data = getClass().getName() + id;	// Fill dummy data
 		for (int i = 0; i < transactionCycles; i++) {
-			long aTransactionId = transactionManager.begin();
+			long aTransactionId = transactionManager.begin();	// Call TransMan: BOT
 			try {
-				int resourceManagers = random.nextInt(10);
+				int resourceManagers = random.nextInt(10);	// Get some RessMans
 				for(int j = 0; j < resourceManagers; j++) {
-					long resourceManagerId = (id * 10) + random.nextInt(10);
+					long resourceManagerId = (id * 10) + random.nextInt(10);	// 1X, 2X, 3X ...
 					IResourceManager resourceManager = ResourceManagerImpl.getInstance(resourceManagerId);
 					int writeCycles = random.nextInt(31);
 					for (int k = 0; k < writeCycles; k++) {
 						long pageId = (id * 10) + random.nextInt(10);
 						resourceManager.write(aTransactionId, pageId, data + " at " + System.currentTimeMillis());
 					}
-					sleepRandom();
+					sleepRandom();	// Wait before commit/EOT
 				}
-				transactionManager.commit(aTransactionId);
-				sleepRandom();
+				transactionManager.commit(aTransactionId);	// Call TransMan: EOT
+				sleepRandom();	// Wait before another transaction
 			} catch(XAException e) {
 				System.out.println("WARNING: Transaction failed with " + e.getMessage());
 				if(transactionManager.isOpen(aTransactionId) == true) {

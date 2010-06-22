@@ -94,7 +94,7 @@ public class LogRecord implements Comparable<LogRecord> {
 	
 	/**
 	 * @param o
-	 * @return
+	 * @return Comparison result of LSNs
 	 */
 	public int compareTo(LogRecord o) {
 		Long l1 = new Long(getLogSequenceNumber());
