@@ -52,7 +52,8 @@ public class Client implements Runnable {
 				transactionManager.commit(aTransactionId);	// Call TransMan: EOT
 				sleepRandom();	// Wait before another transaction
 			} catch(XAException e) {
-				System.out.println("WARNING: Transaction failed with " + e.getMessage());
+				System.out.printf("WARNING: Transaction (%d) on client (%d) failed with: %s\n",
+						aTransactionId, id, e.getMessage());
 				if(transactionManager.isOpen(aTransactionId) == true) {
 					transactionManager.rollback(aTransactionId);
 				}

@@ -23,7 +23,7 @@ public class RedoLog {
 		try {
 			fr = new FileReader(Log.PREFIX + aFileName);
 		} catch (FileNotFoundException e1) {
-			System.out.println("=No LOG file found for " + aFileName + "!");
+			System.out.println("WARNING: No LOG file found for " + aFileName + "!");
 			return;
 		}
 		

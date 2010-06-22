@@ -23,6 +23,8 @@ public class Log {
 		File file = new File(PREFIX + aFileName);
 		try {
 			fw = new FileWriter(file, true);
+			// Make it little readable
+			//fw.write("| LSN | LogType | TID | PID | Data |\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

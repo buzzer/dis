@@ -25,7 +25,7 @@ public class ResourceManagerImpl implements IResourceManager {
 				ConcurrentMap<Long, Page> pages = Page.getPages(aResourceManagerId);
 				RedoLog redolog = new RedoLog(RESOURCE_MANAGER_LOG + aResourceManagerId, pages);
 				if(withAborts && (aResourceManagerId % 5) == 0) {
-					System.out.println("INFO: ResourceManagerImpl.getInstance(long) returning AbortingResourceManagerImpl!");
+					System.out.printf("INFO: ResourceManagerImpl.getInstance(%d) returning AbortingResourceManagerImpl!\n",aResourceManagerId);
 					aResourceManager = new AbortingResourceManagerImpl(aResourceManagerId, redolog.getLogSequenceNumber(), redolog.getPages());
 				} else {
 					aResourceManager = new ResourceManagerImpl(aResourceManagerId, redolog.getLogSequenceNumber(), redolog.getPages());

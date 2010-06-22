@@ -25,7 +25,7 @@ public class TransactionLog {
 		try {
 			fr = new FileReader(Log.PREFIX + transactionManagerLog);
 		} catch (FileNotFoundException e1) {
-			System.out.println("=No LOG file found for "
+			System.out.println("WARNING: No LOG file found for "
 					+ transactionManagerLog + "!");
 			transactionId = new AtomicLong();
 			logWriter = new Log(0, transactionManagerLog);

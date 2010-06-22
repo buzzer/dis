@@ -14,7 +14,7 @@ public class AbortingResourceManagerImpl extends ResourceManagerImpl implements
 	 */
 	@Override
 	public void prepare(long aTransactionId) {
-		System.out.println("INFO: AbortingResourceManagerImpl throwing XAException during prepare(long)!");
-		throw new XAException("Failed to prepare(long)");
+		System.out.println("INFO: AbortingResourceManagerImpl throwing XAException during prepare!");
+		throw new XAException("Failed to prepare");
 	}
 }
