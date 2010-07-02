@@ -1,4 +1,4 @@
-package de.dis2010.extraction;
+package de.dis2010;
 
 import java.io.File;
 import java.io.FileInputStream;

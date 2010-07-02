@@ -1,0 +1,54 @@
+-- comment: aufgabe 7
+-- call: db2 -svtf createTable.sql
+
+-- DDL: Create database
+-- Remarks: 
+-- Sternschema for data warehouse
+
+DROP TABLE aufg7_faktentabelle;
+DROP TABLE aufg7_shop;
+DROP TABLE aufg7_artikel;
+DROP TABLE aufg7_zeit;
+
+CREATE TABLE aufg7_faktentabelle(
+  id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
+  shopId INTEGER,
+  artikelId INTEGER,
+  zeitId INTEGER,
+  verkauft INTEGER,
+  umsatz NUMERIC(12,2)
+);
+
+CREATE TABLE aufg7_shop(
+  id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
+  name VARCHAR(50),
+  land VARCHAR(50),
+  region VARCHAR(50),
+  stadt VARCHAR(50)
+);
+
+CREATE TABLE aufg7_artikel(
+  id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
+  name VARCHAR(50),
+  produktKat VARCHAR(50),
+  produktFam VARCHAR(50),
+  ProduktGru VARCHAR(50)
+);
+
+CREATE TABLE aufg7_zeit(
+  id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
+  datum VARCHAR(50),
+  quartal VARCHAR(50),
+  monat NUMERIC (5,0),
+  jahr VARCHAR(50),
+  kw VARCHAR(50)
+);
+
+ALTER TABLE aufg7_faktentabelle ADD FOREIGN KEY (shopId) REFERENCES aufg7_shop(id) ON DELETE RESTRICT;
+ALTER TABLE aufg7_faktentabelle ADD FOREIGN KEY (artikelId) REFERENCES aufg7_artikel(id) ON DELETE RESTRICT;
+ALTER TABLE aufg7_faktentabelle ADD FOREIGN KEY (zeitId) REFERENCES aufg7_zeit(id) ON DELETE RESTRICT;
+
+COMMIT;
+
+-- quit
+-- terminate
