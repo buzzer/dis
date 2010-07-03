@@ -9,6 +9,8 @@ DROP TABLE aufg7_faktentabelle;
 DROP TABLE aufg7_shop;
 DROP TABLE aufg7_artikel;
 DROP TABLE aufg7_zeit;
+-- Create also CSV table
+DROP TABLE aufg7_csvtabelle;
 
 CREATE TABLE aufg7_faktentabelle(
   id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
@@ -42,6 +44,15 @@ CREATE TABLE aufg7_zeit(
   monat NUMERIC (5,0),
   jahr VARCHAR(50),
   kw VARCHAR(50)
+);
+
+CREATE TABLE aufg7_csvtabelle(
+	id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
+	datum TIMESTAMP,
+	shop VARCHAR(50),
+	artikel VARCHAR(50),
+	verkauft INTEGER,
+	umsatz NUMERIC (12,2)
 );
 
 ALTER TABLE aufg7_faktentabelle ADD FOREIGN KEY (shopId) REFERENCES aufg7_shop(id) ON DELETE RESTRICT;
