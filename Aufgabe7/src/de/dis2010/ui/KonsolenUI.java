@@ -8,10 +8,11 @@ import de.dis2010.DataWarehousing;
 public class KonsolenUI {
 	private static BufferedReader in = new BufferedReader(
 			new InputStreamReader(System.in));
+	@SuppressWarnings("unused")
 	private DataWarehousing dw;
 
-	public KonsolenUI(DataWarehousing kv) {
-		this.dw = kv;
+	public KonsolenUI(DataWarehousing dw) {
+		this.dw = dw;
 	}
 
 	public void start() {
