@@ -22,7 +22,7 @@ CREATE TABLE aufg7_faktentabelle(
 );
 
 CREATE TABLE aufg7_shop(
-  id INTEGER NOT NULL,
+  id INTEGER NOT NULL PRIMARY KEY,
   name VARCHAR(50),
   land VARCHAR(50),
   region VARCHAR(50),
@@ -30,7 +30,7 @@ CREATE TABLE aufg7_shop(
 );
 
 CREATE TABLE aufg7_artikel(
-  id INTEGER NOT NULL,
+  id INTEGER NOT NULL PRIMARY KEY,
   name VARCHAR(50),
   produktKat VARCHAR(50),
   produktFam VARCHAR(50),

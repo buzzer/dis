@@ -50,16 +50,17 @@ public class Zeit {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
 		// Erzeuge Anfrage
-		String insertSQL = "insert into aufg7_zeit (datum,monat,quartal,jahr) values (?,?,?,?)";
+		String insertSQL = "insert into aufg7_zeit (datum,monat,quartal,jahr) values (DATE(?),MONTH(?),1+TIMESTAMPDIFF(128,char(TIMESTAMP(?)-TIMESTAMP(DATE(concat('01.01.',char(YEAR(?))))))),YEAR(?))";
 		PreparedStatement pstmt = con.prepareStatement(insertSQL,
 				Statement.RETURN_GENERATED_KEYS);
 
 
 		// Setze Anfrageparameter und führe Anfrage aus
 		pstmt.setString(1, this.getDatum());
-		pstmt.setInt(2, this.getMonat());
-		pstmt.setInt(3, this.getQuartal());
-		pstmt.setInt(4, this.getJahr());
+		pstmt.setString(2, this.getDatum());
+		pstmt.setString(3, this.getDatum());
+		pstmt.setString(4, this.getDatum());
+		pstmt.setString(5, this.getDatum());
 
 		pstmt.executeUpdate();
 
