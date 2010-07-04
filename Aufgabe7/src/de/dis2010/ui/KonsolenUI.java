@@ -4,15 +4,18 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 import de.dis2010.DataWarehousing;
+import de.dis2010.extraction.CsvParser;
 
 public class KonsolenUI {
 	private static BufferedReader in = new BufferedReader(
 			new InputStreamReader(System.in));
 	@SuppressWarnings("unused")
 	private DataWarehousing dw;
+	private CsvParser csvp;
 
-	public KonsolenUI(DataWarehousing dw) {
+	public KonsolenUI(DataWarehousing dw, CsvParser csvp) {
 		this.dw = dw;
+		this.csvp = csvp;
 	}
 
 	public void start() {
@@ -27,6 +30,7 @@ public class KonsolenUI {
 
 		while (true) {
 			System.out.println("\nHauptmenü\n");
+			System.out.println("[0]\tRead CSV");
 			System.out.println("[1]\tSelect nach Zeit");
 			System.out.println("[2]\tSelect nach Shop");
 			System.out.println("[3]\tSelect nach Artikel");
@@ -39,6 +43,9 @@ public class KonsolenUI {
 				int auswahl = Integer.parseInt(eingabe);
 
 				switch (auswahl) {
+				case 0:
+					csvp.readCsv();
+					break;
 				case 1:
 					stammdatenMenue();
 					break;

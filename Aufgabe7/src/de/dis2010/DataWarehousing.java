@@ -4,6 +4,7 @@ package de.dis2010;
 //import java.io.InputStreamReader;
 
 import de.dis2010.ui.KonsolenUI;
+import de.dis2010.extraction.CsvParser;
 
 public class DataWarehousing {
 
@@ -38,7 +39,8 @@ public class DataWarehousing {
 	 */
 	public static void main(String[] args) {
 		DataWarehousing dw = new DataWarehousing();
-		KonsolenUI ui = new KonsolenUI(dw);
+		CsvParser csvp = new CsvParser();
+		KonsolenUI ui = new KonsolenUI(dw,csvp);
 		dw.setUi(ui);
 		ui.start();
 	}
