@@ -53,8 +53,8 @@ public class Shop {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.stadt = rs.getString("s.name");
-			this.setRegion(rs.getInt("s.regionid"));
+			this.stadt = rs.getString("name");
+			this.setRegion(rs.getInt("regionid"));
 			rs.close();
 		}
 		pstmt.close();
@@ -77,8 +77,8 @@ public class Shop {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.region = rs.getString("r.name");
-			this.setLand(rs.getInt("r.landid"));
+			this.region = rs.getString("name");
+			this.setLand(rs.getInt("landid"));
 			rs.close();
 		}
 		pstmt.close();
@@ -101,32 +101,52 @@ public class Shop {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.land = rs.getString("l.name");
+			this.land = rs.getString("name");
 			rs.close();
 		}
 		pstmt.close();
 	}
 
 	public void save() throws SQLException {
+	
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
 		// Erzeuge Anfrage
-		String insertSQL = "insert into aufg7_shop (id,name,land,region,stadt) values (?,?,?,?,?)";
-		PreparedStatement pstmt = con.prepareStatement(insertSQL);
-
-		//TODO check if already in DB
+		String selectSQL = "SELECT s.id FROM aufg7_shop s WHERE s.id = ?";
+		PreparedStatement pstmt1 = con.prepareStatement(selectSQL);
+		pstmt1.setInt(1, this.id);
+	
+		// Führe Anfrage aus
+		ResultSet rs1 = pstmt1.executeQuery();
 		
-		// Setze Anfrageparameter und führe Anfrage aus
-		pstmt.setInt(1, this.getIid());
-		pstmt.setString(2, this.getName());
-		pstmt.setString(3, this.getLand());
-		pstmt.setString(4, this.getRegion());
-		pstmt.setString(5, this.getStadt());
-
-		pstmt.executeUpdate();
-
-		pstmt.close();
+		// Insert Date only if not alread present
+		if (! rs1.next())
+		{
+			rs1.close();
+			pstmt1.close();
+		
+			// Hole Verbindung
+			//Connection con = DB2ConnectionManager.getInstance().getConnection();
+			
+			// Erzeuge Anfrage
+			String insertSQL = "insert into aufg7_shop (id,name,land,region,stadt) values (?,?,?,?,?)";
+			PreparedStatement pstmt = con.prepareStatement(insertSQL);
+				
+			// Setze Anfrageparameter und führe Anfrage aus
+			pstmt.setInt(1, this.getIid());
+			pstmt.setString(2, this.getName());
+			pstmt.setString(3, this.getLand());
+			pstmt.setString(4, this.getRegion());
+			pstmt.setString(5, this.getStadt());
+	
+			pstmt.executeUpdate();
+	
+			pstmt.close();
+		} else {
+			rs1.close();
+			pstmt1.close();
+		}
 		
 	}
 

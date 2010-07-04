@@ -30,11 +30,11 @@ public class Db2Parser {
 			a.setPreis(rs.getDouble("preis"));
 			
 			// Save into Data Warehouse
-			a.save();
-			
-			rs.close();
-			pstmt.close();
+			a.save();	
 		}
+		rs.close();
+		pstmt.close();
+	
 	}
 	public void extractShops() throws SQLException {
 		// Hole Verbindung
@@ -54,10 +54,9 @@ public class Db2Parser {
 
 			// Save into Data Warehouse
 			s.save();
-			
-			rs.close();
-			pstmt.close();
 		}
+		rs.close();
+		pstmt.close();
 	}
 		
 }

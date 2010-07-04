@@ -32,6 +32,7 @@ CREATE TABLE aufg7_shop(
 CREATE TABLE aufg7_artikel(
   id INTEGER NOT NULL PRIMARY KEY,
   name VARCHAR(50),
+  preis NUMERIC(12,2),
   produktKat VARCHAR(50),
   produktFam VARCHAR(50),
   ProduktGru VARCHAR(50)

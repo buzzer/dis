@@ -53,10 +53,10 @@ public class Artikel {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.productGroup = rs.getString("g.name");
-			this.setProductFamily(rs.getInt("g.productfamilyid"));
-			rs.close();
+			this.productGroup = rs.getString("name");
+			this.setProductFamily(rs.getInt("productfamilyid"));
 		}
+		rs.close();
 		pstmt.close();
 	}
 
@@ -77,10 +77,10 @@ public class Artikel {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.productFamily = rs.getString("f.name");
-			this.setProductCategory(rs.getInt("f.productcategoryid"));
-			rs.close();
+			this.productFamily = rs.getString("name");
+			this.setProductCategory(rs.getInt("productcategoryid"));
 		}
+		rs.close();
 		pstmt.close();
 	}
 
@@ -102,9 +102,9 @@ public class Artikel {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.productCategory = rs.getString("c.name");
-			rs.close();
+			this.productCategory = rs.getString("name");
 		}
+		rs.close();
 		pstmt.close();
 	}
 
@@ -117,25 +117,54 @@ public class Artikel {
 	}
 
 	public void save() throws SQLException {
+		
+//		System.out.println(this.getIid());
+//		System.out.println(this.getName());
+//		System.out.println(this.getPreis());
+//		System.out.println(this.getProductCategory());
+//		System.out.println(this.getProductFamily());
+//		System.out.println(this.getProductGroup());
+		
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
 		// Erzeuge Anfrage
-		String insertSQL = "insert into aufg7_artikel (id,name,preis,produktkat,productfam,produktgru) values (?,?,?,?,?,?)";
-		PreparedStatement pstmt = con.prepareStatement(insertSQL);
-
-		//TODO check if already in DB
+		String selectSQL = "SELECT a.id FROM aufg7_artikel a WHERE a.id = ?";
+		PreparedStatement pstmt1 = con.prepareStatement(selectSQL);
+		pstmt1.setInt(1, this.id);
+	
+		// Führe Anfrage aus
+		ResultSet rs1 = pstmt1.executeQuery();
 		
-		// Setze Parameter und führe Kommando aus
-		pstmt.setInt(1, this.getIid());
-		pstmt.setString(2, this.getName());
-		pstmt.setDouble(2, this.getPreis());
-		pstmt.setString(3, this.getProductCategory());
-		pstmt.setString(4, this.getProductFamily());
-		pstmt.setString(5, this.getProductGroup());
-
-		pstmt.executeUpdate();
-
-		pstmt.close();
+		// Insert Date only if not alread present
+		if (! rs1.next())
+		{
+			rs1.close();
+			pstmt1.close();
+		
+			// Hole Verbindung
+			//Connection con = DB2ConnectionManager.getInstance().getConnection();
+			
+			// Erzeuge Anfrage
+			String insertSQL = "insert into aufg7_artikel (id,name,preis,produktkat,produktfam,produktgru) values (?,?,?,?,?,?)";
+			PreparedStatement pstmt = con.prepareStatement(insertSQL);
+				
+			// Setze Parameter und führe Kommando aus
+			pstmt.setInt(1, this.getIid());
+			pstmt.setString(2, this.getName());
+			pstmt.setDouble(3, this.getPreis());
+			pstmt.setString(4, this.getProductCategory());
+			pstmt.setString(5, this.getProductFamily());
+			pstmt.setString(6, this.getProductGroup());
+	
+	
+			pstmt.executeUpdate();
+	
+			pstmt.close();
+		
+		} else {
+			rs1.close();
+			pstmt1.close();
+		}
 	}
 }

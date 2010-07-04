@@ -80,6 +80,7 @@ public class DB2ConnectionManager
 			_instance = new DB2ConnectionManager();
 		}
 		return _instance;
+		//return new DB2ConnectionManager();
 	}
 
 	/**

@@ -33,8 +33,8 @@ public class KonsolenUI {
 
 		while (true) {
 			System.out.println("\nHauptmenü\n");
-			System.out.println("[1]\tETL DB2 DB");
-			System.out.println("[2]\tETL CSV");
+			System.out.println("[1]\tLoad DB2 DB");
+			System.out.println("[2]\tLoad CSV file");
 			System.out.println("[3]\tAnalyse Data Warehouse");
 			System.out.println("[4]\tBeenden");
 

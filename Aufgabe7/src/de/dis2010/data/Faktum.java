@@ -13,7 +13,7 @@ public class Faktum {
 	private Integer id = -1;
 	private Integer shopId = 0;
 	private Integer artikelId = 0;
-	private Integer zeitId = 0;
+	private String zeitId = null;
 	private Integer verkauft = 0;
 	private Double	umsatz = 0.;
 	
@@ -49,11 +49,11 @@ public class Faktum {
 		this.artikelId = artikelId;
 	}
 
-	public Integer getZeitId() {
+	public String getZeitId() {
 		return zeitId;
 	}
 
-	public void setZeitId(Integer zeitId) {
+	public void setZeitId(String zeitId) {
 		this.zeitId = zeitId;
 	}
 
@@ -75,7 +75,7 @@ public class Faktum {
 
 	public void setArtikel(String string) throws SQLException {
 		
-		this.setArtikel(string);
+		//this.setArtikel(string);
 		
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
@@ -89,7 +89,7 @@ public class Faktum {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.artikelId = rs.getInt("a.id");
+			this.artikelId = rs.getInt("id");
 			rs.close();
 		}
 		pstmt.close();
@@ -98,7 +98,7 @@ public class Faktum {
 
 	public void setShop(String string) throws SQLException {
 		
-		this.setShop(string);
+		//this.setShop(string);
 		
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
@@ -112,7 +112,7 @@ public class Faktum {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.shopId = rs.getInt("s.id");
+			this.shopId = rs.getInt("id");
 			rs.close();
 		}
 		pstmt.close();
@@ -120,24 +120,24 @@ public class Faktum {
 
 	public void setDatum(String string) throws SQLException {
 		
-		this.setDatum(string);
+		this.zeitId = string;
 		
-		// Hole Verbindung
-		Connection con = DB2ConnectionManager.getInstance().getConnection();
-
-		// Erzeuge Anfrage
-		String selectSQL = "SELECT z.id FROM aufg7_zeit z WHERE z.datum = ?";
-		PreparedStatement pstmt = con.prepareStatement(selectSQL);
-		pstmt.setString(1, string);
-
-		// Führe Anfrage aus
-		ResultSet rs = pstmt.executeQuery();
-		if (rs.next())
-		{
-			this.zeitId = rs.getInt("z.id");
-			rs.close();
-		}
-		pstmt.close();	
+//		// Hole Verbindung
+//		Connection con = DB2ConnectionManager.getInstance().getConnection();
+//
+//		// Erzeuge Anfrage
+//		String selectSQL = "SELECT z.id FROM aufg7_zeit z WHERE z.datum = DATE(?)";
+//		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+//		pstmt.setString(1, string);
+//
+//		// Führe Anfrage aus
+//		ResultSet rs = pstmt.executeQuery();
+//		if (rs.next())
+//		{
+//			this.zeitId = rs.getString("id");
+//		}
+//		rs.close();
+//		pstmt.close();	
 	}
 
 	public Shop getShop() {
@@ -169,29 +169,48 @@ public class Faktum {
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
-		// Achtung, hier wird noch ein Parameter mitgegeben,
-		// damit später generierte IDs zurückgeliefert werden!
-		String insertSQL = "INSERT INTO aufg7_faktentabelle (shopId,artikelId,zeitId,verkauft,umsatz) VALUES (?,?,?,?,?)";
-
-		PreparedStatement pstmt = con.prepareStatement(insertSQL,
-				Statement.RETURN_GENERATED_KEYS);
-
-		//TODO check if already in DB
-
-		// Setze Anfrageparameter und führe Anfrage aus
-		pstmt.setInt(1, this.getShopId());
-		pstmt.setInt(2, this.getArtikelId());
-		pstmt.setInt(3, this.getZeitId());
-		pstmt.setInt(4, this.getVerkauft());
-		pstmt.setDouble(5, this.getUmsatz());
-
-		pstmt.executeUpdate();
-
-		// Hole die Id des engefügten Datensatzes
-		ResultSet rs = pstmt.getGeneratedKeys();
-		if (rs.next())	{	this.setIid(rs.getInt(1));	}
-
-		rs.close();
-		pstmt.close();
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT a.id FROM aufg7_artikel a WHERE a.id = ?";
+		PreparedStatement pstmt1 = con.prepareStatement(selectSQL);
+		pstmt1.setInt(1, this.id);
+	
+		// Führe Anfrage aus
+		ResultSet rs1 = pstmt1.executeQuery();
+		
+		// Insert Date only if not alread present
+		if (! rs1.next())
+		{
+			rs1.close();
+			pstmt1.close();
+		
+			// Hole Verbindung
+			//Connection con = DB2ConnectionManager.getInstance().getConnection();
+			
+			// Achtung, hier wird noch ein Parameter mitgegeben,
+			// damit später generierte IDs zurückgeliefert werden!
+			String insertSQL = "INSERT INTO aufg7_faktentabelle (shopId,artikelId,zeitId,verkauft,umsatz) VALUES (?,?,DATE(?),?,?)";
+	
+			PreparedStatement pstmt = con.prepareStatement(insertSQL,
+					Statement.RETURN_GENERATED_KEYS);
+		
+			// Setze Anfrageparameter und führe Anfrage aus
+			pstmt.setInt(1, this.getShopId());
+			pstmt.setInt(2, this.getArtikelId());
+			pstmt.setString(3, this.getZeitId());
+			pstmt.setInt(4, this.getVerkauft());
+			pstmt.setDouble(5, this.getUmsatz());
+	
+			pstmt.executeUpdate();
+	
+			// Hole die Id des engefügten Datensatzes
+			ResultSet rs = pstmt.getGeneratedKeys();
+			if (rs.next())	{	this.setIid(rs.getInt(1));	}
+	
+			rs.close();
+			pstmt.close();
+		} else {
+			rs1.close();
+			pstmt1.close();
+		}
 	}
 }

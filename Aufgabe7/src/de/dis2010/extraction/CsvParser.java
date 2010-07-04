@@ -36,11 +36,13 @@ public class CsvParser {
 			//Read File Line By Line
 			while ((strLine = br.readLine()) != null)   {
 				// Print the content on the console
-				//System.out.println (strLine);
+				System.out.println (strLine);
 				if (strLine.compareTo("") != 0) {
 					strArray = strLine.split(";");
 					// Split csv line and save tupel in faktentablle
+					System.out.println("Parse csv line ..");
 					parseCsvLine(strArray);
+					System.out.println("..done");
 				} else { /* Empty Line */ }
 			}
 			//Close the input stream
@@ -66,18 +68,28 @@ public class CsvParser {
 					s[i] = "0";
 				}
 			}
+			//System.out.println(s[0]);
 			
 			// Save faktum in Date Warehouse
 			f.setDatum(s[0]);
+			//System.out.println(s[1]);
 			f.setShop(s[1]);
+			//System.out.println(s[2]);
 			f.setArtikel(s[2]);
+			//System.out.println(s[3]);
 			f.setVerkauft(Integer.valueOf(s[3]).intValue());
-			f.setUmsatz(Double.valueOf(s[4]).doubleValue());
-			f.save();
+			//System.out.println(s[4].replace(',','.'));
+		
+			f.setUmsatz(Double.valueOf(s[4].replace(',','.')).doubleValue());
+			//System.out.println(f.toString());
 			
 			// Save Datum and its conversions in Data Warehouse
 			z.setDatum(s[0]);
 			z.save();
+			// TODO fix date in sql
+			f.save();
+			System.out.println("Saving Faktum .. done");
+
 
 		} catch (Exception e) {
 			e.printStackTrace();
