@@ -46,10 +46,11 @@ public class KonsolenUI {
 
 				switch (auswahl) {
 				case 1:
-					db2p.etl();
+					db2p.extractArticles();
+					db2p.extractShops();
 					break;
 				case 2:
-					csvp.etl();
+					csvp.readCsv();
 					break;
 				case 3:
 					//analyseMenu();

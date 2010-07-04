@@ -17,6 +17,10 @@ public class Faktum {
 	private Integer verkauft = 0;
 	private Double	umsatz = 0.;
 	
+	private Shop shop = null;
+	private Artikel artikel = null;
+	private Zeit zeit = null;
+	
 	public Faktum() {
 		// dummy
 	}
@@ -136,6 +140,30 @@ public class Faktum {
 		pstmt.close();	
 	}
 
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
+	}
+
+	public Artikel getArtikel() {
+		return artikel;
+	}
+
+	public void setArtikel(Artikel artikel) {
+		this.artikel = artikel;
+	}
+
+	public Zeit getZeit() {
+		return zeit;
+	}
+
+	public void setZeit(Zeit zeit) {
+		this.zeit = zeit;
+	}
+
 	public void save() throws SQLException {
 
 		// Hole Verbindung
@@ -147,6 +175,8 @@ public class Faktum {
 
 		PreparedStatement pstmt = con.prepareStatement(insertSQL,
 				Statement.RETURN_GENERATED_KEYS);
+
+		//TODO check if already in DB
 
 		// Setze Anfrageparameter und führe Anfrage aus
 		pstmt.setInt(1, this.getShopId());

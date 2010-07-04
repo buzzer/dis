@@ -54,6 +54,7 @@ public class Zeit {
 		PreparedStatement pstmt = con.prepareStatement(insertSQL,
 				Statement.RETURN_GENERATED_KEYS);
 
+		//TODO check if already in DB
 
 		// Setze Anfrageparameter und führe Anfrage aus
 		pstmt.setString(1, this.getDatum());

@@ -35,24 +35,26 @@ public class Shop {
 		this.name = name;
 	}
 
-	public String getLand() {
-		return land;
+	public String getStadt() {
+		return stadt;
 	}
 
-	public void setLand(Integer landId) throws SQLException {
+	public void setStadt(Integer stadtId) throws SQLException {
+				
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
-
+	
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT l.name FROM db2inst1.landid l WHERE l.landid = ?";
+		String selectSQL = "SELECT s.name,s.regionid FROM db2inst1.stadtid s WHERE s.stadtid = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
-		pstmt.setInt(1, landId);
-
+		pstmt.setInt(1, stadtId);
+	
 		// Führe Anfrage aus
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.land = rs.getString("l.name");
+			this.stadt = rs.getString("s.name");
+			this.setRegion(rs.getInt("s.regionid"));
 			rs.close();
 		}
 		pstmt.close();
@@ -67,7 +69,7 @@ public class Shop {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT r.name FROM db2inst1.regionid r WHERE r.regionid = ?";
+		String selectSQL = "SELECT r.name,r.landid FROM db2inst1.regionid r WHERE r.regionid = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
 		pstmt.setInt(1, regionId);
 
@@ -76,30 +78,30 @@ public class Shop {
 		if (rs.next())
 		{
 			this.region = rs.getString("r.name");
+			this.setLand(rs.getInt("r.landid"));
 			rs.close();
 		}
 		pstmt.close();
 	}
 
-	public String getStadt() {
-		return stadt;
+	public String getLand() {
+		return land;
 	}
 
-	public void setStadt(Integer stadtId) throws SQLException {
-				
+	public void setLand(Integer landId) throws SQLException {
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
-
+	
 		// Erzeuge Anfrage
-		String selectSQL = "SELECT s.name FROM db2inst1.stadtid s WHERE s.stadtid = ?";
+		String selectSQL = "SELECT l.name FROM db2inst1.landid l WHERE l.landid = ?";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
-		pstmt.setInt(1, stadtId);
-
+		pstmt.setInt(1, landId);
+	
 		// Führe Anfrage aus
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.stadt = rs.getString("s.name");
+			this.land = rs.getString("l.name");
 			rs.close();
 		}
 		pstmt.close();
@@ -113,6 +115,8 @@ public class Shop {
 		String insertSQL = "insert into aufg7_shop (id,name,land,region,stadt) values (?,?,?,?,?)";
 		PreparedStatement pstmt = con.prepareStatement(insertSQL);
 
+		//TODO check if already in DB
+		
 		// Setze Anfrageparameter und führe Anfrage aus
 		pstmt.setInt(1, this.getIid());
 		pstmt.setString(2, this.getName());

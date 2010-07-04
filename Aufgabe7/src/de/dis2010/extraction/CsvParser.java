@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import de.dis2010.DB2ConnectionManager;
 import de.dis2010.data.Faktum;
 import de.dis2010.data.Shop;
+import de.dis2010.data.Zeit;
 
 import java.io.*;
 //import java.lang.String;
@@ -38,6 +39,7 @@ public class CsvParser {
 				//System.out.println (strLine);
 				if (strLine.compareTo("") != 0) {
 					strArray = strLine.split(";");
+					// Split csv line and save tupel in faktentablle
 					parseCsvLine(strArray);
 				} else { /* Empty Line */ }
 			}
@@ -47,12 +49,15 @@ public class CsvParser {
 			System.err.println("Error: " + e.getMessage());
 		}
 	}
+
 	/**
 	 * prints field of strings to stdout
 	 * @param s Array of Strings
 	 */
 	public Faktum parseCsvLine(String []s) {
 		Faktum f = new Faktum();
+		Zeit z   = new Zeit();
+		
 		try {
 			
 			// Handle null or empty fields
@@ -62,12 +67,17 @@ public class CsvParser {
 				}
 			}
 			
+			// Save faktum in Date Warehouse
 			f.setDatum(s[0]);
 			f.setShop(s[1]);
 			f.setArtikel(s[2]);
 			f.setVerkauft(Integer.valueOf(s[3]).intValue());
 			f.setUmsatz(Double.valueOf(s[4]).doubleValue());
-			f.save(); // Persistence
+			f.save();
+			
+			// Save Datum and its conversions in Data Warehouse
+			z.setDatum(s[0]);
+			z.save();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -102,16 +112,6 @@ public class CsvParser {
 		//} else {
 			//return null;
 		}
-	}
-	/**
-	 * Implements the ETL procedure for the Csv file
-	 */
-	public void etl() {
-		this.readCsv();
-		//TODO make etl conform
-		//this.parseCsvLine();
-		//this.injectData();
-		
 	}
 
 }
