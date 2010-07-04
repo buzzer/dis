@@ -5,6 +5,7 @@ package de.dis2010;
 
 import de.dis2010.ui.KonsolenUI;
 import de.dis2010.extraction.CsvParser;
+import de.dis2010.extraction.Db2Parser;
 
 public class DataWarehousing {
 
@@ -40,7 +41,8 @@ public class DataWarehousing {
 	public static void main(String[] args) {
 		DataWarehousing dw = new DataWarehousing();
 		CsvParser csvp = new CsvParser();
-		KonsolenUI ui = new KonsolenUI(dw,csvp);
+		Db2Parser db2p = new Db2Parser();
+		KonsolenUI ui = new KonsolenUI(dw,csvp, db2p);
 		dw.setUi(ui);
 		ui.start();
 	}

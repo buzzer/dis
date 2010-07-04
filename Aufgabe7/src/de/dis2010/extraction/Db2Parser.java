@@ -67,5 +67,12 @@ public class Db2Parser {
 			//return null;
 		}
 	}
+	/**
+	 * Implements the ETL procedure for the Db2 DBMS
+	 */
+	public void etl() {
+		//TODO
+		
+	}
 		
 }

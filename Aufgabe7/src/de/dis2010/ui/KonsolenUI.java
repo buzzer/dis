@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 
 import de.dis2010.DataWarehousing;
 import de.dis2010.extraction.CsvParser;
+import de.dis2010.extraction.Db2Parser;
 
 public class KonsolenUI {
 	private static BufferedReader in = new BufferedReader(
@@ -12,10 +13,12 @@ public class KonsolenUI {
 	@SuppressWarnings("unused")
 	private DataWarehousing dw;
 	private CsvParser csvp;
+	private Db2Parser db2p;
 
-	public KonsolenUI(DataWarehousing dw, CsvParser csvp) {
+	public KonsolenUI(DataWarehousing dw, CsvParser csvp, Db2Parser db2p) {
 		this.dw = dw;
 		this.csvp = csvp;
+		this.db2p = db2p;
 	}
 
 	public void start() {
@@ -30,10 +33,9 @@ public class KonsolenUI {
 
 		while (true) {
 			System.out.println("\nHauptmenü\n");
-			System.out.println("[0]\tRead CSV");
-			System.out.println("[1]\tSelect nach Zeit");
-			System.out.println("[2]\tSelect nach Shop");
-			System.out.println("[3]\tSelect nach Artikel");
+			System.out.println("[1]\tETL DB2 DB");
+			System.out.println("[2]\tETL CSV");
+			System.out.println("[3]\tAnalyse Data Warehouse");
 			System.out.println("[4]\tBeenden");
 
 			System.out.print("\nAuswahl: ");
@@ -43,17 +45,14 @@ public class KonsolenUI {
 				int auswahl = Integer.parseInt(eingabe);
 
 				switch (auswahl) {
-				case 0:
-					csvp.readCsv();
-					break;
 				case 1:
-					stammdatenMenue();
+					db2p.etl();
 					break;
 				case 2:
-					kreditvergabeMenue();
+					csvp.etl();
 					break;
 				case 3:
-					versicherungsabschlussMenue();
+					//analyseMenu();
 					break;
 				case 4:
 					return;
@@ -69,6 +68,7 @@ public class KonsolenUI {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void stammdatenMenue() {
 
 		while (true) {
@@ -111,6 +111,7 @@ public class KonsolenUI {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void kreditvergabeMenue() {
 		
 		while (true) {
@@ -143,6 +144,7 @@ public class KonsolenUI {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void versicherungsabschlussMenue() {
 		
 		while (true) {

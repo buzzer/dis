@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import de.dis2010.DB2ConnectionManager;
+import de.dis2010.data.Faktum;
 import de.dis2010.data.Shop;
 
 import java.io.*;
@@ -50,26 +51,28 @@ public class CsvParser {
 	 * prints field of strings to stdout
 	 * @param s Array of Strings
 	 */
-	public void parseCsvLine(String []s) {
+	public Faktum parseCsvLine(String []s) {
+		Faktum f = new Faktum();
 		try {
+			
 			// Handle null or empty fields
 			for (int i=0; i<s.length; i++) {
 				if (s[i].compareTo("") == 0 || s[i].compareTo("0") == 0) {
 					s[i] = "0";
 				}
 			}
-			String datum = s[0]; // Parse it later by DBMS
-			String shop = s[1];
-			String artikel = s[2];
-			int verkauft = Integer.valueOf(s[3]).intValue();
-			s[4] = s[4].replace(',','.'); // Convert decimal format
-			double umsatz = Double.valueOf(s[4]).doubleValue();
+			
+			f.setDatum(s[0]);
+			f.setShop(s[1]);
+			f.setArtikel(s[2]);
+			f.setVerkauft(Integer.valueOf(s[3]).intValue());
+			f.setUmsatz(Double.valueOf(s[4]).doubleValue());
+			f.save(); // Persistence
 
-			System.out.println(datum+"\t"+shop+"\t"+artikel+"\t"+verkauft+"\t"+umsatz);
-
-		} catch (NumberFormatException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return f;
 	}
 	
 	public void extractZeiten() throws SQLException {
@@ -99,6 +102,16 @@ public class CsvParser {
 		//} else {
 			//return null;
 		}
+	}
+	/**
+	 * Implements the ETL procedure for the Csv file
+	 */
+	public void etl() {
+		this.readCsv();
+		//TODO make etl conform
+		//this.parseCsvLine();
+		//this.injectData();
+		
 	}
 
 }
