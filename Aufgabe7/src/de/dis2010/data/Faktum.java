@@ -85,7 +85,7 @@ public class Faktum {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.setArtikelId(rs.getInt("a.id"));
+			this.artikelId = rs.getInt("a.id");
 			rs.close();
 		}
 		pstmt.close();
@@ -108,7 +108,7 @@ public class Faktum {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.setShopId(rs.getInt("s.id"));
+			this.shopId = rs.getInt("s.id");
 			rs.close();
 		}
 		pstmt.close();
@@ -130,7 +130,7 @@ public class Faktum {
 		ResultSet rs = pstmt.executeQuery();
 		if (rs.next())
 		{
-			this.setZeitId(rs.getInt("z.id"));
+			this.zeitId = rs.getInt("z.id");
 			rs.close();
 		}
 		pstmt.close();	

@@ -2,9 +2,8 @@ package de.dis2010.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-//import java.sql.ResultSet;
-import java.sql.Statement;
 
 import de.dis2010.DB2ConnectionManager;
 
@@ -41,24 +40,70 @@ public class Artikel {
 		return productCategory;
 	}
 
-	public void setProductCategory(String productCategory) {
-		this.productCategory = productCategory;
+	public void setProductCategory(Integer productCategoryId) throws SQLException {
+		
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT c.name FROM db2inst1.productcategoryid c WHERE c.productcategoryid = ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, productCategoryId);
+
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			this.productCategory = rs.getString("c.name");
+			rs.close();
+		}
+		pstmt.close();
 	}
 
 	public String getProductFamily() {
 		return productFamily;
 	}
 
-	public void setProductFamily(String productFamily) {
-		this.productFamily = productFamily;
+	public void setProductFamily(Integer productFamilyId) throws SQLException {
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT f.name FROM db2inst1.productfamilyid f WHERE f.productfamilyid = ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, productFamilyId);
+
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			this.productFamily = rs.getString("f.name");
+			rs.close();
+		}
+		pstmt.close();
 	}
 
 	public String getProductGroup() {
 		return productGroup;
 	}
 
-	public void setProductGroup(String productGroup) {
-		this.productGroup = productGroup;
+	public void setProductGroup(Integer productGroupId) throws SQLException {
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT g.name FROM db2inst1.productgroupid g WHERE g.productgroupid = ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, productGroupId);
+
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			this.productGroup = rs.getString("g.name");
+			rs.close();
+		}
+		pstmt.close();
 	}
 
 	public Double getPreis() {
@@ -69,17 +114,17 @@ public class Artikel {
 		this.preis = preis;
 	}
 
-	public void transfer() throws SQLException {
+	public void save() throws SQLException {
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
 		// Erzeuge Anfrage
-		String insertSQL = "insert into aufg7_artikel (name,preis,produktkat,productfam,produktgru) values (?,?,?,?,?)";
-		PreparedStatement pstmt = con.prepareStatement(insertSQL,
-				Statement.RETURN_GENERATED_KEYS);
+		String insertSQL = "insert into aufg7_artikel (id,name,preis,produktkat,productfam,produktgru) values (?,?,?,?,?,?)";
+		PreparedStatement pstmt = con.prepareStatement(insertSQL);
 
-		// Setze Anfrageparameter und führe Anfrage aus
-		pstmt.setString(1, this.getName());
+		// Setze Parameter und führe Kommando aus
+		pstmt.setInt(1, this.getIid());
+		pstmt.setString(2, this.getName());
 		pstmt.setDouble(2, this.getPreis());
 		pstmt.setString(3, this.getProductCategory());
 		pstmt.setString(4, this.getProductFamily());
@@ -87,16 +132,6 @@ public class Artikel {
 
 		pstmt.executeUpdate();
 
-		// Hole die Id des engefügten Datensatzes
-		//ResultSet rs = pstmt.getGeneratedKeys();
-		//if (rs.next())
-		//{
-			//this.setIid((rs.getInt(1));
-		//}
-
-		//rs.close();
 		pstmt.close();
-		
 	}
-
 }

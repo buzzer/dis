@@ -94,7 +94,7 @@ public class CsvParser {
 			//s.setProductCategory(rs.getInt("BankID"));
 			//s.setPersID(rs.getInt("PersID"));
 			//s.setUNid(rs.getInt("UNid"));
-			s.transfer();
+			s.save();
 			
 			rs.close();
 			pstmt.close();

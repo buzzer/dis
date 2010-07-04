@@ -2,8 +2,8 @@ package de.dis2010.data;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import de.dis2010.DB2ConnectionManager;
 
@@ -39,51 +39,89 @@ public class Shop {
 		return land;
 	}
 
-	public void setLand(String land) {
-		this.land = land;
+	public void setLand(Integer landId) throws SQLException {
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT l.name FROM db2inst1.landid l WHERE l.landid = ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, landId);
+
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			this.land = rs.getString("l.name");
+			rs.close();
+		}
+		pstmt.close();
 	}
 
 	public String getRegion() {
 		return region;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setRegion(Integer regionId) throws SQLException {
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT r.name FROM db2inst1.regionid r WHERE r.regionid = ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, regionId);
+
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			this.region = rs.getString("r.name");
+			rs.close();
+		}
+		pstmt.close();
 	}
 
 	public String getStadt() {
 		return stadt;
 	}
 
-	public void setStadt(String stadt) {
-		this.stadt = stadt;
+	public void setStadt(Integer stadtId) throws SQLException {
+				
+		// Hole Verbindung
+		Connection con = DB2ConnectionManager.getInstance().getConnection();
+
+		// Erzeuge Anfrage
+		String selectSQL = "SELECT s.name FROM db2inst1.stadtid s WHERE s.stadtid = ?";
+		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+		pstmt.setInt(1, stadtId);
+
+		// Führe Anfrage aus
+		ResultSet rs = pstmt.executeQuery();
+		if (rs.next())
+		{
+			this.stadt = rs.getString("s.name");
+			rs.close();
+		}
+		pstmt.close();
 	}
 
-	public void transfer() throws SQLException {
+	public void save() throws SQLException {
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
 		// Erzeuge Anfrage
-		String insertSQL = "insert into aufg7_shop (name,land,region,stadt) values (?,?,?,?)";
-		PreparedStatement pstmt = con.prepareStatement(insertSQL,
-				Statement.RETURN_GENERATED_KEYS);
+		String insertSQL = "insert into aufg7_shop (id,name,land,region,stadt) values (?,?,?,?,?)";
+		PreparedStatement pstmt = con.prepareStatement(insertSQL);
 
 		// Setze Anfrageparameter und führe Anfrage aus
-		pstmt.setString(1, this.getName());
-		pstmt.setString(2, this.getLand());
-		pstmt.setString(3, this.getRegion());
-		pstmt.setString(4, this.getStadt());
+		pstmt.setInt(1, this.getIid());
+		pstmt.setString(2, this.getName());
+		pstmt.setString(3, this.getLand());
+		pstmt.setString(4, this.getRegion());
+		pstmt.setString(5, this.getStadt());
 
 		pstmt.executeUpdate();
 
-		// Hole die Id des engefügten Datensatzes
-		//ResultSet rs = pstmt.getGeneratedKeys();
-		//if (rs.next())
-		//{
-			//this.setIid((rs.getInt(1));
-		//}
-
-		//rs.close();
 		pstmt.close();
 		
 	}
