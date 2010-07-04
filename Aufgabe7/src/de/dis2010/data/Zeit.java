@@ -50,28 +50,48 @@ public class Zeit {
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
 		// Erzeuge Anfrage
-		String insertSQL = "insert into aufg7_zeit (datum,monat,quartal,jahr) values (DATE(?),MONTH(?),1+TIMESTAMPDIFF(128,char(TIMESTAMP(?)-TIMESTAMP(DATE(concat('01.01.',char(YEAR(?))))))),YEAR(?))";
-		PreparedStatement pstmt = con.prepareStatement(insertSQL,
-				Statement.RETURN_GENERATED_KEYS);
-
-		//TODO check if already in DB
-
-		// Setze Anfrageparameter und führe Anfrage aus
-		pstmt.setString(1, this.getDatum());
-		pstmt.setString(2, this.getDatum());
-		pstmt.setString(3, this.getDatum());
-		pstmt.setString(4, this.getDatum());
-		pstmt.setString(5, this.getDatum());
-
-		pstmt.executeUpdate();
-
-		// Hole die Id des engefügten Datensatzes
-		ResultSet rs = pstmt.getGeneratedKeys();
-		if (rs.next())	{	this.setId(rs.getInt(1));	}
-
-		rs.close();
+		String selectSQL = "SELECT z.datum FROM aufg7_zeit z WHERE z.datum = DATE(?)";
+		PreparedStatement pstmt1 = con.prepareStatement(selectSQL);
+		pstmt1.setString(1, this.Datum);
+	
+		// Führe Anfrage aus
+		ResultSet rs1 = pstmt1.executeQuery();
 		
-		pstmt.close();
+		// Insert Date only if not alread present
+		if (! rs1.next())
+		{
+			rs1.close();
+			pstmt1.close();
+			
+			// Erzeuge Anfrage
+			String insertSQL = "insert into aufg7_zeit (datum,monat,quartal,jahr) values (DATE(?),MONTH(?),1+TIMESTAMPDIFF(128,char(TIMESTAMP(?)-TIMESTAMP(DATE(concat('01.01.',char(YEAR(?))))))),YEAR(?))";
+			PreparedStatement pstmt2 = con.prepareStatement(insertSQL,
+					Statement.RETURN_GENERATED_KEYS);
+
+			// Setze Anfrageparameter und führe Anfrage aus
+			pstmt2.setString(1, this.getDatum());
+			pstmt2.setString(2, this.getDatum());
+			pstmt2.setString(3, this.getDatum());
+			pstmt2.setString(4, this.getDatum());
+			pstmt2.setString(5, this.getDatum());
+
+			pstmt2.executeUpdate();
+
+			// Hole die Id des engefügten Datensatzes
+			ResultSet rs2 = pstmt2.getGeneratedKeys();
+			if (rs2.next())	{	this.setId(rs2.getInt(1));	}
+
+			rs2.close();
+			
+			pstmt2.close();
+			
+			
+		} else {
+			// Date alread in Zeit tabelle
+			rs1.close();
+			pstmt1.close();
+		}
+		
 		
 	}
 
