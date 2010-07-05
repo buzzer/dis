@@ -11,7 +11,15 @@ import de.dis2010.data.Shop;
 //import de.dis2010.data.Faktum;
 
 public class Db2Parser {
+	
+	public Db2Parser () {
+		//dummy
+	}
+	
 	public void extractArticles() throws SQLException {
+		
+		System.out.println("Parsing db2inst1 articles ..");
+		
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
@@ -19,6 +27,7 @@ public class Db2Parser {
 		String selectSQL = "select articleid,productgroupid,name,preis from db2inst1.articleid";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
 
+		
 		// Führe Anfrage aus
 		ResultSet rs = pstmt.executeQuery();
 		while (rs.next()) {
@@ -32,17 +41,24 @@ public class Db2Parser {
 			// Save into Data Warehouse
 			a.save();	
 		}
+
 		rs.close();
 		pstmt.close();
 	
+		System.out.println(".. done");	
 	}
+	
 	public void extractShops() throws SQLException {
+		
+		System.out.println("Parsing db2inst1 shops ..");
+
 		// Hole Verbindung
 		Connection con = DB2ConnectionManager.getInstance().getConnection();
 		
 		// Erzeuge Anfrage
 		String selectSQL = "select shopid,stadtid,name from db2inst1.shopid";
 		PreparedStatement pstmt = con.prepareStatement(selectSQL);
+
 
 		// Führe Anfrage aus
 		ResultSet rs = pstmt.executeQuery();
@@ -55,8 +71,11 @@ public class Db2Parser {
 			// Save into Data Warehouse
 			s.save();
 		}
+		
 		rs.close();
 		pstmt.close();
+
+		System.out.println(".. done");
 	}
 		
 }

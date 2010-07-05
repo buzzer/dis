@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import de.dis2010.DataWarehousing;
 import de.dis2010.extraction.CsvParser;
 import de.dis2010.extraction.Db2Parser;
+import de.dis2010.analysis.DataCube;
 
 public class KonsolenUI {
 	private static BufferedReader in = new BufferedReader(
@@ -14,11 +15,13 @@ public class KonsolenUI {
 	private DataWarehousing dw;
 	private CsvParser csvp;
 	private Db2Parser db2p;
+	private DataCube dc;
 
-	public KonsolenUI(DataWarehousing dw, CsvParser csvp, Db2Parser db2p) {
+	public KonsolenUI(DataWarehousing dw, CsvParser csvp, Db2Parser db2p, DataCube dc) {
 		this.dw = dw;
 		this.csvp = csvp;
 		this.db2p = db2p;
+		this.dc = dc;
 	}
 
 	public void start() {
@@ -35,7 +38,7 @@ public class KonsolenUI {
 			System.out.println("\nHauptmenü\n");
 			System.out.println("[1]\tLoad DB2 DB");
 			System.out.println("[2]\tLoad CSV file");
-			System.out.println("[3]\tAnalyse Data Warehouse");
+			System.out.println("[3]\tAnalyse data cube");
 			System.out.println("[4]\tBeenden");
 
 			System.out.print("\nAuswahl: ");
@@ -53,7 +56,7 @@ public class KonsolenUI {
 					csvp.readCsv();
 					break;
 				case 3:
-					//analyseMenu();
+					this.analyseMenu();
 					break;
 				case 4:
 					return;
@@ -69,40 +72,37 @@ public class KonsolenUI {
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private void stammdatenMenue() {
+	private void analyseMenu() {
 
 		while (true) {
-			System.out.println("\nStammdaten-Menü\n");
-			System.out.println("[1]\tNeue Immobilie anlegen");
-			System.out.println("[2]\tNeue Privatperson anlegen");
-			System.out.println("[3]\tNeue Bank anlegen");
-			System.out.println("[4]\tNeues Versicherungsunternehmen anlegen");
-			System.out.println("[5]\tSonstiges Unternehmen anlegen");
-			System.out.println("[6]\tHauptmenü");
+			System.out.println("\nAnalyse-Menü\n");
+			System.out.println("[1]\tnach Stadt");
+			System.out.println("[2]\tnach Region");
+			System.out.println("[3]\tnach Land");
+			System.out.println("[4]\tHauptmenü");
 
 			System.out.print("\nAuswahl: ");
 
 			try {
+				
 				String eingabe = in.readLine();
 				int auswahl = Integer.parseInt(eingabe);
 
 				switch (auswahl) {
 				case 1:
+					dc.aggregatStadt();
 					break;
 				case 2:
+					dc.aggregatRegion();
 					break;
 				case 3:
+					dc.aggregatLand();
 					break;
 				case 4:
-					break;
-				case 5:
-					break;
-				case 6:
 					return;
 				default:
 					System.out.println("Ungültige Eingabe.\n");
-					stammdatenMenue();
+					this.analyseMenu();
 					break;
 				}
 

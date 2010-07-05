@@ -59,7 +59,7 @@ public class Zeit {
 		String selectSQL = "SELECT z.datum FROM aufg7_zeit z WHERE z.datum = ?";
 		PreparedStatement pstmt1 = con.prepareStatement(selectSQL);
 		
-		System.out.println("Checking for date: "+this.Datum.toString());
+		//System.out.println("Checking for date: "+this.Datum.toString());
 		
 		pstmt1.setDate(1, this.Datum);
 		//java.sql.Date sqlDate = java.sql.Date.valueOf("2010-01-01");

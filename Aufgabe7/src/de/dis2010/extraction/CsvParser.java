@@ -31,20 +31,31 @@ public class CsvParser {
 			DataInputStream in = new DataInputStream(fstream);
 			BufferedReader br = new BufferedReader(new InputStreamReader(in));
 			String strLine;
+			
+			System.out.println("Parse csv file ..");
+
 			// Omit first (header) line
 			strLine = br.readLine();
 			//Read File Line By Line
+			Integer line = 0;
 			while ((strLine = br.readLine()) != null)   {
+				line = 1 + line;
+				if (line % 10 == 0) {
+					System.out.println(line+" datasets ok ..");
+				}
 				// Print the content on the console
-				System.out.println (strLine);
+				//System.out.println (strLine);
 				if (strLine.compareTo("") != 0) {
 					strArray = strLine.split(";");
 					// Split csv line and save tupel in faktentablle
-					System.out.println("Parse csv line ..");
+					//System.out.println("Parse csv line ..");
 					parseCsvLine(strArray);
-					System.out.println("..done");
+					//System.out.println("..done");
 				} else { /* Empty Line */ }
 			}
+			
+			System.out.println(".. done");
+			
 			//Close the input stream
 			in.close();
 		}catch (Exception e){//Catch exception if any
@@ -68,20 +79,26 @@ public class CsvParser {
 					s[i] = "0";
 				}
 			}
+			
+			// Parse DATE
 			//System.out.println(s[0]);
 			// convert from dd.mm.yyyy to yyyy-mm-dd
 			String jdbcDate = CsvParser.date2jdbc(s[0]);
 			f.setDatum(jdbcDate);
 			
+			// Parse SHOP
 			//System.out.println(s[1]);
 			f.setShop(s[1]);
 			
+			// Parse ARTIKEL
 			//System.out.println(s[2]);
 			f.setArtikel(s[2]);
 			
+			// Parse VERKAUFT
 			//System.out.println(s[3]);
 			f.setVerkauft(Integer.valueOf(s[3]).intValue());
 			
+			// Parse UMSATZ
 			//System.out.println(s[4].replace(',','.'));
 			f.setUmsatz(Double.valueOf(s[4].replace(',','.')).doubleValue());
 			
@@ -93,7 +110,7 @@ public class CsvParser {
 			
 			// Save faktum in Data Warehouse
 			f.save();
-			System.out.println("Saving Faktum .. done");
+			//System.out.println("Saving Faktum .. done");
 
 
 		} catch (Exception e) {

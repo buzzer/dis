@@ -35,7 +35,7 @@ CREATE TABLE aufg7_artikel(
   preis NUMERIC(12,2),
   produktKat VARCHAR(50),
   produktFam VARCHAR(50),
-  ProduktGru VARCHAR(50)
+  produktGru VARCHAR(50)
 );
 
 CREATE TABLE aufg7_zeit(
