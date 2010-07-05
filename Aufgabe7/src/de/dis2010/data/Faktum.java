@@ -13,7 +13,7 @@ public class Faktum {
 	private Integer id = -1;
 	private Integer shopId = 0;
 	private Integer artikelId = 0;
-	private String zeitId = null;
+	private java.sql.Date zeitId = null;
 	private Integer verkauft = 0;
 	private Double	umsatz = 0.;
 	
@@ -50,11 +50,11 @@ public class Faktum {
 	}
 
 	public String getZeitId() {
-		return zeitId;
+		return zeitId.toString();
 	}
 
 	public void setZeitId(String zeitId) {
-		this.zeitId = zeitId;
+		this.zeitId = java.sql.Date.valueOf(zeitId);
 	}
 
 	public Integer getVerkauft() {
@@ -120,24 +120,7 @@ public class Faktum {
 
 	public void setDatum(String string) throws SQLException {
 		
-		this.zeitId = string;
-		
-//		// Hole Verbindung
-//		Connection con = DB2ConnectionManager.getInstance().getConnection();
-//
-//		// Erzeuge Anfrage
-//		String selectSQL = "SELECT z.id FROM aufg7_zeit z WHERE z.datum = DATE(?)";
-//		PreparedStatement pstmt = con.prepareStatement(selectSQL);
-//		pstmt.setString(1, string);
-//
-//		// Führe Anfrage aus
-//		ResultSet rs = pstmt.executeQuery();
-//		if (rs.next())
-//		{
-//			this.zeitId = rs.getString("id");
-//		}
-//		rs.close();
-//		pstmt.close();	
+		this.zeitId = java.sql.Date.valueOf(string);
 	}
 
 	public Shop getShop() {
@@ -188,17 +171,17 @@ public class Faktum {
 			
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
-			String insertSQL = "INSERT INTO aufg7_faktentabelle (shopId,artikelId,zeitId,verkauft,umsatz) VALUES (?,?,DATE(?),?,?)";
+			String insertSQL = "INSERT INTO aufg7_faktentabelle (shopId,artikelId,zeitId,verkauft,umsatz) VALUES (?,?,?,?,?)";
 	
 			PreparedStatement pstmt = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
 		
 			// Setze Anfrageparameter und führe Anfrage aus
-			pstmt.setInt(1, this.getShopId());
-			pstmt.setInt(2, this.getArtikelId());
-			pstmt.setString(3, this.getZeitId());
-			pstmt.setInt(4, this.getVerkauft());
-			pstmt.setDouble(5, this.getUmsatz());
+			pstmt.setInt(1, this.shopId);
+			pstmt.setInt(2, this.artikelId);
+			pstmt.setDate(3, this.zeitId);
+			pstmt.setInt(4, this.verkauft);
+			pstmt.setDouble(5, this.umsatz);
 	
 			pstmt.executeUpdate();
 	

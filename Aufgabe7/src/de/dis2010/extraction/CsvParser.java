@@ -1,13 +1,13 @@
 package de.dis2010.extraction;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+//import java.sql.Connection;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
 
-import de.dis2010.DB2ConnectionManager;
+//import de.dis2010.DB2ConnectionManager;
 import de.dis2010.data.Faktum;
-import de.dis2010.data.Shop;
+//import de.dis2010.data.Shop;
 import de.dis2010.data.Zeit;
 
 import java.io.*;
@@ -69,24 +69,29 @@ public class CsvParser {
 				}
 			}
 			//System.out.println(s[0]);
+			// convert from dd.mm.yyyy to yyyy-mm-dd
+			String jdbcDate = CsvParser.date2jdbc(s[0]);
+			f.setDatum(jdbcDate);
 			
-			// Save faktum in Date Warehouse
-			f.setDatum(s[0]);
 			//System.out.println(s[1]);
 			f.setShop(s[1]);
+			
 			//System.out.println(s[2]);
 			f.setArtikel(s[2]);
+			
 			//System.out.println(s[3]);
 			f.setVerkauft(Integer.valueOf(s[3]).intValue());
+			
 			//System.out.println(s[4].replace(',','.'));
-		
 			f.setUmsatz(Double.valueOf(s[4].replace(',','.')).doubleValue());
+			
 			//System.out.println(f.toString());
 			
 			// Save Datum and its conversions in Data Warehouse
-			z.setDatum(s[0]);
+			z.setDatum(jdbcDate);
 			z.save();
-			// TODO fix date in sql
+			
+			// Save faktum in Data Warehouse
 			f.save();
 			System.out.println("Saving Faktum .. done");
 
@@ -97,33 +102,22 @@ public class CsvParser {
 		return f;
 	}
 	
-	public void extractZeiten() throws SQLException {
-		// Hole Verbindung
-		Connection con = DB2ConnectionManager.getInstance().getConnection();
+	// Converts date string dd.mm.yyyy to yyyy-mm-dd
+	public static String date2jdbc(String d) {
+	
+		String jdbcDate = null;
 		
-		// Erzeuge Anfrage
-		String selectSQL = "select shopid,stadtid,name from db2inst1.shopid";
-		PreparedStatement pstmt = con.prepareStatement(selectSQL);
-		//pstmt.setInt(1, iid);
-
-		// Führe Anfrage aus
-		ResultSet rs = pstmt.executeQuery();
-		while (rs.next()) {
-			Shop s = new Shop();
-			s.setIid(rs.getInt("shopid"));
-			//TODO convert s.setStadt(rs.getInt("stadtid"));
-			s.setName(rs.getString("name"));
-			//s.setProductCategory(rs.getInt("BankID"));
-			//s.setPersID(rs.getInt("PersID"));
-			//s.setUNid(rs.getInt("UNid"));
-			s.save();
-			
-			rs.close();
-			pstmt.close();
-			//return a;
-		//} else {
-			//return null;
+		java.text.DateFormat csvDf = new java.text.SimpleDateFormat("dd.MM.yyyy");
+		java.text.DateFormat jdbcDf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+		
+		try {
+			java.util.Date csvDate = csvDf.parse(d);
+			jdbcDate = jdbcDf.format(csvDate); 
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
+		
+		return jdbcDate;
 	}
 
 }
