@@ -35,9 +35,9 @@ public class Zeit {
 		this.Datum = java.sql.Date.valueOf(datum);
 		Calendar c =Calendar.getInstance();
 		c.setTime(this.Datum);
-		this.Monat = Calendar.MONTH+1;
-		this.Quartal = (Calendar.MONTH+1)/4+1;
-		this.Jahr = Calendar.YEAR;
+		this.Monat = c.get(Calendar.MONTH)+1;
+		this.Quartal = (c.get(Calendar.MONTH)+1)/4+1;
+		this.Jahr = c.get(Calendar.YEAR);
 	}
 	public Integer getMonat() {
 		return Monat;

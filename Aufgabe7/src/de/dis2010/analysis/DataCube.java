@@ -22,10 +22,10 @@ public class DataCube {
 		// Führe Anfrage aus
 		ResultSet rs = pstmt.executeQuery();
 		
-		System.out.printf("| %15s | %15s | %15s | %10s | %16s |%n", "Stadt","Region","Land","Verkauft","Umsatz");
+		System.out.printf("| %15s | %30s | %15s | %10s | %16s |%n", "Stadt","Region","Land","Verkauft","Umsatz");
 
 		while (rs.next()) {
-			System.out.printf("| %15s | %15s | %15s | %10d | %16.2f |%n", 
+			System.out.printf("| %15s | %30s | %15s | %10d | %16.2f |%n", 
 				rs.getString("stadt"),
 				rs.getString("region"),
 				rs.getString("land"),

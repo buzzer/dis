@@ -1,82 +1,101 @@
 Datum;Shop;Artikel;Verkauft;Umsatz
 01.01.2010;Superstore Berlin;AEG Öko Lavatherm 59850 Sensidry;25;24975,00
-02.01.2010;Superstore Berlin;AEG Öko-Lavamat Öko Plus 1400;25;14975,00
-03.01.2010;Superstore Berlin;Bauknecht TK Care 6B;13;3639,74
-04.01.2010;Superstore Berlin;Bauknecht WA Sensitive 36 DI;2;699,80
-01.02.2010;Superstore Berlin;BenQ DE350P;31;8369,69
-01.03.2010;Superstore Berlin;Bosch Rotak 43 LI (Modell 2009);37;14763,00
-01.03.2010;Superstore Berlin;Bosch WAE 2834P;49;24451,00
-01.01.2011;Superstore Berlin;Bosch WTE 84301;8;3592,00
+01.01.2010;Superstore Berlin;AEG Öko-Lavamat Öko Plus 1400;25;14975,00
+01.01.2010;Superstore Berlin;Bauknecht TK Care 6B;13;3639,74
+01.01.2010;Superstore Berlin;Bauknecht WA Sensitive 36 DI;2;699,80
+01.01.2010;Superstore Berlin;BenQ DE350P;31;8369,69
+01.01.2010;Superstore Berlin;Bosch Rotak 43 LI (Modell 2009);37;14763,00
+01.01.2010;Superstore Berlin;Bosch WAE 2834P;49;24451,00
+01.01.2010;Superstore Berlin;Bosch WTE 84301;8;3592,00
 01.01.2010;Superstore Berlin;Brill 28 VE/RL;14;1946,00
-01.01.2010;Superstore Berlin;Denon DCD-710AE;33;12177,00
-01.01.2010;Superstore Berlin;Einhell RPM 56 S-MS;35;10499,65
-01.01.2010;Superstore Berlin;Gardena CS Vertikutier-Boy (3395-20);41;2045,90
-01.01.2010;Superstore Berlin;Gardena PowerMax 42 E;9;1799,91
-01.01.2010;Superstore Berlin;Güde GV 2400 SL;1;249,00
-01.01.2010;Superstore Berlin;Jaytec DJT-20;37;3326,30
-01.01.2010;Superstore Berlin;Kodak Zx3 Playsport;44;5719,56
-01.01.2010;Superstore Berlin;LG RH-T 298;44;18039,56
-01.01.2010;Superstore Berlin;Miele Softtronic T 7744 C;26;19474,00
-01.01.2010;Superstore Berlin;Miele Softtronic W 3241 WPS;9;7200,00
-01.01.2010;Superstore Berlin;Numark TT1650;47;7002,53
-01.01.2010;Superstore Berlin;Onkyo DX-7355;13;1819,87
-01.01.2010;Superstore Berlin;Panasonic HDC-SD707;19;14819,81
-01.01.2010;Superstore Berlin;Pioneer DVR-550HX;21;9869,79
-01.01.2010;Superstore Berlin;Samsung DVD-SR275;43;3439,57
-01.01.2010;Superstore Berlin;Sony CDP-XE370;0;0,00
-01.01.2010;Superstore Berlin;Sony HDR-CX115;9;3590,91
-01.01.2010;Superstore Berlin;Sony PS-LX 300 USB;11;1518,00
-01.01.2010;Superstore Berlin;Technics SL-1210 MK5;35;20965,00
-01.01.2010;Superstore Berlin;Toshiba Camileo S20;30;2999,70
-01.01.2010;Superstore Berlin;Wolf-Garten 2.34 E;21;3129,00
-01.01.2010;Superstore Berlin;Wolf-Garten Campus 1000 V;48;4315,20
-01.01.2010;Superstore Berlin;Yamaha CDX-497;8;1919,92
-01.01.2010;Superstore Bremen;AEG Öko Lavatherm 59850 Sensidry;30;29970,00
-01.01.2010;Superstore Bremen;AEG Öko-Lavamat Öko Plus 1400;32;19168,00
-01.01.2010;Superstore Bremen;Bauknecht TK Care 6B;23;6439,54
-01.01.2010;Superstore Bremen;Bauknecht WA Sensitive 36 DI;15;5248,50
-01.01.2010;Superstore Bremen;BenQ DE350P;44;11879,56
-01.01.2010;Superstore Bremen;Bosch Rotak 43 LI (Modell 2009);38;15162,00
-01.01.2010;Superstore Bremen;Bosch WAE 2834P;47;23453,00
-01.01.2010;Superstore Bremen;Bosch WTE 84301;4;1796,00
-01.01.2010;Superstore Bremen;Brill 28 VE/RL;30;4170,00
-01.01.2010;Superstore Bremen;Denon DCD-710AE;21;7749,00
-01.01.2010;Superstore Bremen;Einhell RPM 56 S-MS;29;8699,71
-01.01.2010;Superstore Bremen;Gardena CS Vertikutier-Boy (3395-20);25;1247,50
-01.01.2010;Superstore Bremen;Gardena PowerMax 42 E;30;5999,70
-01.01.2010;Superstore Bremen;Güde GV 2400 SL;47;11703,00
-01.01.2010;Superstore Bremen;Jaytec DJT-20;34;3056,60
-01.01.2010;Superstore Bremen;Kodak Zx3 Playsport;39;5069,61
-01.01.2010;Superstore Bremen;LG RH-T 298;24;9839,76
-01.01.2010;Superstore Bremen;Miele Softtronic T 7744 C;34;25466,00
-01.01.2010;Superstore Bremen;Miele Softtronic W 3241 WPS;45;36000,00
-01.01.2010;Superstore Bremen;Numark TT1650;14;2085,86
-01.01.2010;Superstore Bremen;Onkyo DX-7355;42;5879,58
-01.01.2010;Superstore Bremen;Panasonic HDC-SD707;48;37439,52
-01.01.2010;Superstore Bremen;Pioneer DVR-550HX;14;6579,86
-01.01.2010;Superstore Bremen;Samsung DVD-SR275;24;1919,76
-01.01.2010;Superstore Bremen;Sony CDP-XE370;3;422,70
-01.01.2010;Superstore Bremen;Sony HDR-CX115;10;3989,90
-01.01.2010;Superstore Bremen;Sony PS-LX 300 USB;31;4278,00
-01.01.2010;Superstore Bremen;Technics SL-1210 MK5;8;4792,00
-01.01.2010;Superstore Bremen;Toshiba Camileo S20;20;1999,80
-01.01.2010;Superstore Bremen;Wolf-Garten 2.34 E;34;5066,00
-01.01.2010;Superstore Bremen;Wolf-Garten Campus 1000 V;35;3146,50
-01.01.2010;Superstore Bremen;Yamaha CDX-497;4;959,96
-01.01.2010;Superstore Dresden;AEG Öko Lavatherm 59850 Sensidry;42;41958,00
-01.01.2010;Superstore Dresden;AEG Öko-Lavamat Öko Plus 1400;4;2396,00
-01.01.2010;Superstore Dresden;Bauknecht TK Care 6B;1;279,98
-01.01.2010;Superstore Dresden;Bauknecht WA Sensitive 36 DI;39;13646,10
-01.01.2010;Superstore Dresden;BenQ DE350P;18;4859,82
-01.01.2010;Superstore Dresden;Bosch Rotak 43 LI (Modell 2009);19;7581,00
-01.01.2010;Superstore Dresden;Bosch WAE 2834P;20;9980,00
-01.01.2010;Superstore Dresden;Bosch WTE 84301;31;13919,00
-01.01.2010;Superstore Dresden;Brill 28 VE/RL;6;834,00
-01.01.2010;Superstore Dresden;Denon DCD-710AE;18;6642,00
-01.01.2010;Superstore Dresden;Einhell RPM 56 S-MS;25;7499,75
-01.01.2010;Superstore Dresden;Gardena CS Vertikutier-Boy (3395-20);24;1197,60
-01.01.2010;Superstore Dresden;Gardena PowerMax 42 E;7;1399,93
-01.01.2010;Superstore Dresden;Güde GV 2400 SL;13;3237,00
-01.01.2010;Superstore Dresden;Jaytec DJT-20;0;0,00
-01.01.2010;Superstore Dresden;Kodak Zx3 Playsport;16;2079,84
-
+01.01.2010;Superstore Berlin;AEG Öko Lavatherm 59850 Sensidry;25;24975,00
+10.01.2010;Superstore Saarbrücken;Bosch WAE 2834P;47;23453,00
+10.01.2010;Superstore Saarbrücken;Bosch WTE 84301;14;6286,00
+10.01.2010;Superstore Saarbrücken;Brill 28 VE/RL;42;5838,00
+10.01.2010;Superstore Saarbrücken;Denon DCD-710AE;22;8118,00
+10.01.2010;Superstore Saarbrücken;Einhell RPM 56 S-MS;35;10499,65
+10.01.2010;Superstore Saarbrücken;Gardena CS Vertikutier-Boy (3395-20);33;1646,70
+10.01.2010;Superstore Saarbrücken;Gardena PowerMax 42 E;2;399,98
+24.01.2010;Superstore Hannover;Wolf-Garten Campus 1000 V;27;2427,30
+24.01.2010;Superstore Hannover;Yamaha CDX-497;8;1919,92
+24.01.2010;Superstore Kiel;AEG Öko Lavatherm 59850 Sensidry;21;20979,00
+24.01.2010;Superstore Kiel;AEG Öko-Lavamat Öko Plus 1400;14;8386,00
+24.01.2010;Superstore Kiel;Bauknecht TK Care 6B;21;5879,58
+24.01.2010;Superstore Kiel;Bauknecht WA Sensitive 36 DI;49;17145,10
+24.01.2010;Superstore Kiel;BenQ DE350P;9;2429,91
+24.01.2010;Superstore Kiel;Bosch Rotak 43 LI (Modell 2009);46;18354,00
+24.01.2010;Superstore Kiel;Bosch WAE 2834P;44;21956,00
+24.01.2010;Superstore Kiel;Bosch WTE 84301;12;5388,00
+24.01.2010;Superstore Kiel;Brill 28 VE/RL;3;417,00
+24.01.2010;Superstore Kiel;Denon DCD-710AE;15;5535,00
+24.01.2010;Superstore Kiel;Einhell RPM 56 S-MS;37;11099,63
+24.01.2010;Superstore Kiel;Gardena CS Vertikutier-Boy (3395-20);14;698,60
+24.01.2010;Superstore Kiel;Gardena PowerMax 42 E;38;7599,62
+24.01.2010;Superstore Kiel;Güde GV 2400 SL;21;5229,00
+18.02.2010;Superstore Schwerin;Bosch WAE 2834P;0;0,00
+18.02.2010;Superstore Schwerin;Bosch WTE 84301;10;4490,00
+18.02.2010;Superstore Schwerin;Brill 28 VE/RL;37;5143,00
+18.02.2010;Superstore Schwerin;Denon DCD-710AE;40;14760,00
+18.02.2010;Superstore Schwerin;Einhell RPM 56 S-MS;20;5999,80
+18.02.2010;Superstore Schwerin;Gardena CS Vertikutier-Boy (3395-20);42;2095,80
+18.02.2010;Superstore Schwerin;Gardena PowerMax 42 E;25;4999,75
+18.02.2010;Superstore Schwerin;Güde GV 2400 SL;36;8964,00
+18.02.2010;Superstore Schwerin;Jaytec DJT-20;23;2067,70
+18.02.2010;Superstore Schwerin;Kodak Zx3 Playsport;47;6109,53
+18.02.2010;Superstore Schwerin;LG RH-T 298;19;7789,81
+18.02.2010;Superstore Schwerin;Miele Softtronic T 7744 C;29;21721,00
+06.03.2010;Superstore Kiel;Bosch WAE 2834P;23;11477,00
+06.03.2010;Superstore Kiel;Bosch WTE 84301;21;9429,00
+06.03.2010;Superstore Kiel;Brill 28 VE/RL;46;6394,00
+06.03.2010;Superstore Kiel;Denon DCD-710AE;2;738,00
+06.03.2010;Superstore Kiel;Einhell RPM 56 S-MS;30;8999,70
+06.03.2010;Superstore Kiel;Gardena CS Vertikutier-Boy (3395-20);7;349,30
+06.03.2010;Superstore Kiel;Gardena PowerMax 42 E;38;7599,62
+06.03.2010;Superstore Kiel;Güde GV 2400 SL;1;249,00
+06.03.2010;Superstore Kiel;Jaytec DJT-20;28;2517,20
+06.03.2010;Superstore Kiel;Kodak Zx3 Playsport;29;3769,71
+06.03.2010;Superstore Kiel;LG RH-T 298;28;11479,72
+06.03.2010;Superstore Kiel;Miele Softtronic T 7744 C;9;6741,00
+06.03.2010;Superstore Kiel;Miele Softtronic W 3241 WPS;2;1600,00
+06.03.2010;Superstore Kiel;Numark TT1650;24;3575,76
+06.03.2010;Superstore Kiel;Onkyo DX-7355;14;1959,86
+20.03.2010;Superstore Bremen;Wolf-Garten Campus 1000 V;16;1438,40
+20.03.2010;Superstore Bremen;Yamaha CDX-497;8;1919,92
+20.03.2010;Superstore Dresden;AEG Öko Lavatherm 59850 Sensidry;23;22977,00
+20.03.2010;Superstore Dresden;AEG Öko-Lavamat Öko Plus 1400;24;14376,00
+20.03.2010;Superstore Dresden;Bauknecht TK Care 6B;26;7279,48
+20.03.2010;Superstore Dresden;Bauknecht WA Sensitive 36 DI;33;11546,70
+20.03.2010;Superstore Dresden;BenQ DE350P;42;11339,58
+20.03.2010;Superstore Dresden;Bosch Rotak 43 LI (Modell 2009);24;9576,00
+20.03.2010;Superstore Dresden;Bosch WAE 2834P;10;4990,00
+20.03.2010;Superstore Dresden;Bosch WTE 84301;21;9429,00
+20.03.2010;Superstore Dresden;Brill 28 VE/RL;49;6811,00
+20.03.2010;Superstore Dresden;Denon DCD-710AE;14;5166,00
+20.03.2010;Superstore Dresden;Einhell RPM 56 S-MS;25;7499,75
+20.03.2010;Superstore Dresden;Gardena CS Vertikutier-Boy (3395-20);25;1247,50
+28.04.2010;Superstore Dresden;Wolf-Garten Campus 1000 V;27;2427,30
+28.04.2010;Superstore Dresden;Yamaha CDX-497;15;3599,85
+28.04.2010;Superstore Düsseldorf;AEG Öko Lavatherm 59850 Sensidry;21;20979,00
+28.04.2010;Superstore Düsseldorf;AEG Öko-Lavamat Öko Plus 1400;37;22163,00
+28.04.2010;Superstore Düsseldorf;Bauknecht TK Care 6B;21;5879,58
+28.04.2010;Superstore Düsseldorf;Bauknecht WA Sensitive 36 DI;41;14345,90
+28.04.2010;Superstore Düsseldorf;BenQ DE350P;23;6209,77
+28.04.2010;Superstore Düsseldorf;Bosch Rotak 43 LI (Modell 2009);26;10374,00
+28.04.2010;Superstore Düsseldorf;Bosch WAE 2834P;6;2994,00
+28.04.2010;Superstore Düsseldorf;Bosch WTE 84301;46;20654,00
+28.04.2010;Superstore Düsseldorf;Brill 28 VE/RL;0;0,00
+28.04.2010;Superstore Düsseldorf;Denon DCD-710AE;38;14022,00
+28.04.2010;Superstore Düsseldorf;Einhell RPM 56 S-MS;33;9899,67
+28.04.2010;Superstore Düsseldorf;Gardena CS Vertikutier-Boy (3395-20);19;948,10
+31.05.2010;Superstore Wiesbaden;Onkyo DX-7355;18;2519,82
+31.05.2010;Superstore Wiesbaden;Panasonic HDC-SD707;12;9359,88
+31.05.2010;Superstore Wiesbaden;Pioneer DVR-550HX;10;4699,90
+31.05.2010;Superstore Wiesbaden;Samsung DVD-SR275;8;639,92
+31.05.2010;Superstore Wiesbaden;Sony CDP-XE370;0;0,00
+31.05.2010;Superstore Wiesbaden;Sony HDR-CX115;8;3191,92
+31.05.2010;Superstore Wiesbaden;Sony PS-LX 300 USB;20;2760,00
+31.05.2010;Superstore Wiesbaden;Technics SL-1210 MK5;44;26356,00
+31.05.2010;Superstore Wiesbaden;Toshiba Camileo S20;17;1699,83
+31.05.2010;Superstore Wiesbaden;Wolf-Garten 2.34 E;26;3874,00
+31.05.2010;Superstore Wiesbaden;Wolf-Garten Campus 1000 V;43;3865,70
+31.05.2010;Superstore Wiesbaden;Yamaha CDX-497;17;4079,83
