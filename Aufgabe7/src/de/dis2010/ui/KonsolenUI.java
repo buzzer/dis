@@ -78,8 +78,11 @@ public class KonsolenUI {
 			System.out.println("\nAnalyse-Menü\n");
 			System.out.println("[1]\tnach Stadt");
 			System.out.println("[2]\tnach Region");
-			System.out.println("[3]\tnach Land");
-			System.out.println("[4]\tHauptmenü");
+			System.out.println("[3]\tnach Monat");
+			System.out.println("[4]\tnach Produktgruppe");
+			System.out.println("[5]\tnach Produktfamilie");
+			System.out.println("[6]\tnach ProduktCategorie");
+			System.out.println("[7]\tHauptmenü");
 
 			System.out.print("\nAuswahl: ");
 
@@ -96,9 +99,18 @@ public class KonsolenUI {
 					dc.aggregatRegion();
 					break;
 				case 3:
-					dc.aggregatLand();
+					dc.aggregatMonat();
 					break;
 				case 4:
+					dc.aggregatPG();
+					break;
+				case 5:
+					dc.aggregatPF();
+					break;
+				case 6:
+					dc.aggregatPC();
+					break;
+				case 7:
 					return;
 				default:
 					System.out.println("Ungültige Eingabe.\n");
