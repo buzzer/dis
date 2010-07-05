@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Calendar;
 //import java.text.DateFormat;
 //import java.sql.Date;
 //import java.util.Date.*;
@@ -31,7 +32,12 @@ public class Zeit {
 		return Datum.toString();
 	}
 	public void setDatum(String datum) {
-		Datum = java.sql.Date.valueOf(datum);
+		this.Datum = java.sql.Date.valueOf(datum);
+		Calendar c =Calendar.getInstance();
+		c.setTime(this.Datum);
+		this.Monat = Calendar.MONTH+1;
+		this.Quartal = (Calendar.MONTH+1)/4+1;
+		this.Jahr = Calendar.YEAR;
 	}
 	public Integer getMonat() {
 		return Monat;
@@ -75,16 +81,15 @@ public class Zeit {
 			pstmt1.close();
 			
 			// Erzeuge Anfrage
-			String insertSQL = "insert into aufg7_zeit (datum,monat,quartal,jahr) values ?,MONTH(?),1+TIMESTAMPDIFF(128,char(TIMESTAMP(?)-TIMESTAMP(DATE(concat('01.01.',char(YEAR(?))))))),YEAR(?))";
+			String insertSQL = "insert into aufg7_zeit (datum,monat,quartal,jahr) values (?,?,?,?)";
 			PreparedStatement pstmt2 = con.prepareStatement(insertSQL,
 					Statement.RETURN_GENERATED_KEYS);
 
 			// Setze Anfrageparameter und führe Anfrage aus
 			pstmt2.setDate(1, this.Datum);
-			pstmt2.setDate(5, this.Datum);
-			pstmt2.setDate(2, this.Datum);
-			pstmt2.setDate(3, this.Datum);
-			pstmt2.setDate(4, this.Datum);
+			pstmt2.setInt(2, this.Monat);
+			pstmt2.setInt(3, this.Quartal);
+			pstmt2.setInt(4, this.Jahr);
 
 			pstmt2.executeUpdate();
 

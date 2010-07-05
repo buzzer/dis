@@ -149,29 +149,29 @@ public class Faktum {
 
 	public void save() throws SQLException {
 
-		// Hole Verbindung
-		Connection con = DB2ConnectionManager.getInstance().getConnection();
-		
-		// Check for duplicate entry..
-		//String selectSQL = "SELECT a.id FROM aufg7_artikel a WHERE a.id = ?";
-		String selectSQL = "SELECT shopId,artikelId,zeitId FROM aufg7_faktentabelle WHERE shopId = ? and artikelId = ? and zeitId = ?";
-		PreparedStatement pstmt1 = con.prepareStatement(selectSQL);
-		
-		pstmt1.setInt(1, this.shopId);
-		pstmt1.setInt(2, this.artikelId);
-		pstmt1.setDate(3, this.zeitId);
-	
-		// Führe Anfrage aus
-		ResultSet rs1 = pstmt1.executeQuery();
-		
-		// Insert Date only if not alread present
-		if (! rs1.next())
-		{
-			rs1.close();
-			pstmt1.close();
+//		// Hole Verbindung
+//		Connection con = DB2ConnectionManager.getInstance().getConnection();
+//		
+//		// Check for duplicate entry..
+//		//String selectSQL = "SELECT a.id FROM aufg7_artikel a WHERE a.id = ?";
+//		String selectSQL = "SELECT shopId,artikelId,zeitId FROM aufg7_faktentabelle WHERE shopId = ? and artikelId = ? and zeitId = ?";
+//		PreparedStatement pstmt1 = con.prepareStatement(selectSQL);
+//		
+//		pstmt1.setInt(1, this.shopId);
+//		pstmt1.setInt(2, this.artikelId);
+//		pstmt1.setDate(3, this.zeitId);
+//	
+//		// Führe Anfrage aus
+//		ResultSet rs1 = pstmt1.executeQuery();
+//		
+//		// Insert Date only if not alread present
+//		if (! rs1.next())
+//		{
+//			rs1.close();
+//			pstmt1.close();
 		
 			// Hole Verbindung
-			//Connection con = DB2ConnectionManager.getInstance().getConnection();
+			Connection con = DB2ConnectionManager.getInstance().getConnection();
 			
 			// Achtung, hier wird noch ein Parameter mitgegeben,
 			// damit später generierte IDs zurückgeliefert werden!
@@ -195,9 +195,10 @@ public class Faktum {
 	
 			rs.close();
 			pstmt.close();
-		} else {
-			rs1.close();
-			pstmt1.close();
-		}
+//		} else {
+//			System.out.println("Omit dublicate faktum");
+//			rs1.close();
+//			pstmt1.close();
+//		}
 	}
 }

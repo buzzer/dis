@@ -15,6 +15,7 @@ import java.io.*;
 
 public class CsvParser {
 	
+	//private static File csvpath = new File("/Users/sebastian/dis/Aufgabe7/sales_utf8.csv");
 	private static File csvpath = new File("/Users/sebastian/dis/Aufgabe7/sales_s.csv");
 		
 	public CsvParser() {
@@ -84,6 +85,10 @@ public class CsvParser {
 			//System.out.println(s[0]);
 			// convert from dd.mm.yyyy to yyyy-mm-dd
 			String jdbcDate = CsvParser.date2jdbc(s[0]);
+			// Save Datum and its conversions in Data Warehouse
+			z.setDatum(jdbcDate);
+			z.save();
+			
 			f.setDatum(jdbcDate);
 			
 			// Parse SHOP
@@ -103,10 +108,6 @@ public class CsvParser {
 			f.setUmsatz(Double.valueOf(s[4].replace(',','.')).doubleValue());
 			
 			//System.out.println(f.toString());
-			
-			// Save Datum and its conversions in Data Warehouse
-			z.setDatum(jdbcDate);
-			z.save();
 			
 			// Save faktum in Data Warehouse
 			f.save();
