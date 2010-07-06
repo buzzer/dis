@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import de.dis2010.DB2ConnectionManager;
 import de.dis2010.data.Artikel;
 import de.dis2010.data.Shop;
-//import de.dis2010.data.Faktum;
 
 public class Db2Parser {
 	

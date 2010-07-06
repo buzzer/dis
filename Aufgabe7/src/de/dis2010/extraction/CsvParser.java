@@ -1,17 +1,9 @@
 package de.dis2010.extraction;
 
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-
-//import de.dis2010.DB2ConnectionManager;
 import de.dis2010.data.Faktum;
-//import de.dis2010.data.Shop;
 import de.dis2010.data.Zeit;
 
 import java.io.*;
-//import java.lang.String;
 
 public class CsvParser {
 	

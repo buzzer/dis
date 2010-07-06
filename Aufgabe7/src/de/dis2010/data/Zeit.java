@@ -7,10 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Calendar;
-//import java.text.DateFormat;
-//import java.sql.Date;
-//import java.util.Date.*;
-//import java.text.DateFormat;
 
 import de.dis2010.DB2ConnectionManager;
 

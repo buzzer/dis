@@ -1,8 +1,5 @@
 package de.dis2010;
 
-//import java.io.BufferedReader;
-//import java.io.InputStreamReader;
-
 import de.dis2010.ui.KonsolenUI;
 import de.dis2010.analysis.DataCube;
 import de.dis2010.extraction.CsvParser;
@@ -44,7 +41,7 @@ public class DataWarehousing {
 		CsvParser csvp = new CsvParser();
 		Db2Parser db2p = new Db2Parser();
 		DataCube dc = new DataCube();
-		KonsolenUI ui = new KonsolenUI(dw,csvp, db2p, dc);
+		KonsolenUI ui = new KonsolenUI(csvp, db2p, dc);
 		dw.setUi(ui);
 		ui.start();
 	}
