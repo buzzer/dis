@@ -144,6 +144,13 @@ public class Shop {
 	
 			pstmt.close();
 		} else {
+			this.id = rs1.getInt("id");
+			System.out.printf("Omit dublicate shop:\t| %4d | %30s | %15s | %22s | %20s |%n",
+				this.id,
+				this.name,
+				this.stadt,
+				this.region,
+				this.land);
 			rs1.close();
 			pstmt1.close();
 		}

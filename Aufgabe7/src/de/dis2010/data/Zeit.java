@@ -99,7 +99,12 @@ public class Zeit {
 			
 			
 		} else {
-			// Date alread in Zeit tabelle
+			// Date already in Zeit tabelle
+//			System.out.printf("Omit dublicate time:\t| %10s | %4d | %4d | %10d |%n",
+//				this.Datum.toString(),
+//				this.Monat,
+//				this.Quartal,
+//				this.Jahr);
 			rs1.close();
 			pstmt1.close();
 		}

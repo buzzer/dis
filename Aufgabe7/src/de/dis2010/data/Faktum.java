@@ -153,8 +153,7 @@ public class Faktum {
 		Connection con1 = DB2ConnectionManager.getInstance().getConnection();
 		
 		// Check for duplicate entry..
-		//String selectSQL = "SELECT a.id FROM aufg7_artikel a WHERE a.id = ?";
-		String selectSQL = "SELECT shopId,artikelId,zeitId FROM aufg7_faktentabelle WHERE shopId = ? and artikelId = ? and zeitId = ?";
+		String selectSQL = "SELECT id,shopId,artikelId,zeitId FROM aufg7_faktentabelle WHERE shopId = ? and artikelId = ? and zeitId = ?";
 		PreparedStatement pstmt1 = con1.prepareStatement(selectSQL);
 		
 		pstmt1.setInt(1, this.shopId);
@@ -196,7 +195,14 @@ public class Faktum {
 			rs.close();
 			pstmt.close();
 		} else {
-			System.out.println("Omit dublicate faktum");
+			this.id = rs1.getInt("id");
+			System.out.printf("Omit dublicate faktum:\t| %10d | %4d | %4d | %10s | %10d | %16.2f |%n",
+				this.id,
+				this.shopId,
+				this.artikelId,
+				this.zeitId.toString(),
+				this.verkauft,
+				this.umsatz);
 			rs1.close();
 			pstmt1.close();
 		}

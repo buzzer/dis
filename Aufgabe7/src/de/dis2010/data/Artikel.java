@@ -163,6 +163,13 @@ public class Artikel {
 			pstmt.close();
 		
 		} else {
+			this.id = rs1.getInt("id");
+			System.out.printf("Omit dublicate article:\t| %4d | %36s | %20s | %20s | %25s |%n",
+					this.id,
+					this.name,
+					this.productGroup,
+					this.productFamily,
+					this.productCategory);
 			rs1.close();
 			pstmt1.close();
 		}

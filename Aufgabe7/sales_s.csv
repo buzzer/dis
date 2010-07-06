@@ -8,7 +8,6 @@ Datum;Shop;Artikel;Verkauft;Umsatz
 01.01.2010;Superstore Berlin;Bosch WAE 2834P;49;24451,00
 01.01.2010;Superstore Berlin;Bosch WTE 84301;8;3592,00
 01.01.2010;Superstore Berlin;Brill 28 VE/RL;14;1946,00
-01.01.2010;Superstore Berlin;AEG Öko Lavatherm 59850 Sensidry;25;24975,00
 10.01.2010;Superstore Saarbrücken;Bosch WAE 2834P;47;23453,00
 10.01.2010;Superstore Saarbrücken;Bosch WTE 84301;14;6286,00
 10.01.2010;Superstore Saarbrücken;Brill 28 VE/RL;42;5838,00
@@ -87,6 +86,7 @@ Datum;Shop;Artikel;Verkauft;Umsatz
 28.04.2010;Superstore Düsseldorf;Denon DCD-710AE;38;14022,00
 28.04.2010;Superstore Düsseldorf;Einhell RPM 56 S-MS;33;9899,67
 28.04.2010;Superstore Düsseldorf;Gardena CS Vertikutier-Boy (3395-20);19;948,10
+11.05.2010;Superstore Düsseldorf;Brill 28 VE/RL;35;4865,00
 31.05.2010;Superstore Wiesbaden;Onkyo DX-7355;18;2519,82
 31.05.2010;Superstore Wiesbaden;Panasonic HDC-SD707;12;9359,88
 31.05.2010;Superstore Wiesbaden;Pioneer DVR-550HX;10;4699,90
