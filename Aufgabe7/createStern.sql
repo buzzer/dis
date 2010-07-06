@@ -4,6 +4,8 @@
 -- DDL: Create database
 -- Remarks: 
 -- Sternschema for data warehouse
+--
+-- Comments have to start at line beginning for jdbc parsing!!!
 
 DROP TABLE aufg7_faktentabelle;
 DROP TABLE aufg7_shop;
@@ -39,7 +41,7 @@ CREATE TABLE aufg7_artikel(
 );
 
 CREATE TABLE aufg7_zeit(
-  --id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
+--id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
   datum DATE NOT NULL PRIMARY KEY,
   quartal INTEGER,
   monat INTEGER,
@@ -47,19 +49,19 @@ CREATE TABLE aufg7_zeit(
 );
 
 --CREATE TABLE aufg7_csvtabelle(
-	--id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
-	--datum DATE,
-	--shop VARCHAR(50),
-	--artikel VARCHAR(50),
-	--verkauft INTEGER,
-	--umsatz NUMERIC (12,2)
+--id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1, NO CACHE) PRIMARY KEY,
+--datum DATE,
+--shop VARCHAR(50),
+--artikel VARCHAR(50),
+--verkauft INTEGER,
+--umsatz NUMERIC (12,2)
 --);
 
 ALTER TABLE aufg7_faktentabelle ADD FOREIGN KEY (shopId) REFERENCES aufg7_shop(id) ON DELETE RESTRICT;
 ALTER TABLE aufg7_faktentabelle ADD FOREIGN KEY (artikelId) REFERENCES aufg7_artikel(id) ON DELETE RESTRICT;
 ALTER TABLE aufg7_faktentabelle ADD FOREIGN KEY (zeitId) REFERENCES aufg7_zeit(datum) ON DELETE RESTRICT;
 
-COMMIT;
+--COMMIT;
 
 -- quit
 -- terminate

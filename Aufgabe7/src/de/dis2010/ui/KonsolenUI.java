@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import de.dis2010.extraction.CsvParser;
 import de.dis2010.extraction.Db2Parser;
 import de.dis2010.analysis.DataCube;
+import de.dis2010.createtable.StarScheme;
 
 public class KonsolenUI {
 	private static BufferedReader in = new BufferedReader(
@@ -13,11 +14,13 @@ public class KonsolenUI {
 	private CsvParser csvp;
 	private Db2Parser db2p;
 	private DataCube dc;
+	private StarScheme s;
 
-	public KonsolenUI(CsvParser csvp, Db2Parser db2p, DataCube dc) {
+	public KonsolenUI(CsvParser csvp, Db2Parser db2p, DataCube dc, StarScheme s) {
 		this.csvp = csvp;
 		this.db2p = db2p;
 		this.dc = dc;
+		this.s = s;
 	}
 
 	public void start() {
@@ -32,10 +35,11 @@ public class KonsolenUI {
 
 		while (true) {
 			System.out.println("\nHauptmenü\n");
-			System.out.println("[1]\tLoad DB2 DB");
-			System.out.println("[2]\tLoad CSV file");
-			System.out.println("[3]\tAnalyse data cube");
-			System.out.println("[4]\tBeenden");
+			System.out.println("[1]\tCreate star scheme");
+			System.out.println("[2]\tLoad DB2 DB");
+			System.out.println("[3]\tLoad CSV file");
+			System.out.println("[4]\tAnalyse data cube");
+			System.out.println("[5]\tBeenden");
 
 			System.out.print("\nAuswahl: ");
 
@@ -45,16 +49,19 @@ public class KonsolenUI {
 
 				switch (auswahl) {
 				case 1:
+					s.parseSql();
+					break;
+				case 2:
 					db2p.extractArticles();
 					db2p.extractShops();
 					break;
-				case 2:
+				case 3:
 					csvp.readCsv();
 					break;
-				case 3:
+				case 4:
 					this.analyseMenu();
 					break;
-				case 4:
+				case 5:
 					return;
 
 				default:
