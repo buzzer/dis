@@ -1,7 +1,6 @@
 package de.dis2010;
 
 import de.dis2010.ui.KonsolenUI;
-
 import de.dis2010.analysis.DataCube;
 import de.dis2010.extraction.CsvParser;
 import de.dis2010.extraction.Db2Parser;
