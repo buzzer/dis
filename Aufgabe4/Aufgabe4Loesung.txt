@@ -1,4 +1,4 @@
-Pr√§ambel
+﻿Präambel
 --------
 db2 connect to VSISP user vsisp23
 db2 attach to vsisls4 user vsisp23
